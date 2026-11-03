@@ -82,6 +82,8 @@ export interface Product {
   usage?: PracticalField
   format?: PracticalField
   packaging?: PracticalField
+  /** Situations in which the product must not be used */
+  contraindications?: L[]
   precautions: L[]
   hcpNotes: L[]
   references: string[]

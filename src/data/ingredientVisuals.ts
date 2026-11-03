@@ -7,7 +7,6 @@ import milkThistleImg from '../assets/ingredients/milk-thistle.jpg'
 import oliveLeafImg from '../assets/ingredients/olive-leaf.jpg'
 import berberineImg from '../assets/ingredients/berberine.png'
 import cholecalciferolImg from '../assets/ingredients/cholecalciferol.png'
-import cholineImg from '../assets/ingredients/choline.png'
 import chromiumPicolinateImg from '../assets/ingredients/chromium-picolinate.png'
 import menaquinone7Img from '../assets/ingredients/menaquinone-7.png'
 import polaprezincImg from '../assets/ingredients/polaprezinc.png'
@@ -50,9 +49,8 @@ export const INGREDIENT_VISUALS: Record<string, IngredientVisual> = {
   'Vitamine B3': { kind: 'monogram', label: 'B3' },
   'Vitamine B5': { kind: 'monogram', label: 'B5' },
   'Vitamine B12': { kind: 'monogram', label: 'B12' },
-  'Choline bitartrate': { kind: 'structure', src: cholineImg, alt: { fr: 'Structure de la choline', en: 'Choline structure' }, pubchemCid: 305 },
   // BioBerberine+
-  'Berbérine HCl': { kind: 'structure', src: berberineImg, alt: { fr: 'Structure de la berbérine', en: 'Berberine structure' }, pubchemCid: 2353 },
+  'Berbérine': { kind: 'structure', src: berberineImg, alt: { fr: 'Structure de la berbérine', en: 'Berberine structure' }, pubchemCid: 2353 },
   'Chardon-marie': {
     kind: 'photo',
     src: milkThistleImg,

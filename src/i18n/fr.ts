@@ -35,6 +35,7 @@ export const fr = {
     format: 'Format',
     packaging: 'Conditionnement',
     precautions: 'Précautions',
+    contraindications: 'Contre-indications',
     hcp: 'Pour les professionnels de santé',
     references: 'Références scientifiques',
     scanToOpen: 'Scanner pour ouvrir la fiche',

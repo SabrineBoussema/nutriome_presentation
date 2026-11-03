@@ -37,6 +37,7 @@ export const en: Dictionary = {
     format: 'Format',
     packaging: 'Pack size',
     precautions: 'Precautions',
+    contraindications: 'Contraindications',
     hcp: 'For healthcare professionals',
     references: 'Scientific references',
     scanToOpen: 'Scan to open the product page',

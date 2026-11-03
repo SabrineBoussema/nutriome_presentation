@@ -35,7 +35,7 @@ export const STANDARD_PRECAUTIONS: L[] = [
   { fr: 'Tenir hors de portée des jeunes enfants.', en: 'Keep out of reach of young children.' },
 ]
 
-const NOT_A_TREATMENT: L = {
+export const NOT_A_TREATMENT: L = {
   fr: 'Ne se substitue pas à un traitement médical : en cas de pathologie ou de traitement en cours, demander l’avis d’un médecin ou d’un pharmacien.',
   en: 'Not a substitute for medical treatment: in case of illness or ongoing medication, seek the advice of a physician or pharmacist.',
 }
@@ -185,11 +185,33 @@ export const products: Product[] = [
     format: { text: { fr: 'Gélules', en: 'Capsules' } },
     packaging: { text: { fr: 'Boîte de 30 gélules', en: 'Box of 30 capsules' } },
     packCount: 30,
+    contraindications: [
+      {
+        fr: 'Insuffisance rénale sévère',
+        en: 'Severe kidney impairment',
+      },
+      {
+        fr: 'Hypersensibilité à l’un des composants',
+        en: 'Hypersensitivity to any of the ingredients',
+      },
+    ],
     precautions: [
       ...STANDARD_PRECAUTIONS,
       {
-        fr: 'Insuffisance rénale : avis médical préalable (risque d’accumulation du magnésium).',
-        en: 'Kidney impairment: seek medical advice first (risk of magnesium accumulation).',
+        fr: 'Insuffisance rénale modérée : avis médical préalable (risque d’accumulation du magnésium).',
+        en: 'Moderate kidney impairment: seek medical advice first (risk of magnesium accumulation).',
+      },
+      {
+        fr: 'Espacer de 2 heures la prise de tétracyclines, fluoroquinolones, bisphosphonates ou lévothyroxine.',
+        en: 'Take tetracyclines, fluoroquinolones, bisphosphonates or levothyroxine 2 hours apart.',
+      },
+      {
+        fr: 'Selles molles possibles à forte dose : réduire la posologie.',
+        en: 'Loose stools possible at high doses: reduce the dose.',
+      },
+      {
+        fr: 'Grossesse et allaitement : avis médical préalable.',
+        en: 'Pregnancy and breastfeeding: seek medical advice first.',
       },
     ],
     hcpNotes: [
@@ -231,12 +253,12 @@ export const products: Product[] = [
       en: 'Heart, liver & oxidative stress',
     },
     positioning: {
-      fr: 'Soutient la santé cardiovasculaire et hépatique tout en protégeant les cellules du stress oxydatif : coenzyme Q10 100 mg, levure de riz rouge, choline et cinq vitamines B.',
-      en: 'Supports cardiovascular and liver health while protecting cells from oxidative stress: coenzyme Q10 100 mg, red yeast rice, choline and five B vitamins.',
+      fr: 'Soutient la santé cardiovasculaire et hépatique tout en protégeant les cellules du stress oxydatif : coenzyme Q10 100 mg, levure de riz rouge et cinq vitamines B.',
+      en: 'Supports cardiovascular and liver health while protecting cells from oxidative stress: coenzyme Q10 100 mg, red yeast rice and five B vitamins.',
     },
     description: {
-      fr: 'Coenzyme Q10 100 mg, vitamines B1, B2, B3, B5, B12, choline et levure de riz rouge — par gélule.',
-      en: 'Coenzyme Q10 100 mg, vitamins B1, B2, B3, B5, B12, choline and red yeast rice — per capsule.',
+      fr: 'Coenzyme Q10 100 mg, vitamines B1, B2, B3, B5, B12 et levure de riz rouge — par gélule.',
+      en: 'Coenzyme Q10 100 mg, vitamins B1, B2, B3, B5, B12 and red yeast rice — per capsule.',
     },
     image: bioQ10Img,
     imageAspect: 1000 / 769,
@@ -301,13 +323,6 @@ export const products: Product[] = [
         role: { fr: 'Métabolisme normal de l’homocystéine', en: 'Normal homocysteine metabolism' },
         status: 'verified',
       },
-      {
-        name: { fr: 'Choline bitartrate', en: 'Choline bitartrate' },
-        quantity: 4.2,
-        unit: 'mg',
-        role: { fr: 'Maintien d’une fonction hépatique normale', en: 'Maintenance of normal liver function' },
-        status: 'verified',
-      },
     ],
     excipients: {
       fr: 'Excipients : cellulose, silice colloïdale, stéarate de magnésium.',
@@ -365,8 +380,8 @@ export const products: Product[] = [
       {
         title: { fr: 'Homocystéine', en: 'Homocysteine' },
         body: {
-          fr: 'La vitamine B12 contribue au métabolisme normal de l’homocystéine — 100 µg par gélule, soit 4 000 % des VNR.',
-          en: 'Vitamin B12 contributes to normal homocysteine metabolism — 100 µg per capsule, i.e. 4,000% of the NRV.',
+          fr: 'La vitamine B12 contribue au métabolisme normal de l’homocystéine — 0,1 mg par gélule, soit 4 000 % des VNR.',
+          en: 'Vitamin B12 contributes to normal homocysteine metabolism — 0.1 mg per capsule, i.e. 4,000% of the NRV.',
         },
         evidence: 'authorized-claim',
         refs: ['eu-432-2012', 'eu-1169-2011'],
@@ -394,11 +409,37 @@ export const products: Product[] = [
     usage: { text: { fr: '1 gélule par jour, au cours d’un repas.', en: '1 capsule per day, with a meal.' } },
     format: { text: { fr: 'Gélules', en: 'Capsules' } },
     packaging: { text: { fr: 'Boîte de 30 gélules', en: 'Box of 30 capsules' } },
+    contraindications: [
+      {
+        fr: 'Grossesse et allaitement',
+        en: 'Pregnancy and breastfeeding',
+      },
+      {
+        fr: 'Enfants et adolescents de moins de 18 ans',
+        en: 'Children and adolescents under 18',
+      },
+      {
+        fr: 'Maladie hépatique évolutive ou antécédent de myopathie',
+        en: 'Active liver disease or history of myopathy',
+      },
+      {
+        fr: 'Hypersensibilité à l’un des composants',
+        en: 'Hypersensitivity to any of the ingredients',
+      },
+    ],
     precautions: [
       ...STANDARD_PRECAUTIONS,
       {
-        fr: 'Levure de riz rouge : déconseillée pendant la grossesse et l’allaitement, avant 18 ans et après 70 ans. Association à une statine : uniquement sur avis et suivi médical (effet additif de la monacoline K).',
-        en: 'Red yeast rice: not recommended during pregnancy or breastfeeding, under 18 or over 70 years of age. Use with a statin only on medical advice and under monitoring (additive effect of monacolin K).',
+        fr: 'Levure de riz rouge : déconseillée après 70 ans. Association à une statine : uniquement sur avis et suivi médical (effet additif de la monacoline K).',
+        en: 'Red yeast rice: not recommended over 70 years of age. Use with a statin only on medical advice and under monitoring (additive effect of monacolin K).',
+      },
+      {
+        fr: 'Douleurs ou faiblesse musculaires inexpliquées : arrêter et consulter.',
+        en: 'Unexplained muscle pain or weakness: stop and seek medical advice.',
+      },
+      {
+        fr: 'Éviter le jus de pamplemousse et les inhibiteurs du CYP3A4 (macrolides, antifongiques azolés).',
+        en: 'Avoid grapefruit juice and CYP3A4 inhibitors (macrolides, azole antifungals).',
       },
       {
         fr: 'Coenzyme Q10 : peut diminuer l’effet de la warfarine — avis médical en cas de traitement anticoagulant.',
@@ -412,8 +453,8 @@ export const products: Product[] = [
         en: 'Monacolin K is chemically identical to lovastatin. In the EU, monacolin intake must remain below 3 mg/day.',
       },
       {
-        fr: 'Vitamine B3 (54 000 µg) : la limite supérieure de sécurité est de 900 mg/j pour le nicotinamide, mais de 10 mg/j pour l’acide nicotinique (bouffées vasomotrices). La forme doit être confirmée.',
-        en: 'Vitamin B3 (54,000 µg): the upper safe level is 900 mg/day for nicotinamide but 10 mg/day for nicotinic acid (flushing). The form must be confirmed.',
+        fr: 'Vitamine B3 (54 mg) : la limite supérieure de sécurité est de 900 mg/j pour le nicotinamide, mais de 10 mg/j pour l’acide nicotinique (bouffées vasomotrices). La forme doit être confirmée.',
+        en: 'Vitamin B3 (54 mg): the upper safe level is 900 mg/day for nicotinamide but 10 mg/day for nicotinic acid (flushing). The form must be confirmed.',
       },
       {
         fr: 'Les mécanismes présentés relèvent de la biologie générale de la CoQ10. Ils ne constituent pas une démonstration d’efficacité du produit.',
@@ -458,8 +499,8 @@ export const products: Product[] = [
       en: 'Four synergistic actives — berberine, milk thistle, zinc and chromium — to stabilise blood glucose and improve overall metabolic health.',
     },
     description: {
-      fr: 'Berbérine HCl 1 500 mg, chardon-marie, zinc bisglycinate et chrome picolinate : soutien du métabolisme glucidique, pour la dose journalière de 4 gélules.',
-      en: 'Berberine HCl 1,500 mg, milk thistle, zinc bisglycinate and chromium picolinate: glucose-metabolism support, per daily dose of 4 capsules.',
+      fr: 'Berbérine 1 500 mg, chardon-marie, zinc bisglycinate et chrome picolinate : soutien du métabolisme glucidique, pour la dose journalière de 4 gélules.',
+      en: 'Berberine 1,500 mg, milk thistle, zinc bisglycinate and chromium picolinate: glucose-metabolism support, per daily dose of 4 capsules.',
     },
     image: berberineImg,
     imageAspect: 1164 / 903,
@@ -468,7 +509,7 @@ export const products: Product[] = [
     doseBasis: { fr: 'Dose journalière : 4 gélules', en: 'Daily dose: 4 capsules' },
     ingredients: [
       {
-        name: { fr: 'Berbérine HCl', en: 'Berberine HCl' },
+        name: { fr: 'Berbérine', en: 'Berberine' },
         quantity: 1500,
         unit: 'mg',
         role: { fr: 'Actif principal : sensibilité à l’insuline et régulation du glucose', en: 'Main active: insulin sensitivity and glucose regulation' },
@@ -484,17 +525,17 @@ export const products: Product[] = [
       },
       {
         name: { fr: 'Zinc bisglycinate', en: 'Zinc bisglycinate' },
-        quantity: 17000,
-        unit: 'µg',
-        detail: { fr: 'dont zinc élément : 5 000 µg', en: 'of which elemental zinc: 5,000 µg' },
+        quantity: 17,
+        unit: 'mg',
+        detail: { fr: 'dont zinc élément : 5 mg', en: 'of which elemental zinc: 5 mg' },
         role: { fr: 'Forme hautement assimilable — métabolisme normal des glucides', en: 'Highly bioavailable form — normal carbohydrate metabolism' },
         status: 'verified',
       },
       {
         name: { fr: 'Chrome picolinate', en: 'Chromium picolinate' },
-        quantity: 4000,
-        unit: 'µg',
-        detail: { fr: 'dont chrome élément : 500 µg', en: 'of which elemental chromium: 500 µg' },
+        quantity: 4,
+        unit: 'mg',
+        detail: { fr: 'dont chrome élément : 0,5 mg', en: 'of which elemental chromium: 0.5 mg' },
         role: { fr: 'Glycémie normale, réduit les envies de sucre', en: 'Normal blood glucose, reduces sugar cravings' },
         status: 'verified',
       },
@@ -552,8 +593,8 @@ export const products: Product[] = [
     diagram: 'glucose-ampk',
     differentiators: [
       {
-        fr: '1 500 mg de berbérine HCl par dose journalière, répartis en 4 gélules.',
-        en: '1,500 mg berberine HCl per daily dose, split across 4 capsules.',
+        fr: '1 500 mg de berbérine par dose journalière, répartis en 4 gélules.',
+        en: '1,500 mg berberine per daily dose, split across 4 capsules.',
       },
       {
         fr: 'Chardon-marie titré à 80 % de silymarine.',
@@ -567,15 +608,33 @@ export const products: Product[] = [
     usage: { text: { fr: '4 gélules par jour.', en: '4 capsules per day.' } },
     format: { text: { fr: 'Gélules', en: 'Capsules' } },
     packaging: { text: { fr: 'Boîte de 60 gélules', en: 'Box of 60 capsules' }, pending: true },
+    contraindications: [
+      {
+        fr: 'Grossesse et allaitement',
+        en: 'Pregnancy and breastfeeding',
+      },
+      {
+        fr: 'Nouveau-nés et enfants de moins de 18 ans (risque d’ictère)',
+        en: 'Newborns and children under 18 (risk of jaundice)',
+      },
+      {
+        fr: 'Hypersensibilité à l’un des composants',
+        en: 'Hypersensitivity to any of the ingredients',
+      },
+    ],
     precautions: [
       ...STANDARD_PRECAUTIONS,
       {
-        fr: 'Déconseillé pendant la grossesse et l’allaitement.',
-        en: 'Not recommended during pregnancy and breastfeeding.',
+        fr: 'Traitement antidiabétique (insuline, sulfamides, metformine) : surveiller la glycémie — risque d’hypoglycémie.',
+        en: 'Glucose-lowering treatment (insulin, sulfonylureas, metformin): monitor blood glucose — risk of hypoglycaemia.',
       },
       {
-        fr: 'Traitement antidiabétique ou médicaments à métabolisme hépatique (CYP) : avis médical préalable — risque d’interactions et d’effet additif sur la glycémie.',
-        en: 'Glucose-lowering or CYP-metabolised medicines: seek medical advice first — risk of interactions and additive glucose-lowering effect.',
+        fr: 'Médicaments métabolisés par les CYP (ciclosporine, anticoagulants, macrolides…) : avis médical — risque d’interactions.',
+        en: 'CYP-metabolised medicines (ciclosporin, anticoagulants, macrolides…): seek medical advice — risk of interactions.',
+      },
+      {
+        fr: 'Troubles digestifs possibles : prendre au cours des repas et augmenter progressivement la dose.',
+        en: 'Digestive upset possible: take with meals and increase the dose gradually.',
       },
       NOT_A_TREATMENT,
     ],
@@ -702,11 +761,29 @@ export const products: Product[] = [
     usage: { text: { fr: '1 à 2 gélules par jour, au cours d’un repas.', en: '1 to 2 capsules per day, with a meal.' } },
     format: { text: { fr: 'Gélules', en: 'Capsules' } },
     packaging: { text: { fr: 'Boîte de 30 gélules', en: 'Box of 30 capsules' } },
+    contraindications: [
+      {
+        fr: 'Hypersensibilité au zinc ou à la L-carnosine',
+        en: 'Hypersensitivity to zinc or L-carnosine',
+      },
+    ],
     precautions: [
       ...STANDARD_PRECAUTIONS,
       {
         fr: 'Tenir compte de l’apport total en zinc (limite supérieure de sécurité de l’EFSA : 25 mg/jour chez l’adulte).',
         en: 'Take total zinc intake into account (EFSA tolerable upper intake level: 25 mg/day for adults).',
+      },
+      {
+        fr: 'Espacer de 2 heures la prise de quinolones, tétracyclines ou de fer.',
+        en: 'Take quinolones, tetracyclines or iron 2 hours apart.',
+      },
+      {
+        fr: 'Grossesse et allaitement : avis médical préalable.',
+        en: 'Pregnancy and breastfeeding: seek medical advice first.',
+      },
+      {
+        fr: 'Saignement digestif, amaigrissement ou difficulté à avaler : consulter sans délai.',
+        en: 'Digestive bleeding, weight loss or difficulty swallowing: seek medical care promptly.',
       },
       NOT_A_TREATMENT,
     ],
@@ -873,15 +950,41 @@ export const products: Product[] = [
     format: { text: { fr: 'Gélules', en: 'Capsules' } },
     packaging: { text: { fr: 'Boîte de 60 gélules', en: 'Box of 60 capsules' } },
     packCount: 60,
+    contraindications: [
+      {
+        fr: 'Hypercalcémie, hypercalciurie ou lithiase calcique',
+        en: 'Hypercalcaemia, hypercalciuria or calcium kidney stones',
+      },
+      {
+        fr: 'Traitement anticoagulant par antivitamine K (AVK)',
+        en: 'Vitamin K antagonist anticoagulants',
+      },
+      {
+        fr: 'Insuffisance rénale sévère',
+        en: 'Severe kidney impairment',
+      },
+      {
+        fr: 'Sarcoïdose et autres granulomatoses',
+        en: 'Sarcoidosis and other granulomatous diseases',
+      },
+    ],
     precautions: [
       ...STANDARD_PRECAUTIONS,
       {
-        fr: 'Contient de la vitamine K : avis médical en cas de traitement anticoagulant par antivitamine K (AVK).',
-        en: 'Contains vitamin K: seek medical advice if taking vitamin K antagonist anticoagulants.',
+        fr: 'Cumul de sources de vitamine D : contrôler le taux de 25(OH)D (limite EFSA : 100 µg/jour chez l’adulte).',
+        en: 'Combining vitamin D sources: monitor 25(OH)D levels (EFSA upper level: 100 µg/day for adults).',
       },
       {
-        fr: 'Éviter le cumul de sources de vitamine D sans suivi (limite supérieure de sécurité de l’EFSA : 100 µg/jour chez l’adulte), en particulier en cas d’hypercalcémie ou de granulomatose.',
-        en: 'Avoid combining vitamin D sources without monitoring (EFSA upper level: 100 µg/day for adults), especially with hypercalcaemia or granulomatous disease.',
+        fr: 'Diurétiques thiazidiques ou digitaliques : surveiller la calcémie.',
+        en: 'Thiazide diuretics or digitalis: monitor blood calcium.',
+      },
+      {
+        fr: 'Espacer de 2 heures la prise de bisphosphonates ou de tétracyclines.',
+        en: 'Take bisphosphonates or tetracyclines 2 hours apart.',
+      },
+      {
+        fr: 'Enfants : posologie à adapter sur avis médical.',
+        en: 'Children: dose to be adjusted on medical advice.',
       },
     ],
     hcpNotes: [
@@ -963,9 +1066,9 @@ export const products: Product[] = [
       },
       {
         name: { fr: 'Zinc bisglycinate', en: 'Zinc bisglycinate' },
-        quantity: 17000,
-        unit: 'µg',
-        detail: { fr: 'dont zinc élément : 5 000 µg', en: 'of which elemental zinc: 5,000 µg' },
+        quantity: 17,
+        unit: 'mg',
+        detail: { fr: 'dont zinc élément : 5 mg', en: 'of which elemental zinc: 5 mg' },
         role: { fr: 'Fonctionnement normal du système immunitaire', en: 'Normal immune function' },
         status: 'verified',
       },
@@ -1032,15 +1135,29 @@ export const products: Product[] = [
     usage: { text: { fr: 'Posologie à confirmer sur l’emballage final.', en: 'Dosage to be confirmed on final packaging.' }, pending: true },
     format: { text: { fr: 'Gélules', en: 'Capsules' } },
     packaging: { text: { fr: 'Boîtes de 15 et de 30 gélules', en: 'Boxes of 15 and 30 capsules' } },
+    contraindications: [
+      {
+        fr: 'Allergie aux produits de la ruche (propolis) ou aux Astéracées (échinacée)',
+        en: 'Allergy to bee products (propolis) or Asteraceae (echinacea)',
+      },
+      {
+        fr: 'Maladie auto-immune évolutive ou traitement immunosuppresseur',
+        en: 'Active autoimmune disease or immunosuppressive treatment',
+      },
+    ],
     precautions: [
       ...STANDARD_PRECAUTIONS,
       {
-        fr: 'Contient des produits de la ruche (propolis) et une Astéracée (échinacée) : déconseillé en cas d’allergie.',
-        en: 'Contains bee products (propolis) and an Asteraceae plant (echinacea): not recommended in case of allergy.',
+        fr: 'Grossesse, allaitement et enfants de moins de 12 ans : déconseillé.',
+        en: 'Pregnancy, breastfeeding and children under 12: not recommended.',
       },
       {
-        fr: 'Traitement immunosuppresseur, anticoagulant, maladie auto-immune, grossesse ou allaitement : avis médical préalable.',
-        en: 'Immunosuppressants, anticoagulants, autoimmune disease, pregnancy or breastfeeding: seek medical advice first.',
+        fr: 'Traitement anticoagulant : avis médical préalable.',
+        en: 'Anticoagulant treatment: seek medical advice first.',
+      },
+      {
+        fr: 'Asthme ou terrain atopique : risque de réaction allergique.',
+        en: 'Asthma or atopy: risk of allergic reaction.',
       },
       {
         fr: 'Ne remplace ni la vaccination ni une prise en charge médicale.',
