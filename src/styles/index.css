@@ -1,0 +1,127 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Highly legible pairing for projection: Fraunces (headlines) + Plus Jakarta Sans (text) */
+  --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-serif: 'Fraunces', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+
+  /* Nutriome identity — derived from the logo (forest green + amber) and the navy of the existing deck */
+  --color-ivory: #faf7f0;
+  --color-paper: #fffdf8;
+  --color-sand: #efe8da;
+  --color-navy: #0e1a2b;
+  --color-ink: #16222f;
+  --color-slate: #46515e;
+  --color-forest: #1d5a39;
+  --color-leaf: #2f8a57;
+  --color-sage: #e6efe7;
+  --color-amber: #e3862b;
+  --color-amber-soft: #fbeedd;
+  --color-gold: #c9a24b;
+  --color-gold-soft: #f6eedb;
+  --color-ocean: #1b6fa8;
+  --color-ocean-soft: #e3f0f8;
+  --color-plum: #6a3d8f;
+  --color-rose: #c4525f;
+
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    margin: 0;
+    background: var(--color-navy);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: var(--color-amber-soft);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-amber);
+    outline-offset: 3px;
+  }
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+/* Inside the 1600×900 slide canvas, theme text sizes are enlarged so labels, chips and
+   footnotes stay readable on a projector once the canvas is scaled down. */
+.slide-canvas {
+  --text-xs: 0.95rem;
+  --text-xs--line-height: 1.35;
+  --text-sm: 1.125rem;
+  --text-sm--line-height: 1.45;
+  --text-base: 1.3rem;
+  --text-lg: 1.45rem;
+  --text-xl: 1.6rem;
+}
+
+@keyframes dash-flow {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+
+@utility flow-dash {
+  animation: dash-flow 1.2s linear infinite;
+}
+
+@utility grain {
+  background-image:
+    radial-gradient(circle at 15% 20%, rgb(47 138 87 / 0.07), transparent 45%),
+    radial-gradient(circle at 85% 80%, rgb(227 134 43 / 0.06), transparent 45%);
+}
+
+/* ---------- Print / PDF export ----------
+   The /print route renders every slide at the 1600×900 design baseline.
+   Each .print-slide becomes one landscape page. */
+@page {
+  size: 1600px 900px;
+  margin: 0;
+}
+
+@media print {
+  html,
+  body,
+  #root {
+    height: auto;
+    background: white !important;
+  }
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-slide {
+    break-after: page;
+    page-break-after: always;
+    margin: 0 !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+  .print-slide:last-child {
+    break-after: auto;
+    page-break-after: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
