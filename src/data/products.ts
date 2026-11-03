@@ -537,7 +537,7 @@ export const products: Product[] = [
     ],
     usage: { text: { fr: '4 gélules par jour.', en: '4 capsules per day.' } },
     format: { text: { fr: 'Gélules', en: 'Capsules' } },
-    packaging: { text: { fr: '60 gélules (emballage / deck Figma) — à confirmer', en: '60 capsules (pack / Figma deck) — to be confirmed' }, pending: true },
+    packaging: { text: { fr: 'Boîte de 60 gélules', en: 'Box of 60 capsules' }, pending: true },
     precautions: [
       ...STANDARD_PRECAUTIONS,
       {

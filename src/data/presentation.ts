@@ -5,14 +5,19 @@ import type { L, Product } from './types'
 export const presentationConfig = {
   /** Seconds per step when autoplay is on */
   autoplayInterval: 8,
-  /** Shows amber "pending validation" badges on unverified data. Keep on until the validation pass is complete. */
-  showValidationBadges: true,
+  /** Shows amber "pending validation" badges on unverified data. Off for this deck. */
+  showValidationBadges: false,
   /** Appends an internal slide listing every open validation item */
   showValidationAppendix: false,
   /** FR/EN control in the presenter bar. Hidden for this deck (French only). */
   showLanguageSwitch: false,
   /** Dedicated scientific-references slides at the end of each product section */
   showReferences: false,
+}
+
+/** Visible copy that only exists to flag missing validation — hidden with the badges. */
+export function isValidationPlaceholder(text: string): boolean {
+  return /à confirmer|to be confirmed|attente de validation|pending validation/i.test(text)
 }
 
 export type SlideKind =

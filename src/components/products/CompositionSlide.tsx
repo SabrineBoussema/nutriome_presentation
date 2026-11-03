@@ -1,4 +1,5 @@
 import type { Product } from '../../data/types'
+import { isValidationPlaceholder, presentationConfig } from '../../data/presentation'
 import { useI18n } from '../../i18n'
 import { Eyebrow, PendingBadge } from '../ui/Badges'
 import { Reveal } from '../ui/Reveal'
@@ -17,7 +18,10 @@ export function CompositionSlide({ product }: { product: Product }) {
   const showBar = quantified.length > 1 && quantified.length <= 5 && quantified.every((i) => i.unit === 'mg')
   const total = quantified.reduce((s, i) => s + (i.quantity ?? 0), 0)
   const shades = [product.accent, `${product.accent}cc`, `${product.accent}99`, `${product.accent}70`, `${product.accent}50`, `${product.accent}38`, `${product.accent}28`, `${product.accent}1c`]
-  const anyPending = product.ingredients.some((i) => i.status === 'pending')
+  const showPending = presentationConfig.showValidationBadges
+  const anyPending = showPending && product.ingredients.some((i) => i.status === 'pending')
+  const pendingLook = (pending?: boolean) => showPending && pending
+  const excipients = product.excipients && (showPending || !isValidationPlaceholder(l(product.excipients))) ? product.excipients : undefined
   const many = product.ingredients.length > 5
   const visuals = product.ingredients.map((i) => visualFor(i.name))
   // Narrow 5-column cards: the illustration sits above the figure instead of in the corner
@@ -51,7 +55,7 @@ export function CompositionSlide({ product }: { product: Product }) {
               className={`relative flex h-full flex-col rounded-3xl border p-5 shadow-[0_20px_50px_-30px_rgb(14_26_43/0.35)] ${many ? '@4xl:p-5' : '@4xl:p-6'} ${
                 ing.derived
                   ? 'border-transparent'
-                  : ing.status === 'pending'
+                  : pendingLook(ing.status === 'pending')
                     ? 'border-amber/30 bg-white'
                     : 'border-navy/[0.06] bg-white'
               }`}
@@ -95,11 +99,13 @@ export function CompositionSlide({ product }: { product: Product }) {
                   {n(nrvPercent(ing.nrvKey, ing.quantity))} % {t.common.nrv}
                 </div>
               )}
-              {ing.detail && <div className={`mt-1 text-sm @4xl:text-[20px] ${ing.derived ? 'text-white/80' : 'text-slate'}`}>{l(ing.detail)}</div>}
+              {ing.detail && (showPending || !isValidationPlaceholder(l(ing.detail))) && (
+                <div className={`mt-1 text-sm @4xl:text-[20px] ${ing.derived ? 'text-white/80' : 'text-slate'}`}>{l(ing.detail)}</div>
+              )}
               {ing.role && !many && (
                 <div className={`mt-3 text-sm leading-snug @4xl:text-[19px] ${ing.derived ? 'text-white/85' : 'text-slate/90'}`}>{l(ing.role)}</div>
               )}
-              {ing.status === 'pending' && (
+              {pendingLook(ing.status === 'pending') && (
                 <div className="mt-auto pt-3">
                   <PendingBadge short />
                 </div>
@@ -132,7 +138,7 @@ export function CompositionSlide({ product }: { product: Product }) {
       </div>
 
       <Reveal delay={0.5} className="pt-4 text-xs text-slate @4xl:text-[17px]">
-        {product.excipients && <p>{l(product.excipients)}</p>}
+        {excipients && <p>{l(excipients)}</p>}
         {product.ingredients.some((i) => i.nrvKey) && <p className="mt-1">{t.common.nrvNote}</p>}
         {(photos.length > 0 || hasStructures) && (
           <p className="mt-1 opacity-80">

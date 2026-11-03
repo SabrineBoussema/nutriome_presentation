@@ -1,4 +1,5 @@
 import { motion } from 'motion/react'
+import { presentationConfig } from '../../../data/presentation'
 import type { Product } from '../../../data/types'
 import { useI18n } from '../../../i18n'
 import { useSlide } from '../../presentation/SlideContext'
@@ -29,9 +30,11 @@ export function Q10RevealSlide({ product }: { product: Product }) {
           <Reveal delay={0.4}>
             <p className="mt-4 max-w-xl text-base leading-relaxed text-slate @4xl:text-[27px]">{l(product.positioning)}</p>
           </Reveal>
-          <Reveal delay={0.5} className="mt-8">
-            <PendingBadge />
-          </Reveal>
+          {presentationConfig.showValidationBadges && (
+            <Reveal delay={0.5} className="mt-8">
+              <PendingBadge />
+            </Reveal>
+          )}
         </div>
         <div className="order-1 mx-auto w-full max-w-md @4xl:order-2 @4xl:max-w-[640px]">
           {isPrint ? (

@@ -1,4 +1,5 @@
 import { Box, ClipboardList, Pill, ShieldAlert, Stethoscope } from 'lucide-react'
+import { isValidationPlaceholder, presentationConfig } from '../../data/presentation'
 import type { PracticalField, Product } from '../../data/types'
 import { useI18n } from '../../i18n'
 import { Eyebrow, PendingBadge } from '../ui/Badges'
@@ -8,13 +9,16 @@ import { Packshot } from './Packshot'
 
 function Field({ icon: Icon, label, field, accent }: { icon: typeof Pill; label: string; field?: PracticalField; accent: string }) {
   const { l, t } = useI18n()
+  const showPending = presentationConfig.showValidationBadges
+  if (!field && !showPending) return null
+  if (field && !showPending && isValidationPlaceholder(l(field.text))) return null
   return (
     <div className="rounded-3xl border border-navy/[0.06] bg-white p-5 @4xl:p-6">
       <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.14em]" style={{ color: accent }}>
         <Icon className="size-5" aria-hidden /> {label}
       </div>
       <p className="mt-2 text-xl font-semibold leading-snug text-ink @4xl:text-[28px]">{field ? l(field.text) : t.common.pending}</p>
-      {(!field || field.pending) && <PendingBadge short className="mt-2" />}
+      {showPending && (!field || field.pending) && <PendingBadge short className="mt-2" />}
     </div>
   )
 }
