@@ -103,6 +103,11 @@ export function CompositionSlide({ product }: { product: Product }) {
               {ing.detail && (showPending || !isValidationPlaceholder(l(ing.detail))) && (
                 <div className={`mt-1 text-sm @4xl:text-[20px] ${ing.derived ? 'text-white/80' : 'text-slate'}`}>{l(ing.detail)}</div>
               )}
+              {ing.role && !ing.derived && (
+                <div className="mt-3 text-sm font-semibold leading-snug @4xl:text-[19px]" style={{ color: product.accent }}>
+                  {l(ing.role)}
+                </div>
+              )}
               {pendingLook(ing.status === 'pending') && (
                 <div className="mt-auto pt-3">
                   <PendingBadge short />
