@@ -38,7 +38,7 @@ export function DifferentiationSlide({ product }: { product: Product }) {
 export function FormulationSlide({ product }: { product: Product }) {
   const { l, t } = useI18n()
   return (
-    <SlideShell tone="tint" accent={product.accent} accentSoft={product.accentSoft} label={product.name} product={product}>
+    <SlideShell tone="tint" accent={product.accent} accentSoft={product.accentSoft} label={product.name} product={product} headerPackshot={false}>
       <Reveal>
         <Eyebrow color={product.accent}>{product.name}</Eyebrow>
       </Reveal>

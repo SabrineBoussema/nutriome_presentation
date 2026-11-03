@@ -8,7 +8,7 @@ export const presentationConfig = {
   /** Shows amber "pending validation" badges on unverified data. Keep on until the validation pass is complete. */
   showValidationBadges: true,
   /** Appends an internal slide listing every open validation item */
-  showValidationAppendix: true,
+  showValidationAppendix: false,
   /** FR/EN control in the presenter bar. Hidden for this deck (French only). */
   showLanguageSwitch: false,
   /** Dedicated scientific-references slides at the end of each product section */

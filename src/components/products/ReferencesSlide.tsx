@@ -7,7 +7,7 @@ import { SlideShell, SlideTitle } from '../ui/SlideShell'
 import { productReferences } from './productRefs'
 
 export function ReferencesSlide({ product, dark = false }: { product: Product; dark?: boolean }) {
-  const { t, l } = useI18n()
+  const { t } = useI18n()
   const refs = productReferences(product)
   return (
     <SlideShell tone={dark ? 'navy' : 'ivory'} accent={product.accent} label={product.name} product={product}>
@@ -42,9 +42,6 @@ export function ReferencesSlide({ product, dark = false }: { product: Product; d
             </li>
           ))}
         </ol>
-      </Reveal>
-      <Reveal delay={0.3} className={`mt-auto pt-6 text-xs @4xl:text-[17px] ${dark ? 'text-white/50' : 'text-slate'}`}>
-        {t.common.source} : {l(product.source)}
       </Reveal>
     </SlideShell>
   )

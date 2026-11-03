@@ -11,7 +11,7 @@ export function ProductHeroSlide({ product }: { product: Product }) {
   const isNew = product.story !== 'standard'
   const elemental = product.ingredients.find((i) => i.derived && i.quantity !== undefined)
   return (
-    <SlideShell tone="tint" accent={product.accent} accentSoft={product.accentSoft} label={l(product.category)} product={product}>
+    <SlideShell tone="tint" accent={product.accent} accentSoft={product.accentSoft} label={l(product.category)} product={product} headerPackshot={false}>
       <div className="grid flex-1 items-center gap-10 @4xl:grid-cols-[1.05fr_1fr] @4xl:gap-16">
         <div className="order-2 @4xl:order-1">
           <Reveal>

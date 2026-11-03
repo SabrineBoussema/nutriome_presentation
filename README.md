@@ -116,6 +116,7 @@ Once the scientific or regulatory team has checked a value against the final pac
 | Folder | Convention | Example |
 | --- | --- | --- |
 | `src/assets/products/` | `<product-slug>.jpg` — the full packaging face, never cropped, ≥1000 px wide | `bio3mag.jpg`, `bio-q10-plus.jpg` |
+| `src/assets/ingredients/` | ingredient photos (`.jpg`, 360 px square) and PubChem structures (`.png`, transparent); mapped by French ingredient name in `src/data/ingredientVisuals.ts`, with author and licence shown on each composition slide | `propolis.jpg`, `berberine.png` |
 | `src/assets/logos/` | `nutriome-logo[-variant].png` | `nutriome-logo-tight.png` |
 | `src/assets/scientific/` | `<topic>-<subject>.webp` | `coq10-chaine-respiratoire.webp` |
 

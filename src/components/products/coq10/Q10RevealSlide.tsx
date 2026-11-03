@@ -12,7 +12,7 @@ export function Q10RevealSlide({ product }: { product: Product }) {
   const { l, t } = useI18n()
   const { isPrint } = useSlide()
   return (
-    <SlideShell product={product}>
+    <SlideShell product={product} headerPackshot={false}>
       <div className="relative grid flex-1 items-center gap-10 @4xl:grid-cols-[1fr_1.05fr] @4xl:gap-16">
         <div className="order-2 @4xl:order-1">
           <Reveal>

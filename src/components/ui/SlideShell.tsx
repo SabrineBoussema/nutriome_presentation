@@ -11,18 +11,21 @@ interface SlideShellProps {
   label?: string
   /** When set, the product packshot stays in the header so every captured slide is identifiable */
   product?: Product
+  /** Hide the header packshot when the slide already shows the box in the body */
+  headerPackshot?: boolean
   className?: string
   hideLogo?: boolean
 }
 
 /** Common frame: one shared ivory canvas, safe padding and discreet brand header. */
-export function SlideShell({ children, accent, label, product, className = '', hideLogo }: SlideShellProps) {
+export function SlideShell({ children, accent, label, product, headerPackshot = true, className = '', hideLogo }: SlideShellProps) {
+  const showHeaderPackshot = Boolean(product && headerPackshot)
   return (
     <section className={`relative flex min-h-full w-full flex-col overflow-hidden bg-ivory grain @4xl:h-full ${className}`}>
       {!hideLogo && (
         <header className="relative z-10 flex items-center justify-between gap-5 px-6 pt-5 @4xl:px-20 @4xl:pt-7">
           <Logo className="h-14 w-auto @4xl:h-20" />
-          {product ? (
+          {showHeaderPackshot && product ? (
             <img
               src={product.image}
               alt={product.name}
@@ -30,6 +33,7 @@ export function SlideShell({ children, accent, label, product, className = '', h
               draggable={false}
             />
           ) : (
+            !product &&
             label && (
               <span
                 className="text-xs font-medium uppercase tracking-[0.2em] text-slate @4xl:text-sm"

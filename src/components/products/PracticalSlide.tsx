@@ -23,7 +23,7 @@ function Field({ icon: Icon, label, field, accent }: { icon: typeof Pill; label:
 export function PracticalSlide({ product }: { product: Product }) {
   const { t } = useI18n()
   return (
-    <SlideShell tone="paper" accent={product.accent} label={product.name} product={product}>
+    <SlideShell tone="paper" accent={product.accent} label={product.name} product={product} headerPackshot={false}>
       <Reveal>
         <Eyebrow color={product.accent}>{product.name}</Eyebrow>
       </Reveal>

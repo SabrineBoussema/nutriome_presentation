@@ -38,6 +38,8 @@ export const fr = {
     scanToOpen: 'Scanner pour ouvrir la fiche',
     source: 'Source des données',
     nrv: 'VNR',
+    imageCredits: 'Illustrations',
+    structuresCredit: 'structures chimiques : PubChem (NIH)',
     nrvNote: 'VNR : valeurs nutritionnelles de référence de l’adulte (Règl. UE 1169/2011).',
     perCapsule: 'par gélule',
     step: 'Étape',

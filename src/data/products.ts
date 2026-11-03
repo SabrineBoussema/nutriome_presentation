@@ -698,14 +698,14 @@ export const products: Product[] = [
     aliases: ['biod3k2'],
     name: 'BioD3K2+',
     category: { fr: 'Vitamines', en: 'Vitamins' },
-    tagline: { fr: 'Vitamine D3, vitamine K2 et magnésium', en: 'Vitamin D3, vitamin K2 and magnesium' },
+    tagline: { fr: 'Vitamine D3, vitamine K2 MK-7 et magnésium', en: 'Vitamin D3, vitamin K2 MK-7 and magnesium' },
     positioning: {
-      fr: 'Vitamine D3, vitamine K2 (MK-7) et magnésium pour le métabolisme du calcium.',
-      en: 'Vitamin D3, vitamin K2 (MK-7) and magnesium for calcium metabolism.',
+      fr: 'Vitamine D3 2 000 UI, vitamine K2 (MK-7) 50 µg et 60 mg de magnésium élément, pour le métabolisme du calcium.',
+      en: 'Vitamin D3 2,000 IU, vitamin K2 (MK-7) 50 µg and 60 mg of elemental magnesium, for calcium metabolism.',
     },
     description: {
-      fr: 'Vitamine D3 2 000 UI, vitamine K2 MK-7 et bisglycinate de magnésium, en une gélule par jour.',
-      en: 'Vitamin D3 2,000 IU, vitamin K2 MK-7 and magnesium bisglycinate, one capsule a day.',
+      fr: 'Vitamine D3 2 000 UI (50 µg), vitamine K2 MK-7 50 µg et bisglycinate de magnésium 300 mg (60 mg de magnésium élément), en une gélule par jour.',
+      en: 'Vitamin D3 2,000 IU (50 µg), vitamin K2 MK-7 50 µg and magnesium bisglycinate 300 mg (60 mg elemental magnesium), one capsule a day.',
     },
     image: d3k2Img,
     imageAspect: 1183 / 876,
@@ -717,23 +717,34 @@ export const products: Product[] = [
         name: { fr: 'Vitamine D3', en: 'Vitamin D3' },
         quantity: 2000,
         unit: 'UI',
-        detail: { fr: 'soit 50 µg de cholécalciférol', en: 'i.e. 50 µg cholecalciferol' },
+        detail: { fr: 'soit 50 µg de cholécalciférol (1 000 % des VNR)', en: 'i.e. 50 µg cholecalciferol (1,000% of the NRV)' },
         role: { fr: 'Absorption du calcium et du phosphore', en: 'Calcium and phosphorus absorption' },
         status: 'verified',
       },
       {
         name: { fr: 'Vitamine K2 (MK-7)', en: 'Vitamin K2 (MK-7)' },
-        detail: { fr: 'Quantité à confirmer', en: 'Amount to be confirmed' },
+        quantity: 50,
+        unit: 'µg',
+        detail: { fr: 'soit 0,05 mg de ménaquinone-7 (67 % des VNR)', en: 'i.e. 0.05 mg menaquinone-7 (67% of the NRV)' },
         role: { fr: 'Cofacteur de la γ-carboxylation', en: 'Cofactor of γ-carboxylation' },
-        status: 'pending',
+        status: 'verified',
       },
       {
         name: { fr: 'Bisglycinate de magnésium', en: 'Magnesium bisglycinate' },
+        quantity: 300,
+        unit: 'mg',
+        detail: { fr: 'Quantité du composé tel que fourni', en: 'Amount of the compound as supplied' },
+        role: { fr: 'Ossature et fonction musculaire', en: 'Bones and muscle function' },
+        status: 'verified',
+      },
+      {
+        name: { fr: 'Magnésium élément', en: 'Elemental magnesium' },
         quantity: 60,
         unit: 'mg',
-        detail: { fr: 'Teneur en magnésium élément à confirmer', en: 'Elemental magnesium to be confirmed' },
-        role: { fr: 'Ossature et fonction musculaire', en: 'Bones and muscle function' },
-        status: 'pending',
+        nrvKey: 'Mg',
+        derived: true,
+        role: { fr: 'Teneur en magnésium élément par gélule', en: 'Elemental magnesium per capsule' },
+        status: 'verified',
       },
     ],
     excipients: {
@@ -785,17 +796,18 @@ export const products: Product[] = [
         en: 'Three complementary micronutrients of calcium–phosphate metabolism in one capsule.',
       },
       {
-        fr: 'Vitamine K2 sous forme ménaquinone-7 (MK-7).',
-        en: 'Vitamin K2 as menaquinone-7 (MK-7).',
+        fr: 'Vitamine K2 sous forme ménaquinone-7 (MK-7), 50 µg.',
+        en: 'Vitamin K2 as menaquinone-7 (MK-7), 50 µg.',
       },
       {
-        fr: 'Magnésium sous forme de bisglycinate.',
-        en: 'Magnesium as bisglycinate.',
+        fr: 'Magnésium sous forme de bisglycinate, 300 mg, soit 60 mg de magnésium élément (16 % des VNR).',
+        en: 'Magnesium as bisglycinate, 300 mg, i.e. 60 mg of elemental magnesium (16% of the NRV).',
       },
     ],
     usage: { text: { fr: '1 gélule par jour.', en: '1 capsule per day.' } },
     format: { text: { fr: 'Gélules', en: 'Capsules' } },
-    packaging: { text: { fr: 'À confirmer', en: 'To be confirmed' }, pending: true },
+    packaging: { text: { fr: 'Boîte de 60 gélules', en: 'Box of 60 capsules' } },
+    packCount: 60,
     precautions: [
       ...STANDARD_PRECAUTIONS,
       {
@@ -809,8 +821,16 @@ export const products: Product[] = [
     ],
     hcpNotes: [
       {
-        fr: 'Le statut en vitamine D s’évalue par le dosage sérique de 25(OH)D.',
-        en: 'Vitamin D status is assessed by serum 25(OH)D.',
+        fr: 'Le statut en vitamine D s’évalue par le dosage sérique de 25(OH)D. Une gélule apporte 50 µg de D3 (2 000 UI), soit 1 000 % des VNR ; la limite supérieure de sécurité EFSA est 100 µg/jour chez l’adulte.',
+        en: 'Vitamin D status is assessed by serum 25(OH)D. One capsule provides 50 µg of D3 (2,000 IU), i.e. 1,000% of the NRV; the EFSA adult upper level is 100 µg/day.',
+      },
+      {
+        fr: 'L’emballage indique vitamine K2 3,34 mg dont MK-7 0,05 mg : 3,34 mg est la masse de la préparation ; la teneur en ménaquinone-7 est 50 µg (67 % des VNR vitamine K).',
+        en: 'The pack lists vitamin K2 3.34 mg of which MK-7 0.05 mg: 3.34 mg is the preparation mass; menaquinone-7 content is 50 µg (67% of the vitamin K NRV).',
+      },
+      {
+        fr: 'Magnésium élément : 60 mg par gélule (16 % des VNR). Les allégations du magnésium (Règl. UE 432/2012) s’appliquent à partir de 15 % des VNR, soit 56,25 mg.',
+        en: 'Elemental magnesium: 60 mg per capsule (16% of the NRV). Magnesium health claims (EU Reg. 432/2012) apply from 15% of the NRV, i.e. 56.25 mg.',
       },
       {
         fr: 'La MK-7 a une demi-vie plasmatique plus longue que la K1. Cela ne suffit pas à établir une supériorité clinique.',
@@ -818,19 +838,19 @@ export const products: Product[] = [
       },
     ],
     references: ['ods-vitamin-d', 'ods-vitamin-k', 'holick-2007', 'manson-2019', 'efsa-vitamin-d-2009', 'eu-432-2012'],
-    validationStatus: 'pending',
+    validationStatus: 'verified',
     validationNotes: [
-      {
-        fr: 'Incohérences sur le site : « vitamine K2 0,05 mg dont MK7 300 mg » et « magnésium bisglycinate 60 mg dont magnésium élément 60 mg » sont impossibles en l’état. « D3 2 000 UI — 3,34 mg » désigne vraisemblablement la masse d’une préparation de D3. Fiche produit requise.',
-        en: 'Website inconsistencies: “vitamin K2 0.05 mg of which MK7 300 mg” and “magnesium bisglycinate 60 mg of which elemental magnesium 60 mg” are impossible as stated. “D3 2,000 IU — 3.34 mg” likely refers to the mass of a D3 preparation. Product sheet required.',
-      },
       {
         fr: 'Liste d’« indications » du deck Figma (asthme, maladies auto-immunes, chute des cheveux…) : allégations thérapeutiques, non reprises.',
         en: 'Figma deck “indications” list (asthma, autoimmune disease, hair loss…): therapeutic claims, not used.',
       },
     ],
+    manufacturer: { fr: 'Nutriome Labs', en: 'Nutriome Labs' },
     story: 'standard',
-    source: SITE,
+    source: {
+      fr: 'Emballage BioD3K2+ (panneau composition), 03/11/2026.',
+      en: 'BioD3K2+ pack (composition panel), 3 Nov 2026.',
+    },
   },
 
   // ────────────────────────────────────────────────────────────── BIOGRIPPAL

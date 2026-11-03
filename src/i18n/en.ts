@@ -40,6 +40,8 @@ export const en: Dictionary = {
     scanToOpen: 'Scan to open the product page',
     source: 'Data source',
     nrv: 'NRV',
+    imageCredits: 'Illustrations',
+    structuresCredit: 'chemical structures: PubChem (NIH)',
     nrvNote: 'NRV: adult nutrient reference values (EU Reg. 1169/2011).',
     perCapsule: 'per capsule',
     step: 'Step',
