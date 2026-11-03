@@ -34,36 +34,31 @@ export function Q10HighlightsSlide({ product }: { product: Product }) {
   ]
 
   return (
-    <SlideShell tone="navy" label={product.name}>
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{ background: 'radial-gradient(55% 70% at 80% 45%, rgb(217 169 59 / 0.18), transparent 70%)' }}
-        aria-hidden
-      />
+    <SlideShell product={product}>
       <div className="relative grid flex-1 gap-8 @4xl:grid-cols-[1fr_1.1fr] @4xl:gap-14">
         <div className="flex flex-col">
           <Reveal>
-            <Eyebrow color="#e9c46a">{t.coq10.highlightsEyebrow}</Eyebrow>
+            <Eyebrow color={product.accent}>{t.coq10.highlightsEyebrow}</Eyebrow>
           </Reveal>
           <Reveal delay={0.08}>
-            <SlideTitle className="mt-3 text-white">{t.coq10.highlightsTitle}</SlideTitle>
+            <SlideTitle className="mt-3 text-navy">{t.coq10.highlightsTitle}</SlideTitle>
           </Reveal>
           <div className="mt-8 grid flex-1 grid-cols-2 content-center gap-3 @4xl:gap-4">
             {stats.map(({ icon: Icon, value, label, small }, i) => (
               <Reveal key={i} delay={0.15 + i * 0.08}>
-                <div className="flex h-full flex-col rounded-3xl bg-white/[0.05] p-5 ring-1 ring-white/10 @4xl:p-6">
-                  <Icon className="size-5 text-[#e9c46a]" aria-hidden />
-                  <div className={`mt-3 font-serif leading-none text-white ${small ? 'text-2xl @4xl:text-[37px]' : 'text-4xl @4xl:text-[68px]'}`}>{value}</div>
-                  <div className="mt-2 text-sm leading-snug text-white/65 @4xl:text-[21px]">{label}</div>
+                <div className="flex h-full flex-col rounded-3xl border border-navy/[0.06] bg-white p-5 shadow-[0_20px_50px_-36px_rgb(14_26_43/0.45)] @4xl:p-6">
+                  <Icon className="size-5" style={{ color: product.accent }} aria-hidden />
+                  <div className={`mt-3 font-serif leading-none text-navy ${small ? 'text-2xl @4xl:text-[37px]' : 'text-4xl @4xl:text-[68px]'}`}>{value}</div>
+                  <div className="mt-2 text-sm leading-snug text-slate @4xl:text-[21px]">{label}</div>
                 </div>
               </Reveal>
             ))}
           </div>
         </div>
 
-        <Reveal fromStep={1} delay={0.1} className="flex flex-col justify-center rounded-[28px] bg-white/[0.04] p-6 ring-1 ring-white/10 @4xl:p-8">
-          <h3 className="font-serif text-2xl text-white @4xl:text-[34px]">{t.coq10.chartTitle}</h3>
-          <p className="mt-1 text-sm text-white/55 @4xl:text-[18px]">{t.coq10.chartSub}</p>
+        <Reveal fromStep={1} delay={0.1} className="flex flex-col justify-center rounded-[28px] border border-navy/[0.06] bg-white p-6 shadow-[0_20px_50px_-36px_rgb(14_26_43/0.45)] @4xl:p-8">
+          <h3 className="font-serif text-2xl text-navy @4xl:text-[34px]">{t.coq10.chartTitle}</h3>
+          <p className="mt-1 text-sm text-slate @4xl:text-[18px]">{t.coq10.chartSub}</p>
           <ul className="mt-6 flex flex-col gap-4 @4xl:gap-5">
             {vitamins.map(({ ing, pct }, i) => {
               const width = Math.min(pct, SCALE_MAX) / SCALE_MAX
@@ -71,12 +66,12 @@ export function Q10HighlightsSlide({ product }: { product: Product }) {
               return (
                 <li key={ing.nrvKey}>
                   <div className="flex items-baseline justify-between gap-3 text-sm @4xl:text-[21px]">
-                    <span className="font-medium text-white">
-                      {l(ing.name)} <span className="text-white/50">· {ing.unit === 'mg' && ing.quantity! < 1 ? `${n(ing.quantity! * 1000)} µg` : `${n(ing.quantity!)} ${ing.unit}`}</span>
+                    <span className="font-medium text-ink">
+                      {l(ing.name)} <span className="text-slate">· {ing.unit === 'mg' && ing.quantity! < 1 ? `${n(ing.quantity! * 1000)} µg` : `${n(ing.quantity!)} ${ing.unit}`}</span>
                     </span>
-                    <span className="font-semibold tabular-nums text-[#e9c46a]">{n(pct)} %</span>
+                    <span className="font-semibold tabular-nums" style={{ color: product.accent }}>{n(pct)} %</span>
                   </div>
-                  <div className="relative mt-2 h-3 rounded-full bg-white/10">
+                  <div className="relative mt-2 h-3 rounded-full bg-navy/[0.08]">
                     <motion.div
                       className="absolute inset-y-0 left-0 rounded-full"
                       style={{ background: `linear-gradient(90deg, #a87b16, ${GOLD})` }}
@@ -85,16 +80,15 @@ export function Q10HighlightsSlide({ product }: { product: Product }) {
                       transition={{ duration: 1.1, delay: 0.25 + i * 0.12, ease: [0.22, 1, 0.36, 1] }}
                     />
                     {overflow && (
-                      <span className="absolute -right-1 top-1/2 h-5 w-2 -translate-y-1/2 skew-x-[-20deg] bg-navy ring-2 ring-navy" aria-hidden />
+                      <span className="absolute -right-1 top-1/2 h-5 w-2 -translate-y-1/2 skew-x-[-20deg] bg-ivory ring-2 ring-ivory" aria-hidden />
                     )}
-                    {/* 100 % NRV marker */}
-                    <span className="absolute inset-y-[-4px] w-px bg-white/70" style={{ left: `${(100 / SCALE_MAX) * 100}%` }} aria-hidden />
+                    <span className="absolute inset-y-[-4px] w-px bg-navy/40" style={{ left: `${(100 / SCALE_MAX) * 100}%` }} aria-hidden />
                   </div>
                 </li>
               )
             })}
           </ul>
-          <p className="mt-6 text-xs text-white/45 @4xl:text-[17px]">{t.common.nrvNote}</p>
+          <p className="mt-6 text-xs text-slate @4xl:text-[17px]">{t.common.nrvNote}</p>
         </Reveal>
       </div>
     </SlideShell>

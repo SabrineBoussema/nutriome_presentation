@@ -10,7 +10,7 @@ export function ReferencesSlide({ product, dark = false }: { product: Product; d
   const { t, l } = useI18n()
   const refs = productReferences(product)
   return (
-    <SlideShell tone={dark ? 'navy' : 'ivory'} accent={product.accent} label={product.name}>
+    <SlideShell tone={dark ? 'navy' : 'ivory'} accent={product.accent} label={product.name} product={product}>
       <Reveal>
         <Eyebrow color={dark ? '#e9c46a' : product.accent}>{t.common.references}</Eyebrow>
       </Reveal>

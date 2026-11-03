@@ -27,6 +27,8 @@ export interface Ingredient {
   nrvKey?: NrvKey
   /** Short physiological role shown on the composition card */
   role?: L
+  /** Derived figure (e.g. elemental mineral) — shown, but excluded from compound mass totals */
+  derived?: boolean
   status?: ValidationStatus
 }
 
@@ -86,6 +88,8 @@ export interface Product {
   validationNotes: L[]
   /** Which storytelling template to use */
   story: 'standard' | 'bio3mag' | 'coq10'
+  /** When true, the product is kept in the registry but omitted from the main deck */
+  hiddenFromDeck?: boolean
   /** Units per box, when confirmed on the pack */
   packCount?: number
   manufacturer?: L

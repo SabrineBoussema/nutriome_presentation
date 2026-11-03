@@ -65,9 +65,9 @@ export function SlideRenderer({ slide }: { slide: SlideDef }) {
     case 'q10-reveal':
       return <Q10RevealSlide product={product} />
     case 'q10-mitochondrion':
-      return <ScienceSlide product={product} diagram="mitochondria" eyebrow={t.coq10.mitoEyebrow} title={t.coq10.mitoTitle} dark />
+      return <ScienceSlide product={product} diagram="mitochondria" eyebrow={t.coq10.mitoEyebrow} title={t.coq10.mitoTitle} />
     case 'q10-mechanism':
-      return <ScienceSlide product={product} diagram="electron-transport" eyebrow={t.coq10.mechEyebrow} title={t.coq10.mechTitle} dark />
+      return <ScienceSlide product={product} diagram="electron-transport" eyebrow={t.coq10.mechEyebrow} title={t.coq10.mechTitle} />
     default:
       return null
   }

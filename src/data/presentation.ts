@@ -1,5 +1,5 @@
 import { diagrams } from './diagrams'
-import { products } from './products'
+import { catalog, products } from './products'
 import type { L, Product } from './types'
 
 export const presentationConfig = {
@@ -9,6 +9,10 @@ export const presentationConfig = {
   showValidationBadges: true,
   /** Appends an internal slide listing every open validation item */
   showValidationAppendix: true,
+  /** FR/EN control in the presenter bar. Hidden for this deck (French only). */
+  showLanguageSwitch: false,
+  /** Dedicated scientific-references slides at the end of each product section */
+  showReferences: false,
 }
 
 export type SlideKind =
@@ -70,21 +74,20 @@ function productSlides(p: Product): SlideDef[] {
   const differentiation = base('differentiation', { fr: 'Rôles physiologiques', en: 'Physiological roles' })
   const formulation = base('formulation', { fr: 'Formulation', en: 'Formulation' })
   const safety = base('safety', { fr: 'Précautions', en: 'Precautions' })
-  const practical = base('practical', { fr: 'Informations pratiques', en: 'Practical information' }, 1, {
-    fr: 'Le QR code renvoie vers la fiche partageable de ce produit.',
-    en: 'The QR code links to the shareable page for this product.',
-  })
-  const refs = base('references', { fr: 'Références', en: 'References' })
+  const practical = base('practical', { fr: 'Informations pratiques', en: 'Practical information' })
+  const refs = presentationConfig.showReferences
+    ? [base('references', { fr: 'Références', en: 'References' })]
+    : []
 
   if (p.story === 'bio3mag') {
     return [
       base('product-hero', { fr: 'Bio3Mag', en: 'Bio3Mag' }, 1, {
-        fr: 'Nouveau : trois sels de magnésium dans une gélule. Les quantités désignent les composés, pas le magnésium élément.',
-        en: 'New: three magnesium salts in one capsule. Amounts refer to the compounds, not elemental magnesium.',
+        fr: 'Nouveau : trois sels de magnésium dans une gélule, soit 75 mg de magnésium élément.',
+        en: 'New: three magnesium salts in one capsule, i.e. 75 mg of elemental magnesium.',
       }),
       base('mag-pillars', { fr: 'Trois formes, une formule', en: 'Three forms, one formula' }, 2, {
-        fr: 'Étape 1 : les trois piliers. Étape 2 : réunion dans la formule. Insister sur 150 / 150 / 200 mg de composé.',
-        en: 'Step 1: the three pillars. Step 2: brought together in the formula. Stress 150 / 150 / 200 mg of compound.',
+        fr: 'Étape 1 : les trois piliers. Étape 2 : réunion dans la formule. Insister sur 150 / 150 / 200 mg de composé et 75 mg d’élément.',
+        en: 'Step 1: the three pillars. Step 2: brought together in the formula. Stress 150 / 150 / 200 mg of compound and 75 mg elemental.',
       }),
       base('mag-molecules', { fr: 'Schémas des trois formes', en: 'The three forms, schematically' }, 3, {
         fr: 'Schémas simplifiés, non à l’échelle. La structure réelle dépend de la forme hydratée et du fournisseur.',
@@ -96,7 +99,7 @@ function productSlides(p: Product): SlideDef[] {
       formulation,
       practical,
       safety,
-      refs,
+      ...refs,
     ]
   }
 
@@ -119,7 +122,7 @@ function productSlides(p: Product): SlideDef[] {
       differentiation,
       practical,
       safety,
-      refs,
+      ...refs,
     ]
   }
 
@@ -131,7 +134,7 @@ function productSlides(p: Product): SlideDef[] {
     formulation,
     practical,
     safety,
-    refs,
+    ...refs,
   ]
 }
 
@@ -164,7 +167,7 @@ export function buildDeck(onlySlug?: string): SlideDef[] {
         en: 'Click a product to jump straight to its section.',
       },
     },
-    ...products.flatMap(productSlides),
+    ...catalog.flatMap(productSlides),
     { id: 'closing', kind: 'closing', steps: 1, section: S.end, title: { fr: 'Contact', en: 'Contact' } },
   ]
   if (presentationConfig.showValidationAppendix) {

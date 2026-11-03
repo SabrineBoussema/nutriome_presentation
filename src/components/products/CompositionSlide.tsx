@@ -10,7 +10,7 @@ import { nrvPercent } from '../../data/nrv'
 export function CompositionSlide({ product }: { product: Product }) {
   const { l, n, t, lang } = useI18n()
   const { isPrint } = useSlide()
-  const quantified = product.ingredients.filter((i) => i.quantity !== undefined)
+  const quantified = product.ingredients.filter((i) => i.quantity !== undefined && !i.derived)
   // Mass bar only when every quantified ingredient is in mg (never mix units)
   const showBar = quantified.length > 1 && quantified.length <= 5 && quantified.every((i) => i.unit === 'mg')
   const total = quantified.reduce((s, i) => s + (i.quantity ?? 0), 0)
@@ -19,7 +19,7 @@ export function CompositionSlide({ product }: { product: Product }) {
   const many = product.ingredients.length > 5
 
   return (
-    <SlideShell tone="paper" accent={product.accent} label={product.name}>
+    <SlideShell tone="paper" accent={product.accent} label={product.name} product={product}>
       <div className="flex flex-col gap-2 @4xl:flex-row @4xl:items-end @4xl:justify-between">
         <div>
           <Reveal>
@@ -41,32 +41,43 @@ export function CompositionSlide({ product }: { product: Product }) {
         {product.ingredients.map((ing, i) => (
           <Reveal key={i} delay={0.12 + i * 0.06}>
             <div
-              className={`relative flex h-full flex-col rounded-3xl border bg-white p-5 shadow-[0_20px_50px_-30px_rgb(14_26_43/0.35)] @4xl:p-6 ${
-                ing.status === 'pending' ? 'border-amber/30' : 'border-navy/[0.06]'
+              className={`relative flex h-full flex-col rounded-3xl border p-5 shadow-[0_20px_50px_-30px_rgb(14_26_43/0.35)] @4xl:p-6 ${
+                ing.derived
+                  ? 'border-transparent'
+                  : ing.status === 'pending'
+                    ? 'border-amber/30 bg-white'
+                    : 'border-navy/[0.06] bg-white'
               }`}
+              style={ing.derived ? { background: product.accent } : undefined}
             >
-              <div className="h-1 w-10 rounded-full" style={{ background: shades[i % shades.length] }} />
-              <div className={`mt-4 flex items-baseline gap-1.5 font-serif text-navy ${many ? 'text-4xl @4xl:text-[47px]' : 'text-5xl @4xl:text-[64px]'}`}>
+              <div className="h-1 w-10 rounded-full" style={{ background: ing.derived ? 'rgb(255 255 255 / 0.55)' : shades[i % shades.length] }} />
+              <div
+                className={`mt-4 flex items-baseline gap-1.5 font-serif ${ing.derived ? 'text-white' : 'text-navy'} ${many ? 'text-4xl @4xl:text-[47px]' : 'text-5xl @4xl:text-[64px]'}`}
+              >
                 {ing.quantity !== undefined ? (
                   <>
                     {n(ing.quantity)}
-                    <span className="font-sans text-lg font-medium text-slate @4xl:text-xl">{ing.unit === 'UI' && lang === 'en' ? 'IU' : ing.unit}</span>
+                    <span className={`font-sans text-lg font-medium @4xl:text-xl ${ing.derived ? 'text-white/80' : 'text-slate'}`}>
+                      {ing.unit === 'UI' && lang === 'en' ? 'IU' : ing.unit}
+                    </span>
                   </>
                 ) : (
                   <span className="text-3xl text-slate/60">—</span>
                 )}
               </div>
-              <div className="mt-2 text-base font-semibold leading-tight text-ink @4xl:text-[25px]">{l(ing.name)}</div>
+              <div className={`mt-2 text-base font-semibold leading-tight @4xl:text-[25px] ${ing.derived ? 'text-white' : 'text-ink'}`}>{l(ing.name)}</div>
               {ing.nrvKey && ing.quantity !== undefined && (
                 <div
-                  className="mt-2 inline-flex w-fit items-center rounded-full px-2.5 py-0.5 text-xs font-semibold text-white @4xl:text-[17px]"
-                  style={{ background: product.accent }}
+                  className="mt-2 inline-flex w-fit items-center rounded-full px-2.5 py-0.5 text-xs font-semibold @4xl:text-[17px]"
+                  style={ing.derived ? { background: 'white', color: product.accent } : { background: product.accent, color: 'white' }}
                 >
                   {n(nrvPercent(ing.nrvKey, ing.quantity))} % {t.common.nrv}
                 </div>
               )}
-              {ing.detail && <div className="mt-1 text-sm text-slate @4xl:text-[20px]">{l(ing.detail)}</div>}
-              {ing.role && !many && <div className="mt-3 text-sm leading-snug text-slate/90 @4xl:text-[19px]">{l(ing.role)}</div>}
+              {ing.detail && <div className={`mt-1 text-sm @4xl:text-[20px] ${ing.derived ? 'text-white/80' : 'text-slate'}`}>{l(ing.detail)}</div>}
+              {ing.role && !many && (
+                <div className={`mt-3 text-sm leading-snug @4xl:text-[19px] ${ing.derived ? 'text-white/85' : 'text-slate/90'}`}>{l(ing.role)}</div>
+              )}
               {ing.status === 'pending' && (
                 <div className="mt-auto pt-3">
                   <PendingBadge short />

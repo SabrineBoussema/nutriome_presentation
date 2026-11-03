@@ -10,9 +10,9 @@ import { SlideShell, SlideTitle } from '../../ui/SlideShell'
 const BLUES = ['#14507c', '#1b6fa8', '#5fa8d8']
 const MOLECULES = [BisglycinateMolecule, MalateMolecule, CitrateMolecule]
 
-/** The three declared magnesium compounds (ignores the pending elemental-Mg row). */
+/** The three declared magnesium compounds (excludes the elemental-Mg summary). */
 function forms(product: Product) {
-  return product.ingredients.filter((i) => i.quantity !== undefined).slice(0, 3)
+  return product.ingredients.filter((i) => i.quantity !== undefined && !i.derived).slice(0, 3)
 }
 
 /** Step 0: three pillars. Step 1: animated composition overview bringing them together. */
@@ -20,12 +20,13 @@ export function MagPillarsSlide({ product }: { product: Product }) {
   const { l, n, t } = useI18n()
   const { step, isPrint } = useSlide()
   const items = forms(product)
+  const elemental = product.ingredients.find((i) => i.derived && i.quantity !== undefined)
   const total = items.reduce((s, i) => s + (i.quantity ?? 0), 0)
   const together = step >= 1 || isPrint
   const offsets = items.map((_, i) => items.slice(0, i).reduce((s, x) => s + ((x.quantity ?? 0) / total) * 100, 0))
 
   return (
-    <SlideShell tone="tint" accent={product.accent} accentSoft={product.accentSoft} label={product.name}>
+    <SlideShell tone="tint" accent={product.accent} accentSoft={product.accentSoft} label={product.name} product={product}>
       <Reveal>
         <Eyebrow color={product.accent}>{t.bio3mag.pillarsEyebrow}</Eyebrow>
       </Reveal>
@@ -103,8 +104,17 @@ export function MagPillarsSlide({ product }: { product: Product }) {
               <div className="absolute inset-y-0 right-0 w-1/2 bg-gradient-to-b from-white to-[#dbe9f3]" />
               <div className="absolute inset-x-3 top-1.5 h-2 rounded-full bg-white/50" />
             </div>
-            <div className="mt-5 font-serif text-3xl text-navy @4xl:text-[42px]">{product.name}</div>
-            <div className="text-sm text-slate @4xl:text-base">{l(product.doseBasis)}</div>
+            <div className="mt-5 font-serif text-3xl text-navy @4xl:text-[42px]">
+              {elemental ? (
+                <>
+                  {n(elemental.quantity ?? 0)}
+                  <span className="ml-1 font-sans text-base text-slate">mg</span>
+                </>
+              ) : (
+                product.name
+              )}
+            </div>
+            <div className="text-sm text-slate @4xl:text-base">{elemental ? l(elemental.name) : l(product.doseBasis)}</div>
           </motion.div>
           <div className="absolute -bottom-4 left-0 right-0 flex flex-wrap justify-center gap-x-4 gap-y-1 @4xl:-bottom-8">
             {items.map((ing, i) => (
@@ -126,7 +136,7 @@ export function MagMoleculesSlide({ product }: { product: Product }) {
   const items = forms(product)
   const captions = [t.bio3mag.pillar1, t.bio3mag.pillar2, t.bio3mag.pillar3]
   return (
-    <SlideShell tone="paper" accent={product.accent} label={product.name}>
+    <SlideShell tone="paper" accent={product.accent} label={product.name} product={product}>
       <Reveal>
         <Eyebrow color={product.accent}>{t.bio3mag.moleculesEyebrow}</Eyebrow>
       </Reveal>

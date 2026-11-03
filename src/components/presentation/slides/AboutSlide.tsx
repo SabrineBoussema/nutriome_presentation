@@ -1,6 +1,6 @@
 import { BookOpen, FlaskConical, ShieldCheck, Stethoscope } from 'lucide-react'
 import { company } from '../../../data/company'
-import { products } from '../../../data/products'
+import { catalog } from '../../../data/products'
 import { useI18n } from '../../../i18n'
 import { Eyebrow } from '../../ui/Badges'
 import { Reveal } from '../../ui/Reveal'
@@ -36,7 +36,7 @@ export function AboutSlide() {
           <Reveal delay={0.38} className="mt-auto flex flex-wrap gap-x-12 gap-y-4 pt-8">
             {[
               { k: t.about.since, v: String(company.founded) },
-              { k: t.about.products, v: String(products.length) },
+              { k: t.about.products, v: String(catalog.length) },
               { k: t.about.base, v: 'Monastir' },
             ].map(({ k, v }) => (
               <div key={k}>

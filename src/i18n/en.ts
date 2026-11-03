@@ -75,13 +75,13 @@ export const en: Dictionary = {
   portfolio: {
     eyebrow: 'Our range',
     title: 'The Nutriome ecosystem',
-    subtitle: 'Seven formulas, available in pharmacies on pharmacist advice.',
+    subtitle: 'Six formulas, available in pharmacies on pharmacist advice.',
   },
   bio3mag: {
     pillar: 'Pillar',
     pillarsEyebrow: 'Three pillars',
     pillarsTitle: 'Three forms of magnesium, together.',
-    compoundNote: 'Amounts of the compounds as supplied — their sum is not the elemental magnesium content.',
+    compoundNote: 'Amounts of the compounds as supplied. Elemental magnesium: 75 mg per capsule (20% of the NRV).',
     moleculesEyebrow: 'Chemistry of the forms',
     moleculesTitle: 'How magnesium is bound',
     pillar1: 'Chelate: Mg²⁺ coordinated by the amino nitrogen and carboxylate oxygen of two glycinates.',

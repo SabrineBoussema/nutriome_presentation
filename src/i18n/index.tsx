@@ -19,14 +19,6 @@ interface I18nValue {
 const I18nContext = createContext<I18nValue | null>(null)
 
 function initialLang(): Lang {
-  const fromUrl = new URLSearchParams(window.location.search).get('lang')
-  if (fromUrl === 'fr' || fromUrl === 'en') return fromUrl
-  try {
-    const stored = localStorage.getItem(STORAGE_KEY)
-    if (stored === 'fr' || stored === 'en') return stored
-  } catch {
-    /* storage unavailable */
-  }
   return 'fr'
 }
 

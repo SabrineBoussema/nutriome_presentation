@@ -74,13 +74,13 @@ export const fr = {
   portfolio: {
     eyebrow: 'Notre gamme',
     title: 'L’écosystème Nutriome',
-    subtitle: 'Sept formules, disponibles en pharmacie, sur conseil pharmaceutique.',
+    subtitle: 'Six formules, disponibles en pharmacie, sur conseil pharmaceutique.',
   },
   bio3mag: {
     pillar: 'Pilier',
     pillarsEyebrow: 'Trois piliers',
     pillarsTitle: 'Trois formes de magnésium, réunies.',
-    compoundNote: 'Quantités des composés tels que fournis — leur somme n’est pas la teneur en magnésium élément.',
+    compoundNote: 'Quantités des composés tels que fournis. Magnésium élément : 75 mg par gélule (20 % des VNR).',
     moleculesEyebrow: 'Chimie des formes',
     moleculesTitle: 'Comment le magnésium est associé',
     pillar1: 'Chélate : Mg²⁺ coordonné par l’azote aminé et l’oxygène carboxylate de deux glycinates.',

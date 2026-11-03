@@ -14,6 +14,7 @@ import {
 } from 'lucide-react'
 import { useState, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
+import { presentationConfig } from '../../data/presentation'
 import { useI18n } from '../../i18n'
 
 interface ControlBarProps {
@@ -130,20 +131,24 @@ export function ControlBar(props: ControlBarProps) {
           </IconButton>
         )}
 
-        <span className="mx-1 h-6 w-px shrink-0 bg-white/15" />
-        <div className="flex shrink-0 rounded-full bg-white/10 p-0.5 text-xs font-semibold" role="group" aria-label={t.nav.language}>
-          {(['fr', 'en'] as const).map((code) => (
-            <button
-              key={code}
-              type="button"
-              onClick={() => setLang(code)}
-              aria-pressed={lang === code}
-              className={`rounded-full px-2.5 py-1.5 uppercase transition-colors ${lang === code ? 'bg-white text-navy' : 'text-white/70 hover:text-white'}`}
-            >
-              {code}
-            </button>
-          ))}
-        </div>
+        {presentationConfig.showLanguageSwitch && (
+          <>
+            <span className="mx-1 h-6 w-px shrink-0 bg-white/15" />
+            <div className="flex shrink-0 rounded-full bg-white/10 p-0.5 text-xs font-semibold" role="group" aria-label={t.nav.language}>
+              {(['fr', 'en'] as const).map((code) => (
+                <button
+                  key={code}
+                  type="button"
+                  onClick={() => setLang(code)}
+                  aria-pressed={lang === code}
+                  className={`rounded-full px-2.5 py-1.5 uppercase transition-colors ${lang === code ? 'bg-white text-navy' : 'text-white/70 hover:text-white'}`}
+                >
+                  {code}
+                </button>
+              ))}
+            </div>
+          </>
+        )}
       </nav>
     </div>
   )

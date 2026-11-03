@@ -48,8 +48,8 @@ export const products: Product[] = [
     category: { fr: 'Minéraux', en: 'Minerals' },
     tagline: { fr: 'Triple source de magnésium', en: 'Triple source of magnesium' },
     positioning: {
-      fr: 'Trois sels organiques de magnésium — bisglycinate, malate et citrate — réunis dans une même gélule.',
-      en: 'Three organic magnesium salts — bisglycinate, malate and citrate — combined in a single capsule.',
+      fr: 'Trois sels organiques de magnésium — bisglycinate, malate et citrate — réunis dans une même gélule, soit 75 mg de magnésium élément.',
+      en: 'Three organic magnesium salts — bisglycinate, malate and citrate — combined in a single capsule, i.e. 75 mg of elemental magnesium.',
     },
     description: {
       fr: 'Bisglycinate, malate et citrate de magnésium : une formule à trois formes, déclarées individuellement.',
@@ -87,11 +87,15 @@ export const products: Product[] = [
       },
       {
         name: { fr: 'Magnésium élément', en: 'Elemental magnesium' },
+        quantity: 75,
+        unit: 'mg',
+        nrvKey: 'Mg',
+        derived: true,
         role: {
-          fr: 'Teneur à déclarer d’après la spécification fournisseur validée',
-          en: 'To be declared from the validated supplier specification',
+          fr: 'Teneur en magnésium élément par gélule',
+          en: 'Elemental magnesium per capsule',
         },
-        status: 'pending',
+        status: 'verified',
       },
     ],
     excipients: { fr: 'Excipients : à confirmer sur l’emballage final.', en: 'Excipients: to be confirmed on final packaging.' },
@@ -153,6 +157,10 @@ export const products: Product[] = [
         en: 'Each compound is declared separately (150 mg / 150 mg / 200 mg per capsule).',
       },
       {
+        fr: '75 mg de magnésium élément par gélule (20 % des VNR).',
+        en: '75 mg of elemental magnesium per capsule (20% of the NRV).',
+      },
+      {
         fr: 'Ligands d’origine métabolique : la glycine (acide aminé), le malate et le citrate (intermédiaires du cycle de Krebs).',
         en: 'Ligands of metabolic origin: glycine (an amino acid), malate and citrate (Krebs cycle intermediates).',
       },
@@ -166,10 +174,8 @@ export const products: Product[] = [
       pending: true,
     },
     format: { text: { fr: 'Gélules', en: 'Capsules' } },
-    packaging: {
-      text: { fr: '30 gélules (emballage) — 60 gélules (site web) : à harmoniser', en: '30 capsules (pack) — 60 capsules (website): to be reconciled' },
-      pending: true,
-    },
+    packaging: { text: { fr: 'Boîte de 30 gélules', en: 'Box of 30 capsules' } },
+    packCount: 30,
     precautions: [
       ...STANDARD_PRECAUTIONS,
       {
@@ -179,8 +185,8 @@ export const products: Product[] = [
     ],
     hcpNotes: [
       {
-        fr: 'Les quantités déclarées (150 / 150 / 200 mg) correspondent aux composés tels que fournis. Leur somme (500 mg) n’est pas la teneur en magnésium élément.',
-        en: 'Declared amounts (150 / 150 / 200 mg) refer to the compounds as supplied. Their sum (500 mg) is not the elemental magnesium content.',
+        fr: 'Les quantités déclarées (150 / 150 / 200 mg) correspondent aux composés tels que fournis. Magnésium élément : 75 mg par gélule (20 % des VNR).',
+        en: 'Declared amounts (150 / 150 / 200 mg) refer to the compounds as supplied. Elemental magnesium: 75 mg per capsule (20% of the NRV).',
       },
       {
         fr: 'Les allégations nutritionnelles du magnésium (Règl. UE 432/2012) s’appliquent à partir de 15 % des VNR, soit 56,25 mg de magnésium élément par jour.',
@@ -195,20 +201,8 @@ export const products: Product[] = [
     validationStatus: 'pending',
     validationNotes: [
       {
-        fr: 'Magnésium élément : le site indique 70,5 mg / gélule. Valeur non affichée tant que la spécification fournisseur (titre en Mg de chaque sel, forme hydratée) n’est pas validée.',
-        en: 'Elemental magnesium: the website states 70.5 mg / capsule. Not displayed until the supplier specification (Mg assay of each salt, hydration form) is validated.',
-      },
-      {
-        fr: 'Conditionnement : 30 gélules sur l’emballage, 60 gélules sur le site.',
-        en: 'Pack size: 30 capsules on the pack, 60 capsules on the website.',
-      },
-      {
         fr: 'Mentions « haute absorption et tolérance » (emballage) et « améliore la qualité du sommeil » (site) : non reprises, faute de justification produit.',
         en: '“High absorption and tolerance” (pack) and “improves sleep quality” (website): not used — no product-specific substantiation.',
-      },
-      {
-        fr: 'Visuel d’emballage en basse résolution (483 px) : fournir un packshot HD.',
-        en: 'Low-resolution pack image (483 px): supply an HD packshot.',
       },
     ],
     story: 'bio3mag',
@@ -1120,9 +1114,13 @@ export const products: Product[] = [
       },
     ],
     story: 'standard',
+    hiddenFromDeck: true,
     source: SITE,
   },
 ]
+
+/** Products shown in the main deck, portfolio and opening. */
+export const catalog = products.filter((p) => !p.hiddenFromDeck)
 
 export function getProduct(slugOrAlias: string): Product | undefined {
   return products.find((p) => p.slug === slugOrAlias || p.aliases?.includes(slugOrAlias))

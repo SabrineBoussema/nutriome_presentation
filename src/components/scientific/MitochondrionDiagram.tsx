@@ -20,7 +20,7 @@ function innerY(x: number, upper: boolean) {
  * Stylised mitochondrion: outer membrane, inner membrane folded into cristae, matrix with Krebs cycle.
  * Steps: 0 outer membrane · 1 inner membrane & cristae · 2 matrix / Krebs → NADH, FADH₂
  */
-export function MitochondrionDiagram({ step, dark = true, className = '' }: DiagramProps) {
+export function MitochondrionDiagram({ step, dark = false, className = '' }: DiagramProps) {
   const tr = useTr()
   const { isPrint } = useSlide()
   const outer = dark ? '#d9a93b' : '#b8862b'

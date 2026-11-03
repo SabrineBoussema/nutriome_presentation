@@ -1,5 +1,5 @@
 import { AlertTriangle } from 'lucide-react'
-import { products } from '../../../data/products'
+import { catalog } from '../../../data/products'
 import { useI18n } from '../../../i18n'
 import { Eyebrow } from '../../ui/Badges'
 import { Reveal } from '../../ui/Reveal'
@@ -8,8 +8,8 @@ import { SlideShell } from '../../ui/SlideShell'
 /** Internal appendix listing every open validation item, product by product. */
 export function ValidationSlide({ part }: { part: number }) {
   const { l, t } = useI18n()
-  const half = Math.ceil(products.length / 2)
-  const items = part === 1 ? products.slice(0, half) : products.slice(half)
+  const half = Math.ceil(catalog.length / 2)
+  const items = part === 1 ? catalog.slice(0, half) : catalog.slice(half)
   return (
     <SlideShell tone="paper" label={t.common.validationTitle}>
       <Reveal>

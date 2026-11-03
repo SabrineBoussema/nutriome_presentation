@@ -5,7 +5,6 @@ import { Eyebrow, EvidenceChip } from '../ui/Badges'
 import { Reveal } from '../ui/Reveal'
 import { SlideShell, SlideTitle } from '../ui/SlideShell'
 import { Packshot } from './Packshot'
-import { citation } from './productRefs'
 
 /** Physiological roles of the ingredients, each with its evidence level and citations. */
 export function DifferentiationSlide({ product }: { product: Product }) {
@@ -13,7 +12,7 @@ export function DifferentiationSlide({ product }: { product: Product }) {
   const count = product.mechanisms.length
   const cols = count === 4 ? '@4xl:grid-cols-2' : count >= 3 ? '@4xl:grid-cols-3' : '@4xl:grid-cols-2'
   return (
-    <SlideShell tone="ivory" accent={product.accent} label={product.name}>
+    <SlideShell tone="ivory" accent={product.accent} label={product.name} product={product}>
       <Reveal>
         <Eyebrow color={product.accent}>{product.name}</Eyebrow>
       </Reveal>
@@ -26,12 +25,7 @@ export function DifferentiationSlide({ product }: { product: Product }) {
             <article className="h-full rounded-3xl border border-navy/[0.06] bg-white p-5 shadow-[0_20px_50px_-36px_rgb(14_26_43/0.45)] @4xl:p-7">
               <EvidenceChip level={m.evidence} />
               <h3 className="mt-3 text-lg font-bold text-ink @4xl:text-[26px]">{l(m.title)}</h3>
-              <p className="mt-2 text-base leading-relaxed text-slate @4xl:text-[20px]">
-                {l(m.body)}{' '}
-                <span className="whitespace-nowrap text-sm font-semibold" style={{ color: product.accent }}>
-                  {citation(product, m.refs)}
-                </span>
-              </p>
+              <p className="mt-2 text-base leading-relaxed text-slate @4xl:text-[20px]">{l(m.body)}</p>
             </article>
           </Reveal>
         ))}
@@ -44,7 +38,7 @@ export function DifferentiationSlide({ product }: { product: Product }) {
 export function FormulationSlide({ product }: { product: Product }) {
   const { l, t } = useI18n()
   return (
-    <SlideShell tone="tint" accent={product.accent} accentSoft={product.accentSoft} label={product.name}>
+    <SlideShell tone="tint" accent={product.accent} accentSoft={product.accentSoft} label={product.name} product={product}>
       <Reveal>
         <Eyebrow color={product.accent}>{product.name}</Eyebrow>
       </Reveal>

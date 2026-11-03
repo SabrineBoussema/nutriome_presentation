@@ -7,10 +7,11 @@ import { SlideShell } from '../ui/SlideShell'
 import { Packshot } from './Packshot'
 
 export function ProductHeroSlide({ product }: { product: Product }) {
-  const { l, t } = useI18n()
+  const { l, n, t } = useI18n()
   const isNew = product.story !== 'standard'
+  const elemental = product.ingredients.find((i) => i.derived && i.quantity !== undefined)
   return (
-    <SlideShell tone="tint" accent={product.accent} accentSoft={product.accentSoft} label={l(product.category)}>
+    <SlideShell tone="tint" accent={product.accent} accentSoft={product.accentSoft} label={l(product.category)} product={product}>
       <div className="grid flex-1 items-center gap-10 @4xl:grid-cols-[1.05fr_1fr] @4xl:gap-16">
         <div className="order-2 @4xl:order-1">
           <Reveal>
@@ -43,6 +44,11 @@ export function ProductHeroSlide({ product }: { product: Product }) {
             <span className="rounded-full border border-navy/10 bg-white/70 px-4 py-1.5 text-sm font-medium text-ink backdrop-blur">
               {l(product.doseBasis)}
             </span>
+            {elemental && (
+              <span className="rounded-full px-4 py-1.5 text-sm font-semibold text-white" style={{ background: product.accent }}>
+                {n(elemental.quantity!)} {elemental.unit} {l(elemental.name)}
+              </span>
+            )}
             {product.validationStatus === 'pending' && <PendingBadge />}
           </Reveal>
         </div>

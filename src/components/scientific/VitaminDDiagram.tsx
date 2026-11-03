@@ -1,3 +1,6 @@
+import liverImg from '../../assets/scientific/liver.jpg'
+import kidneyImg from '../../assets/scientific/kidney.jpg'
+import intestineImg from '../../assets/scientific/intestine.jpg'
 import { ArrowDefs, DrawPath, FONT, Step, useTr, type DiagramProps } from './DiagramKit'
 
 /**
@@ -40,8 +43,8 @@ export function VitaminDDiagram({ step, className = '' }: DiagramProps) {
       {/* Step 1 — liver */}
       <DrawPath at={1} step={step} d="M 145 267 L 222 267" stroke={sun} strokeWidth={3} markerEnd="url(#vitd-arrow-sun)" />
       <Step at={1} step={step}>
-        <path d="M 230 120 C 250 80, 370 75, 400 105 C 420 125, 405 165, 370 185 C 330 205, 270 200, 245 175 C 225 155, 222 135, 230 120 Z" fill="#e8b4a2" stroke="#a8492a" strokeWidth="2.5" />
-        <text x="318" y="148" textAnchor="middle" fontSize="16" fontWeight="700" fill="#6e2a14">
+        <image href={liverImg} x="228" y="58" width="158" height="158" preserveAspectRatio="xMidYMid meet" />
+        <text x="307" y="232" textAnchor="middle" fontSize="16" fontWeight="700" fill="#6e2a14">
           {tr('Foie', 'Liver')}
         </text>
         <rect x="230" y="250" width="150" height="34" rx="17" fill={sun} />
@@ -56,8 +59,8 @@ export function VitaminDDiagram({ step, className = '' }: DiagramProps) {
       {/* Step 2 — kidney */}
       <DrawPath at={2} step={step} d="M 385 267 L 452 267" stroke={sun} strokeWidth={3} markerEnd="url(#vitd-arrow-sun)" />
       <Step at={2} step={step}>
-        <path d="M 500 90 C 450 90, 440 150, 470 175 C 490 190, 480 205, 500 215 C 545 235, 580 190, 575 150 C 570 110, 545 90, 500 90 Z" fill="#d79b9b" stroke="#8f3a3a" strokeWidth="2.5" />
-        <text x="515" y="160" textAnchor="middle" fontSize="16" fontWeight="700" fill="#5d1f1f">
+        <image href={kidneyImg} x="455" y="52" width="162" height="162" preserveAspectRatio="xMidYMid meet" />
+        <text x="536" y="228" textAnchor="middle" fontSize="16" fontWeight="700" fill="#5d1f1f">
           {tr('Rein', 'Kidney')}
         </text>
         <rect x="458" y="250" width="160" height="34" rx="17" fill="#a86e0c" />
@@ -70,15 +73,15 @@ export function VitaminDDiagram({ step, className = '' }: DiagramProps) {
       </Step>
 
       {/* Step 3 — intestine */}
-      <DrawPath at={3} step={step} d="M 622 267 C 660 267, 680 230, 690 200" stroke={sun} strokeWidth={3} markerEnd="url(#vitd-arrow-sun)" />
+      <DrawPath at={3} step={step} d="M 622 267 C 660 267, 680 210, 700 175" stroke={sun} strokeWidth={3} markerEnd="url(#vitd-arrow-sun)" />
       <Step at={3} step={step}>
-        <path d="M 650 90 C 700 70, 760 90, 750 130 C 740 165, 680 150, 670 175 C 660 195, 720 200, 740 185" fill="none" stroke="#d7a27a" strokeWidth="18" strokeLinecap="round" />
-        <text x="700" y="32" textAnchor="middle" fontSize="16" fontWeight="700" fill={ink}>
+        <text x="710" y="28" textAnchor="middle" fontSize="16" fontWeight="700" fill={ink}>
           {tr('Intestin', 'Intestine')}
         </text>
-        <text x="700" y="54" textAnchor="middle" fontSize="15" fontWeight="600" fill={ink}>
+        <text x="710" y="48" textAnchor="middle" fontSize="14" fontWeight="600" fill={ink}>
           {tr('Absorption Ca²⁺ · P ↑', 'Ca²⁺ · P absorption ↑')}
         </text>
+        <image href={intestineImg} x="638" y="54" width="148" height="148" preserveAspectRatio="xMidYMid meet" />
       </Step>
 
       {/* Step 4 — bone & vitamin K */}
