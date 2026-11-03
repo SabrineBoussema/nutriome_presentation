@@ -1,5 +1,6 @@
 import { Box, ClipboardList, Pill, ShieldAlert, Stethoscope } from 'lucide-react'
 import { isValidationPlaceholder, presentationConfig } from '../../data/presentation'
+import { STANDARD_PRECAUTIONS } from '../../data/products'
 import type { PracticalField, Product } from '../../data/types'
 import { useI18n } from '../../i18n'
 import { Eyebrow, PendingBadge } from '../ui/Badges'
@@ -23,11 +24,12 @@ function Field({ icon: Icon, label, field, accent }: { icon: typeof Pill; label:
   )
 }
 
-/** Directions for use, format and pack size. */
+/** Dosage, format, pack size and the product-specific precautions. */
 export function PracticalSlide({ product }: { product: Product }) {
-  const { t } = useI18n()
+  const { l, t } = useI18n()
+  const precautions = product.precautions.filter((p) => !STANDARD_PRECAUTIONS.includes(p))
   return (
-    <SlideShell tone="paper" accent={product.accent} label={product.name} product={product} headerPackshot={false}>
+    <SlideShell tone="paper" accent={product.accent} label={product.name} product={product}>
       <Reveal>
         <Eyebrow color={product.accent}>{product.name}</Eyebrow>
       </Reveal>
@@ -38,12 +40,30 @@ export function PracticalSlide({ product }: { product: Product }) {
       <div className="mt-6 grid flex-1 items-center gap-8 @4xl:mt-4 @4xl:grid-cols-[1.15fr_0.85fr] @4xl:gap-14">
         <Reveal delay={0.12} className="flex flex-col gap-4">
           <Field icon={ClipboardList} label={t.common.usage} field={product.usage} accent={product.accent} />
-          <Field icon={Pill} label={t.common.format} field={product.format} accent={product.accent} />
-          <Field icon={Box} label={t.common.packaging} field={product.packaging} accent={product.accent} />
+          <div className="grid gap-4 @md:grid-cols-2">
+            <Field icon={Pill} label={t.common.format} field={product.format} accent={product.accent} />
+            <Field icon={Box} label={t.common.packaging} field={product.packaging} accent={product.accent} />
+          </div>
         </Reveal>
-        <Reveal delay={0.2} className="mx-auto hidden w-full max-w-[460px] @4xl:block">
-          <Packshot product={product} />
-        </Reveal>
+        {precautions.length > 0 ? (
+          <Reveal delay={0.2} className="rounded-[28px] border border-amber/30 bg-amber-soft/70 p-6 @4xl:p-8">
+            <h3 className="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.14em] text-[#9a5612]">
+              <ShieldAlert className="size-5" aria-hidden /> {t.common.precautions}
+            </h3>
+            <ul className="mt-4 flex flex-col gap-3">
+              {precautions.map((p, i) => (
+                <li key={i} className="flex gap-3 text-base leading-snug text-ink @4xl:text-[20px]">
+                  <span className="mt-[9px] size-2 shrink-0 rounded-full bg-amber" />
+                  {l(p)}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        ) : (
+          <Reveal delay={0.2} className="mx-auto hidden w-full max-w-[460px] @4xl:block">
+            <Packshot product={product} />
+          </Reveal>
+        )}
       </div>
     </SlideShell>
   )

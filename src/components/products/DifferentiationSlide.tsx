@@ -1,10 +1,42 @@
-import { Check } from 'lucide-react'
+import { Check, Stethoscope } from 'lucide-react'
 import type { Product } from '../../data/types'
 import { useI18n } from '../../i18n'
 import { Eyebrow, EvidenceChip } from '../ui/Badges'
 import { Reveal } from '../ui/Reveal'
 import { SlideShell, SlideTitle } from '../ui/SlideShell'
 import { Packshot } from './Packshot'
+
+/** Therapeutic indications of the product, presented next to the pack. */
+export function IndicationsSlide({ product }: { product: Product }) {
+  const { l, t } = useI18n()
+  return (
+    <SlideShell tone="ivory" accent={product.accent} label={product.name} product={product} headerPackshot={false}>
+      <Reveal>
+        <Eyebrow color={product.accent}>{product.name}</Eyebrow>
+      </Reveal>
+      <Reveal delay={0.08}>
+        <SlideTitle className="mt-3 text-navy">{t.common.indications}</SlideTitle>
+      </Reveal>
+      <div className="mt-6 grid flex-1 items-center gap-8 @4xl:mt-4 @4xl:grid-cols-[1.2fr_0.8fr] @4xl:gap-14">
+        <ul className="flex flex-col gap-3 @4xl:gap-4">
+          {product.indications.map((d, i) => (
+            <Reveal key={i} delay={0.12 + i * 0.07} x={-24} y={0}>
+              <li className="flex items-center gap-4 rounded-3xl border border-navy/[0.06] bg-white p-4 text-lg font-semibold leading-snug text-ink shadow-[0_20px_50px_-38px_rgb(14_26_43/0.5)] @4xl:p-5 @4xl:text-[26px]">
+                <span className="flex size-9 shrink-0 items-center justify-center rounded-full text-white @4xl:size-11" style={{ background: product.accent }}>
+                  <Stethoscope className="size-4 @4xl:size-5" aria-hidden />
+                </span>
+                {l(d)}
+              </li>
+            </Reveal>
+          ))}
+        </ul>
+        <Reveal delay={0.2} className="mx-auto hidden w-full max-w-[460px] @4xl:block">
+          <Packshot product={product} />
+        </Reveal>
+      </div>
+    </SlideShell>
+  )
+}
 
 /** Physiological roles of the ingredients, each with its evidence level and citations. */
 export function DifferentiationSlide({ product }: { product: Product }) {

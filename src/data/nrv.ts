@@ -9,6 +9,7 @@ export const NRV_MG = {
   B5: 6,
   B12: 0.0025,
   D: 0.005,
+  K: 0.075,
   Mg: 375,
   Zn: 10,
   Cr: 0.04,
@@ -16,7 +17,14 @@ export const NRV_MG = {
 
 export type NrvKey = keyof typeof NRV_MG
 
-/** % of the NRV for a quantity expressed in mg, rounded to the nearest whole percent */
+/** Convert a declared quantity to mg so it can be compared with NRV_MG. */
+export function toMg(quantity: number, unit?: 'mg' | 'µg' | 'UI' | '%'): number | undefined {
+  if (unit === 'µg') return quantity / 1000
+  if (unit === 'mg' || unit === undefined) return quantity
+  return undefined
+}
+
+/** % of the NRV, rounded to the nearest whole percent. `quantity` must be in mg. */
 export function nrvPercent(key: NrvKey, quantityMg: number): number {
   return Math.round((quantityMg / NRV_MG[key]) * 100)
 }

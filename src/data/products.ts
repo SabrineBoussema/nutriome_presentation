@@ -8,6 +8,7 @@ import d3k2Img from '../assets/products/bio-d3k2-plus.jpg'
 import grippalImg from '../assets/products/biogrippal.jpg'
 import tenseurImg from '../assets/products/biotenseur.jpg'
 
+
 /*
  * PRODUCT REGISTRY — single source of truth for every product slide.
  *
@@ -25,7 +26,7 @@ const SITE: L = {
 }
 
 /** Mandatory food-supplement label statements (EU Directive 2002/46/EC, art. 6) */
-const STANDARD_PRECAUTIONS: L[] = [
+export const STANDARD_PRECAUTIONS: L[] = [
   { fr: 'Ne pas dépasser la dose journalière recommandée.', en: 'Do not exceed the recommended daily dose.' },
   {
     fr: 'Un complément alimentaire ne remplace pas une alimentation variée et équilibrée ni un mode de vie sain.',
@@ -46,7 +47,7 @@ export const products: Product[] = [
     slug: 'bio3mag',
     name: 'Bio3Mag',
     category: { fr: 'Minéraux', en: 'Minerals' },
-    tagline: { fr: 'Triple source de magnésium', en: 'Triple source of magnesium' },
+    tagline: { fr: 'Fatigue, stress & crampes musculaires', en: 'Fatigue, stress & muscle cramps' },
     positioning: {
       fr: 'Trois sels organiques de magnésium — bisglycinate, malate et citrate — réunis dans une même gélule, soit 75 mg de magnésium élément.',
       en: 'Three organic magnesium salts — bisglycinate, malate and citrate — combined in a single capsule, i.e. 75 mg of elemental magnesium.',
@@ -99,6 +100,14 @@ export const products: Product[] = [
       },
     ],
     excipients: { fr: 'Excipients : à confirmer sur l’emballage final.', en: 'Excipients: to be confirmed on final packaging.' },
+    indications: [
+      { fr: 'Carence et déficit en magnésium', en: 'Magnesium deficiency and insufficiency' },
+      { fr: 'Fatigue physique et mentale, asthénie', en: 'Physical and mental fatigue, asthenia' },
+      { fr: 'Stress, nervosité, irritabilité et anxiété légère', en: 'Stress, nervousness, irritability and mild anxiety' },
+      { fr: 'Troubles du sommeil légers', en: 'Mild sleep disorders' },
+      { fr: 'Crampes, contractures musculaires et fasciculations', en: 'Cramps, muscle contractions and fasciculations' },
+      { fr: 'Besoins accrus : surmenage, effort physique intense', en: 'Increased needs: overwork, intense physical exertion' },
+    ],
     mechanisms: [
       {
         title: { fr: 'Métabolisme énergétique', en: 'Energy-yielding metabolism' },
@@ -218,8 +227,8 @@ export const products: Product[] = [
     name: 'BioQ10+',
     category: { fr: 'Énergie cellulaire', en: 'Cellular energy' },
     tagline: {
-      fr: 'Coenzyme Q10 100 mg + 5 vitamines B',
-      en: 'Coenzyme Q10 100 mg + 5 B vitamins',
+      fr: 'Énergie, cœur & cholestérol',
+      en: 'Energy, heart & cholesterol',
     },
     positioning: {
       fr: 'La nouvelle formule de Nutriome Labs : 100 mg de coenzyme Q10, cinq vitamines du groupe B et de la levure de riz rouge, dans une seule gélule.',
@@ -252,8 +261,8 @@ export const products: Product[] = [
       },
       {
         name: { fr: 'Vitamine B3', en: 'Vitamin B3' },
-        quantity: 54,
-        unit: 'mg',
+        quantity: 54000,
+        unit: 'µg',
         nrvKey: 'B3',
         detail: { fr: 'Forme (nicotinamide ?) à préciser', en: 'Form (nicotinamide?) to be specified' },
         role: { fr: 'Métabolisme énergétique, réduction de la fatigue', en: 'Energy metabolism, reduction of tiredness' },
@@ -261,41 +270,40 @@ export const products: Product[] = [
       },
       {
         name: { fr: 'Vitamine B5', en: 'Vitamin B5' },
-        quantity: 18,
-        unit: 'mg',
+        quantity: 18000,
+        unit: 'µg',
         nrvKey: 'B5',
         role: { fr: 'Métabolisme énergétique, réduction de la fatigue', en: 'Energy metabolism, reduction of tiredness' },
         status: 'verified',
       },
       {
         name: { fr: 'Vitamine B2', en: 'Vitamin B2' },
-        quantity: 4.8,
-        unit: 'mg',
+        quantity: 4800,
+        unit: 'µg',
         nrvKey: 'B2',
         role: { fr: 'Protection des cellules contre le stress oxydatif', en: 'Protection of cells from oxidative stress' },
         status: 'verified',
       },
       {
         name: { fr: 'Vitamine B1', en: 'Vitamin B1' },
-        quantity: 4.2,
-        unit: 'mg',
+        quantity: 4200,
+        unit: 'µg',
         nrvKey: 'B1',
         role: { fr: 'Métabolisme énergétique, fonction cardiaque normale', en: 'Energy metabolism, normal heart function' },
         status: 'verified',
       },
       {
         name: { fr: 'Vitamine B12', en: 'Vitamin B12' },
-        quantity: 0.1,
-        unit: 'mg',
+        quantity: 100,
+        unit: 'µg',
         nrvKey: 'B12',
-        detail: { fr: 'soit 100 µg', en: 'i.e. 100 µg' },
         role: { fr: 'Métabolisme normal de l’homocystéine', en: 'Normal homocysteine metabolism' },
         status: 'verified',
       },
       {
         name: { fr: 'Choline bitartrate', en: 'Choline bitartrate' },
-        quantity: 4.2,
-        unit: 'mg',
+        quantity: 4200,
+        unit: 'µg',
         role: { fr: 'Source de choline', en: 'Choline source' },
         status: 'verified',
       },
@@ -304,6 +312,13 @@ export const products: Product[] = [
       fr: 'Excipients : cellulose, silice colloïdale, stéarate de magnésium.',
       en: 'Excipients: cellulose, colloidal silica, magnesium stearate.',
     },
+    indications: [
+      { fr: 'Fatigue chronique et baisse d’énergie', en: 'Chronic fatigue and low energy' },
+      { fr: 'Hypercholestérolémie légère à modérée', en: 'Mild to moderate hypercholesterolaemia' },
+      { fr: 'Prévention cardiovasculaire et soutien de la fonction cardiaque', en: 'Cardiovascular prevention and support of heart function' },
+      { fr: 'Déficit en coenzyme Q10 lié à l’âge', en: 'Age-related coenzyme Q10 deficiency' },
+      { fr: 'Déficit en vitamines du groupe B', en: 'B-vitamin deficiency' },
+    ],
     mechanisms: [
       {
         title: { fr: 'Chaîne respiratoire', en: 'Respiratory chain' },
@@ -391,8 +406,8 @@ export const products: Product[] = [
         en: 'Monacolin K is chemically identical to lovastatin. In the EU, monacolin intake must remain below 3 mg/day.',
       },
       {
-        fr: 'Vitamine B3 (54 mg) : la limite supérieure de sécurité est de 900 mg/j pour le nicotinamide, mais de 10 mg/j pour l’acide nicotinique (bouffées vasomotrices). La forme doit être confirmée.',
-        en: 'Vitamin B3 (54 mg): the upper safe level is 900 mg/day for nicotinamide but 10 mg/day for nicotinic acid (flushing). The form must be confirmed.',
+        fr: 'Vitamine B3 (54 000 µg) : la limite supérieure de sécurité est de 900 mg/j pour le nicotinamide, mais de 10 mg/j pour l’acide nicotinique (bouffées vasomotrices). La forme doit être confirmée.',
+        en: 'Vitamin B3 (54,000 µg): the upper safe level is 900 mg/day for nicotinamide but 10 mg/day for nicotinic acid (flushing). The form must be confirmed.',
       },
       {
         fr: 'Les mécanismes présentés relèvent de la biologie générale de la CoQ10. Ils ne constituent pas une démonstration d’efficacité du produit.',
@@ -431,7 +446,7 @@ export const products: Product[] = [
     aliases: ['berberine', 'bioberberine'],
     name: 'BioBerberine+',
     category: { fr: 'Métabolisme', en: 'Metabolism' },
-    tagline: { fr: 'Glycémie normale & métabolisme glucidique', en: 'Normal blood glucose & carbohydrate metabolism' },
+    tagline: { fr: 'Prédiabète, diabète de type 2 & syndrome métabolique', en: 'Prediabetes, type 2 diabetes & metabolic syndrome' },
     positioning: {
       fr: 'Berbérine HCl associée au chardon-marie, au zinc et au chrome.',
       en: 'Berberine HCl combined with milk thistle, zinc and chromium.',
@@ -463,17 +478,17 @@ export const products: Product[] = [
       },
       {
         name: { fr: 'Zinc bisglycinate', en: 'Zinc bisglycinate' },
-        quantity: 17,
-        unit: 'mg',
-        detail: { fr: 'dont zinc élément : 5 mg', en: 'of which elemental zinc: 5 mg' },
+        quantity: 17000,
+        unit: 'µg',
+        detail: { fr: 'dont zinc élément : 5 000 µg', en: 'of which elemental zinc: 5,000 µg' },
         role: { fr: 'Métabolisme glucidique normal', en: 'Normal carbohydrate metabolism' },
         status: 'verified',
       },
       {
         name: { fr: 'Chrome picolinate', en: 'Chromium picolinate' },
-        quantity: 4,
-        unit: 'mg',
-        detail: { fr: 'dont chrome élément : 0,5 mg', en: 'of which elemental chromium: 0.5 mg' },
+        quantity: 4000,
+        unit: 'µg',
+        detail: { fr: 'dont chrome élément : 500 µg', en: 'of which elemental chromium: 500 µg' },
         role: { fr: 'Maintien d’une glycémie normale', en: 'Maintenance of normal blood glucose' },
         status: 'verified',
       },
@@ -482,6 +497,13 @@ export const products: Product[] = [
       fr: 'Excipients : cellulose, silice colloïdale, stéarate de magnésium.',
       en: 'Excipients: cellulose, colloidal silica, magnesium stearate.',
     },
+    indications: [
+      { fr: 'Prédiabète et insulinorésistance', en: 'Prediabetes and insulin resistance' },
+      { fr: 'Diabète de type 2, en complément des mesures hygiéno-diététiques', en: 'Type 2 diabetes, alongside diet and lifestyle measures' },
+      { fr: 'Syndrome métabolique et surpoids', en: 'Metabolic syndrome and excess weight' },
+      { fr: 'Dyslipidémie', en: 'Dyslipidaemia' },
+      { fr: 'Stéatose hépatique non alcoolique', en: 'Non-alcoholic fatty liver disease' },
+    ],
     mechanisms: [
       {
         title: { fr: 'Chrome', en: 'Chromium' },
@@ -582,7 +604,7 @@ export const products: Product[] = [
     slug: 'biodigest',
     name: 'BioDigest',
     category: { fr: 'Digestion', en: 'Digestion' },
-    tagline: { fr: 'Zinc carnosine — confort digestif', en: 'Zinc carnosine — digestive comfort' },
+    tagline: { fr: 'Gastrite, brûlures & reflux', en: 'Gastritis, heartburn & reflux' },
     positioning: {
       fr: 'Une formule mono-actif : 66 mg de zinc-L-carnosine par gélule.',
       en: 'A single-active formula: 66 mg of zinc-L-carnosine per capsule.',
@@ -605,6 +627,13 @@ export const products: Product[] = [
         role: { fr: 'Complexe de zinc et de L-carnosine (polaprézinc)', en: 'Complex of zinc and L-carnosine (polaprezinc)' },
         status: 'verified',
       },
+    ],
+    indications: [
+      { fr: 'Gastrite et dyspepsie', en: 'Gastritis and dyspepsia' },
+      { fr: 'Brûlures d’estomac et reflux gastro-œsophagien', en: 'Heartburn and gastro-oesophageal reflux' },
+      { fr: 'Prévention des lésions gastriques sous AINS', en: 'Prevention of NSAID-induced gastric lesions' },
+      { fr: 'Ulcère gastroduodénal, en traitement d’appoint', en: 'Peptic ulcer, as adjunctive therapy' },
+      { fr: 'Hyperperméabilité intestinale', en: 'Increased intestinal permeability' },
     ],
     mechanisms: [
       {
@@ -698,14 +727,14 @@ export const products: Product[] = [
     aliases: ['biod3k2'],
     name: 'BioD3K2+',
     category: { fr: 'Vitamines', en: 'Vitamins' },
-    tagline: { fr: 'Vitamine D3, vitamine K2 MK-7 et magnésium', en: 'Vitamin D3, vitamin K2 MK-7 and magnesium' },
+    tagline: { fr: 'Carence en vitamine D & santé osseuse', en: 'Vitamin D deficiency & bone health' },
     positioning: {
-      fr: 'Vitamine D3 2 000 UI, vitamine K2 (MK-7) 50 µg et 60 mg de magnésium élément, pour le métabolisme du calcium.',
-      en: 'Vitamin D3 2,000 IU, vitamin K2 (MK-7) 50 µg and 60 mg of elemental magnesium, for calcium metabolism.',
+      fr: 'Vitamine D3 50 µg, vitamine K2 (MK-7) 50 µg et 60 mg de magnésium élément, en une gélule par jour.',
+      en: 'Vitamin D3 50 µg, vitamin K2 (MK-7) 50 µg and 60 mg of elemental magnesium, in one capsule a day.',
     },
     description: {
-      fr: 'Vitamine D3 2 000 UI (50 µg), vitamine K2 MK-7 50 µg et bisglycinate de magnésium 300 mg (60 mg de magnésium élément), en une gélule par jour.',
-      en: 'Vitamin D3 2,000 IU (50 µg), vitamin K2 MK-7 50 µg and magnesium bisglycinate 300 mg (60 mg elemental magnesium), one capsule a day.',
+      fr: 'Vitamine D3 50 µg (2 000 UI), vitamine K2 MK-7 50 µg et bisglycinate de magnésium 300 mg (60 mg de magnésium élément), en une gélule par jour.',
+      en: 'Vitamin D3 50 µg (2,000 IU), vitamin K2 MK-7 50 µg and magnesium bisglycinate 300 mg (60 mg elemental magnesium), one capsule a day.',
     },
     image: d3k2Img,
     imageAspect: 1183 / 876,
@@ -715,9 +744,10 @@ export const products: Product[] = [
     ingredients: [
       {
         name: { fr: 'Vitamine D3', en: 'Vitamin D3' },
-        quantity: 2000,
-        unit: 'UI',
-        detail: { fr: 'soit 50 µg de cholécalciférol (1 000 % des VNR)', en: 'i.e. 50 µg cholecalciferol (1,000% of the NRV)' },
+        quantity: 50,
+        unit: 'µg',
+        nrvKey: 'D',
+        detail: { fr: 'soit 2 000 UI de cholécalciférol', en: 'i.e. 2,000 IU cholecalciferol' },
         role: { fr: 'Absorption du calcium et du phosphore', en: 'Calcium and phosphorus absorption' },
         status: 'verified',
       },
@@ -725,7 +755,8 @@ export const products: Product[] = [
         name: { fr: 'Vitamine K2 (MK-7)', en: 'Vitamin K2 (MK-7)' },
         quantity: 50,
         unit: 'µg',
-        detail: { fr: 'soit 0,05 mg de ménaquinone-7 (67 % des VNR)', en: 'i.e. 0.05 mg menaquinone-7 (67% of the NRV)' },
+        nrvKey: 'K',
+        detail: { fr: 'ménaquinone-7', en: 'menaquinone-7' },
         role: { fr: 'Cofacteur de la γ-carboxylation', en: 'Cofactor of γ-carboxylation' },
         status: 'verified',
       },
@@ -751,6 +782,13 @@ export const products: Product[] = [
       fr: 'Excipients : cellulose, silice colloïdale, stéarate de magnésium.',
       en: 'Excipients: cellulose, colloidal silica, magnesium stearate.',
     },
+    indications: [
+      { fr: 'Carence et insuffisance en vitamine D', en: 'Vitamin D deficiency and insufficiency' },
+      { fr: 'Prévention de l’ostéopénie et de l’ostéoporose', en: 'Prevention of osteopenia and osteoporosis' },
+      { fr: 'Santé osseuse après la ménopause et chez le sujet âgé', en: 'Bone health after menopause and in older adults' },
+      { fr: 'Faiblesse et douleurs musculaires', en: 'Muscle weakness and pain' },
+      { fr: 'Renforcement immunitaire en période hivernale', en: 'Immune support in winter' },
+    ],
     mechanisms: [
       {
         title: { fr: 'Activation de la vitamine D', en: 'Vitamin D activation' },
@@ -859,10 +897,10 @@ export const products: Product[] = [
     slug: 'biogrippal',
     name: 'BioGrippal',
     category: { fr: 'Immunité', en: 'Immunity' },
-    tagline: { fr: 'Échinacée, propolis, reishi, zinc et vitamine D3', en: 'Echinacea, propolis, reishi, zinc and vitamin D3' },
+    tagline: { fr: 'Prévention & accompagnement des états grippaux', en: 'Prevention & support of flu-like illness' },
     positioning: {
-      fr: 'Trois actifs d’origine naturelle associés au zinc et à la vitamine D3, deux nutriments du système immunitaire.',
-      en: 'Three natural actives combined with zinc and vitamin D3, two nutrients of the immune system.',
+      fr: 'Échinacée, propolis et reishi associés au zinc et à la vitamine D3, en une seule gélule.',
+      en: 'Echinacea, propolis and reishi combined with zinc and vitamin D3, in a single capsule.',
     },
     description: {
       fr: 'Échinacée, propolis et reishi, associés au zinc et à la vitamine D3.',
@@ -898,20 +936,27 @@ export const products: Product[] = [
       },
       {
         name: { fr: 'Zinc bisglycinate', en: 'Zinc bisglycinate' },
-        quantity: 17,
-        unit: 'mg',
-        detail: { fr: 'dont zinc élément : 5 mg', en: 'of which elemental zinc: 5 mg' },
+        quantity: 17000,
+        unit: 'µg',
+        detail: { fr: 'dont zinc élément : 5 000 µg', en: 'of which elemental zinc: 5,000 µg' },
         role: { fr: 'Fonctionnement normal du système immunitaire', en: 'Normal immune function' },
         status: 'verified',
       },
       {
         name: { fr: 'Vitamine D3', en: 'Vitamin D3' },
-        quantity: 1000,
-        unit: 'UI',
-        detail: { fr: 'soit 25 µg', en: 'i.e. 25 µg' },
+        quantity: 25,
+        unit: 'µg',
+        nrvKey: 'D',
+        detail: { fr: 'soit 1 000 UI de cholécalciférol', en: 'i.e. 1,000 IU cholecalciferol' },
         role: { fr: 'Fonctionnement normal du système immunitaire', en: 'Normal immune function' },
         status: 'verified',
       },
+    ],
+    indications: [
+      { fr: 'Prévention des infections ORL hivernales (rhume, grippe)', en: 'Prevention of winter ENT infections (colds, flu)' },
+      { fr: 'Traitement d’appoint des états grippaux', en: 'Adjunctive treatment of flu-like illness' },
+      { fr: 'Infections respiratoires récidivantes', en: 'Recurrent respiratory infections' },
+      { fr: 'Convalescence et baisse des défenses immunitaires', en: 'Convalescence and weakened immune defences' },
     ],
     mechanisms: [
       {
@@ -1003,7 +1048,7 @@ export const products: Product[] = [
     slug: 'biotenseur',
     name: 'BioTenseur',
     category: { fr: 'Cardiovasculaire', en: 'Cardiovascular' },
-    tagline: { fr: 'Olive, potassium, magnésium et CoQ10', en: 'Olive, potassium, magnesium and CoQ10' },
+    tagline: { fr: 'Pression artérielle', en: 'Blood pressure' },
     positioning: {
       fr: 'Extrait d’olive EFLA®, potassium, magnésium et coenzyme Q10.',
       en: 'EFLA® olive extract, potassium, magnesium and coenzyme Q10.',
@@ -1048,6 +1093,11 @@ export const products: Product[] = [
         role: { fr: 'Transporteur d’électrons mitochondrial', en: 'Mitochondrial electron carrier' },
         status: 'pending',
       },
+    ],
+    indications: [
+      { fr: 'Hypertension artérielle légère, en complément du suivi médical', en: 'Mild hypertension, alongside medical follow-up' },
+      { fr: 'Pression artérielle normale haute (préhypertension)', en: 'High-normal blood pressure (prehypertension)' },
+      { fr: 'Prévention du risque cardiovasculaire', en: 'Cardiovascular risk prevention' },
     ],
     mechanisms: [
       {

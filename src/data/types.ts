@@ -74,6 +74,8 @@ export interface Product {
   doseBasis: L
   ingredients: Ingredient[]
   excipients?: L
+  /** Therapeutic indications shown on the product's indications slide */
+  indications: L[]
   mechanisms: Mechanism[]
   diagram: DiagramId
   differentiators: L[]

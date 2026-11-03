@@ -6,7 +6,7 @@ import { Reveal } from '../ui/Reveal'
 import { SlideShell, SlideTitle } from '../ui/SlideShell'
 import { useSlide } from '../presentation/SlideContext'
 import { motion } from 'motion/react'
-import { nrvPercent } from '../../data/nrv'
+import { nrvPercent, toMg } from '../../data/nrv'
 import { visualFor } from '../../data/ingredientVisuals'
 import { IngredientThumb } from './IngredientThumb'
 
@@ -14,9 +14,10 @@ export function CompositionSlide({ product }: { product: Product }) {
   const { l, n, t, lang } = useI18n()
   const { isPrint } = useSlide()
   const quantified = product.ingredients.filter((i) => i.quantity !== undefined && !i.derived)
-  // Mass bar only when every quantified ingredient is in mg (never mix units)
-  const showBar = quantified.length > 1 && quantified.length <= 5 && quantified.every((i) => i.unit === 'mg')
-  const total = quantified.reduce((s, i) => s + (i.quantity ?? 0), 0)
+  const quantifiedMg = quantified.filter((i) => i.unit === 'mg')
+  // Mass bar only for mg quantities (never mix µg / UI into a milligram total)
+  const showBar = quantifiedMg.length > 1 && quantifiedMg.length <= 5
+  const total = quantifiedMg.reduce((s, i) => s + (i.quantity ?? 0), 0)
   const shades = [product.accent, `${product.accent}cc`, `${product.accent}99`, `${product.accent}70`, `${product.accent}50`, `${product.accent}38`, `${product.accent}28`, `${product.accent}1c`]
   const showPending = presentationConfig.showValidationBadges
   const anyPending = showPending && product.ingredients.some((i) => i.status === 'pending')
@@ -91,19 +92,16 @@ export function CompositionSlide({ product }: { product: Product }) {
               </div>
               </div>
               <div className={`mt-2 text-base font-semibold leading-tight @4xl:text-[25px] ${ing.derived ? 'text-white' : 'text-ink'}`}>{l(ing.name)}</div>
-              {ing.nrvKey && ing.quantity !== undefined && (
+              {ing.nrvKey && ing.quantity !== undefined && toMg(ing.quantity, ing.unit) !== undefined && (
                 <div
                   className="mt-2 inline-flex w-fit items-center rounded-full px-2.5 py-0.5 text-xs font-semibold @4xl:text-[17px]"
                   style={ing.derived ? { background: 'white', color: product.accent } : { background: product.accent, color: 'white' }}
                 >
-                  {n(nrvPercent(ing.nrvKey, ing.quantity))} % {t.common.nrv}
+                  {n(nrvPercent(ing.nrvKey, toMg(ing.quantity, ing.unit)!))} % {t.common.nrv}
                 </div>
               )}
               {ing.detail && (showPending || !isValidationPlaceholder(l(ing.detail))) && (
                 <div className={`mt-1 text-sm @4xl:text-[20px] ${ing.derived ? 'text-white/80' : 'text-slate'}`}>{l(ing.detail)}</div>
-              )}
-              {ing.role && !many && (
-                <div className={`mt-3 text-sm leading-snug @4xl:text-[19px] ${ing.derived ? 'text-white/85' : 'text-slate/90'}`}>{l(ing.role)}</div>
               )}
               {pendingLook(ing.status === 'pending') && (
                 <div className="mt-auto pt-3">
@@ -118,7 +116,7 @@ export function CompositionSlide({ product }: { product: Product }) {
       {showBar && (
         <Reveal delay={0.4} className="mt-8">
           <div className="flex h-3 w-full overflow-hidden rounded-full bg-navy/[0.06]">
-            {quantified.map((ing, i) => (
+            {quantifiedMg.map((ing, i) => (
               <motion.div
                 key={i}
                 className="h-full"

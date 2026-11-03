@@ -1,6 +1,6 @@
 import { Factory, Pill, Sparkles, Zap } from 'lucide-react'
 import { motion } from 'motion/react'
-import { nrvPercent } from '../../../data/nrv'
+import { nrvPercent, toMg } from '../../../data/nrv'
 import type { Product } from '../../../data/types'
 import { useI18n } from '../../../i18n'
 import { useSlide } from '../../presentation/SlideContext'
@@ -22,7 +22,7 @@ export function Q10HighlightsSlide({ product }: { product: Product }) {
   const coq10 = product.ingredients.find((i) => i.name.en === 'Coenzyme Q10')
   const vitamins = product.ingredients
     .filter((i) => i.nrvKey && i.quantity !== undefined)
-    .map((i) => ({ ing: i, pct: nrvPercent(i.nrvKey!, i.quantity!) }))
+    .map((i) => ({ ing: i, pct: nrvPercent(i.nrvKey!, toMg(i.quantity!, i.unit) ?? i.quantity!) }))
     .sort((a, b) => a.pct - b.pct)
   const showChart = isPrint || step >= 1
 
@@ -67,7 +67,7 @@ export function Q10HighlightsSlide({ product }: { product: Product }) {
                 <li key={ing.nrvKey}>
                   <div className="flex items-baseline justify-between gap-3 text-sm @4xl:text-[21px]">
                     <span className="font-medium text-ink">
-                      {l(ing.name)} <span className="text-slate">· {ing.unit === 'mg' && ing.quantity! < 1 ? `${n(ing.quantity! * 1000)} µg` : `${n(ing.quantity!)} ${ing.unit}`}</span>
+                      {l(ing.name)} <span className="text-slate">· {n(ing.quantity!)} {ing.unit}</span>
                     </span>
                     <span className="font-semibold tabular-nums" style={{ color: product.accent }}>{n(pct)} %</span>
                   </div>

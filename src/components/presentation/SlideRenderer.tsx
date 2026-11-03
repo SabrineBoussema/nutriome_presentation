@@ -5,11 +5,11 @@ import { MagMoleculesSlide, MagPillarsSlide } from '../products/bio3mag/Bio3MagS
 import { Q10HighlightsSlide } from '../products/coq10/Q10HighlightsSlide'
 import { Q10RevealSlide } from '../products/coq10/Q10RevealSlide'
 import { CompositionSlide } from '../products/CompositionSlide'
-import { DifferentiationSlide, FormulationSlide } from '../products/DifferentiationSlide'
+import { DifferentiationSlide, FormulationSlide, IndicationsSlide } from '../products/DifferentiationSlide'
 import { PracticalSlide, SafetySlide } from '../products/PracticalSlide'
 import { ProductHeroSlide } from '../products/ProductHeroSlide'
 import { ReferencesSlide } from '../products/ReferencesSlide'
-import { ScienceSlide } from '../products/ScienceSlide'
+import { IllustrationSlide, ScienceSlide } from '../products/ScienceSlide'
 import { AboutSlide } from './slides/AboutSlide'
 import { ClosingSlide } from './slides/ClosingSlide'
 import { OpeningSlide } from './slides/OpeningSlide'
@@ -44,6 +44,10 @@ export function SlideRenderer({ slide }: { slide: SlideDef }) {
       return <CompositionSlide product={product} />
     case 'science':
       return <ScienceSlide product={product} />
+    case 'illustration':
+      return <IllustrationSlide product={product} />
+    case 'indications':
+      return <IndicationsSlide product={product} />
     case 'differentiation':
       return <DifferentiationSlide product={product} />
     case 'formulation':
