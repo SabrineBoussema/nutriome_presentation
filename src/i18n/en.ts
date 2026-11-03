@@ -32,7 +32,7 @@ export const en: Dictionary = {
     mechanisms: 'Physiological roles',
     differentiation: 'Formulation characteristics',
     indications: 'Therapeutic indications',
-    schema: 'Scientific schema',
+    schema: 'How it works',
     usage: 'Dosage',
     format: 'Format',
     packaging: 'Pack size',

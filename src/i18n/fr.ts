@@ -30,7 +30,7 @@ export const fr = {
     mechanisms: 'Rôles physiologiques',
     differentiation: 'Caractéristiques de la formulation',
     indications: 'Indications thérapeutiques',
-    schema: 'Schéma scientifique',
+    schema: 'Mode d’action',
     usage: 'Posologie',
     format: 'Format',
     packaging: 'Conditionnement',

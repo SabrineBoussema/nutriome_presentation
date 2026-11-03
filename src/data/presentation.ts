@@ -77,7 +77,7 @@ function productSlides(p: Product): SlideDef[] {
     fr: 'Rappeler la base de calcul de chaque quantité, et signaler les valeurs en attente de validation.',
     en: 'State the basis of each amount, and point out values pending validation.',
   })
-  const schema = base('illustration', { fr: 'Schéma scientifique', en: 'Scientific schema' })
+  const schema = base('illustration', { fr: 'Mode d’action', en: 'How it works' })
   const indications = base('indications', { fr: 'Indications thérapeutiques', en: 'Therapeutic indications' })
   const posology = base('practical', { fr: 'Posologie', en: 'Dosage' })
   const refs = presentationConfig.showReferences
