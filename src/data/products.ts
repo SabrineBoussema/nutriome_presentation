@@ -1004,7 +1004,7 @@ export const products: Product[] = [
     ],
     usage: { text: { fr: 'Posologie à confirmer sur l’emballage final.', en: 'Dosage to be confirmed on final packaging.' }, pending: true },
     format: { text: { fr: 'Gélules', en: 'Capsules' } },
-    packaging: { text: { fr: 'À confirmer', en: 'To be confirmed' }, pending: true },
+    packaging: { text: { fr: 'Boîtes de 15 et de 30 gélules', en: 'Boxes of 15 and 30 capsules' } },
     precautions: [
       ...STANDARD_PRECAUTIONS,
       {
@@ -1030,8 +1030,8 @@ export const products: Product[] = [
     validationStatus: 'pending',
     validationNotes: [
       {
-        fr: 'Posologie et conditionnement non indiqués sur le site.',
-        en: 'Dosage and pack size not stated on the website.',
+        fr: 'Posologie non indiquée sur le site. Conditionnements : boîtes de 15 et de 30 gélules.',
+        en: 'Dosage not stated on the website. Pack sizes: boxes of 15 and 30 capsules.',
       },
       {
         fr: 'Visuel d’emballage en basse résolution (314 px).',
