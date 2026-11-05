@@ -42,6 +42,9 @@ export type SlideKind =
   | 'q10-mitochondrion'
   | 'q10-mechanism'
   | 'q10-highlights'
+  | 'direction-welcome'
+  | 'direction-program'
+  | 'direction-closing'
 
 export interface SlideDef {
   id: string

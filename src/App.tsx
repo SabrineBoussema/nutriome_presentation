@@ -3,6 +3,7 @@ import { BrowserRouter, Link, Navigate, Route, Routes } from 'react-router-dom'
 import { I18nProvider, useI18n } from './i18n'
 import Presentation from './pages/Presentation'
 
+const Direction = lazy(() => import('./pages/Direction'))
 const ProductDetail = lazy(() => import('./pages/ProductDetail'))
 const PrintDeck = lazy(() => import('./pages/PrintDeck'))
 
@@ -26,6 +27,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Navigate to="/presentation" replace />} />
             <Route path="/presentation" element={<Presentation />} />
+            <Route path="/nutriome_direction" element={<Direction />} />
             <Route path="/products/:slug" element={<ProductDetail />} />
             <Route path="/print" element={<PrintDeck />} />
             <Route path="*" element={<NotFound />} />

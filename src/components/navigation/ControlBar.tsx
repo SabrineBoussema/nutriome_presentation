@@ -28,15 +28,17 @@ interface ControlBarProps {
   canPrev: boolean
   canNext: boolean
   autoplay: boolean
-  onToggleAutoplay: () => void
+  onToggleAutoplay?: () => void
   onOverview: () => void
   notesOpen: boolean
   onToggleNotes: () => void
   fullscreen: { supported: boolean; isFullscreen: boolean; toggle: () => void }
-  onExport: () => void
+  onExport?: () => void
   onShare: () => Promise<void>
   hidden: boolean
   backHref?: string
+  padIndex?: boolean
+  extraLink?: { to: string; label: string }
 }
 
 function IconButton({ label, onClick, active, children, disabled }: { label: string; onClick?: () => void; active?: boolean; children: ReactNode; disabled?: boolean }) {
@@ -60,7 +62,9 @@ function IconButton({ label, onClick, active, children, disabled }: { label: str
 export function ControlBar(props: ControlBarProps) {
   const { t, lang, setLang } = useI18n()
   const [copied, setCopied] = useState(false)
-  const { index, total, step, steps } = props
+  const { index, total, step, steps, padIndex } = props
+  const currentLabel = padIndex ? String(index + 1).padStart(2, '0') : String(index + 1)
+  const totalLabel = padIndex ? String(total).padStart(2, '0') : String(total)
 
   const share = async () => {
     await props.onShare()
@@ -88,7 +92,7 @@ export function ControlBar(props: ControlBarProps) {
         </IconButton>
         <div className="flex min-w-[92px] flex-col items-center px-1 leading-none">
           <span className="text-sm font-semibold tabular-nums">
-            {index + 1} <span className="text-white/45">/ {total}</span>
+            {currentLabel} <span className="text-white/45">/ {totalLabel}</span>
           </span>
           {steps > 1 ? (
             <span className="mt-1 flex gap-1" aria-label={`${t.common.step} ${step + 1} / ${steps}`}>
@@ -106,29 +110,44 @@ export function ControlBar(props: ControlBarProps) {
 
         <span className="mx-1 h-6 w-px shrink-0 bg-white/15" />
 
-        <IconButton label={props.autoplay ? t.nav.pause : t.nav.autoplay} onClick={props.onToggleAutoplay} active={props.autoplay}>
-          {props.autoplay ? <Pause className="size-4" /> : <Play className="size-4" />}
-        </IconButton>
+        {props.onToggleAutoplay && (
+          <IconButton label={props.autoplay ? t.nav.pause : t.nav.autoplay} onClick={props.onToggleAutoplay} active={props.autoplay}>
+            {props.autoplay ? <Pause className="size-4" /> : <Play className="size-4" />}
+          </IconButton>
+        )}
         <IconButton label={t.nav.overview} onClick={props.onOverview}>
           <LayoutGrid className="size-4" />
         </IconButton>
-        <span className="hidden sm:contents">
-          <IconButton label={t.nav.notes} onClick={props.onToggleNotes} active={props.notesOpen}>
-            <NotebookPen className="size-4" />
-          </IconButton>
-        </span>
+        <IconButton label={t.nav.notes} onClick={props.onToggleNotes} active={props.notesOpen}>
+          <NotebookPen className="size-4" />
+        </IconButton>
         <IconButton label={copied ? t.nav.copied : t.nav.share} onClick={share}>
           {copied ? <Check className="size-4" /> : <Link2 className="size-4" />}
         </IconButton>
-        <span className="hidden sm:contents">
-          <IconButton label={t.nav.exportPdf} onClick={props.onExport}>
-            <FileDown className="size-4" />
-          </IconButton>
-        </span>
+        {props.onExport && (
+          <span className="hidden sm:contents">
+            <IconButton label={t.nav.exportPdf} onClick={props.onExport}>
+              <FileDown className="size-4" />
+            </IconButton>
+          </span>
+        )}
         {props.fullscreen.supported && (
           <IconButton label={props.fullscreen.isFullscreen ? t.nav.exitFullscreen : t.nav.fullscreen} onClick={props.fullscreen.toggle}>
             {props.fullscreen.isFullscreen ? <Minimize className="size-4" /> : <Maximize className="size-4" />}
           </IconButton>
+        )}
+
+        {props.extraLink && (
+          <>
+            <span className="mx-1 h-6 w-px shrink-0 bg-white/15" />
+            <Link
+              to={props.extraLink.to}
+              title={props.extraLink.label}
+              className="shrink-0 rounded-full px-3 py-1.5 text-[11px] font-semibold tracking-wide text-white/85 ring-1 ring-white/15 transition-colors hover:bg-white/10 hover:text-white"
+            >
+              {props.extraLink.label}
+            </Link>
+          </>
         )}
 
         {presentationConfig.showLanguageSwitch && (

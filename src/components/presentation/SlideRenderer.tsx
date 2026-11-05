@@ -10,6 +10,9 @@ import { PracticalSlide, SafetySlide } from '../products/PracticalSlide'
 import { ProductHeroSlide } from '../products/ProductHeroSlide'
 import { ReferencesSlide } from '../products/ReferencesSlide'
 import { IllustrationSlide, ScienceSlide } from '../products/ScienceSlide'
+import { ClosingSlide as DirectionClosingSlide } from '../direction/ClosingSlide'
+import { ProgramSlide } from '../direction/ProgramSlide'
+import { WelcomeSlide } from '../direction/WelcomeSlide'
 import { AboutSlide } from './slides/AboutSlide'
 import { ClosingSlide } from './slides/ClosingSlide'
 import { OpeningSlide } from './slides/OpeningSlide'
@@ -33,6 +36,12 @@ export function SlideRenderer({ slide }: { slide: SlideDef }) {
       return <ClosingSlide />
     case 'validation':
       return <ValidationSlide part={slide.part ?? 1} />
+    case 'direction-welcome':
+      return <WelcomeSlide />
+    case 'direction-program':
+      return <ProgramSlide />
+    case 'direction-closing':
+      return <DirectionClosingSlide />
   }
 
   if (!product) return null

@@ -20,6 +20,16 @@ interface DeckProps {
   backHref?: string
   /** Query appended to the /print URL for PDF export */
   printQuery?: string
+  /** When false, autoplay is unavailable (Direction deck). Default true. */
+  allowAutoplay?: boolean
+  /** When false, the PDF export control is hidden. Default true. */
+  allowExport?: boolean
+  /** Zero-pad the slide counter, e.g. 01 / 03 */
+  padIndex?: boolean
+  /** Stage atmosphere. Emerald is used by the Direction presentation. */
+  atmosphere?: 'navy' | 'emerald'
+  /** Discrete extra link in the control bar (does not auto-navigate). */
+  extraLink?: { to: string; label: string }
 }
 
 const variants = {
@@ -28,7 +38,16 @@ const variants = {
   exit: (dir: number) => ({ opacity: 0, x: dir * -60, scale: 0.985 }),
 }
 
-export function Deck({ slides, backHref, printQuery = '' }: DeckProps) {
+export function Deck({
+  slides,
+  backHref,
+  printQuery = '',
+  allowAutoplay = true,
+  allowExport = true,
+  padIndex = false,
+  atmosphere = 'navy',
+  extraLink,
+}: DeckProps) {
   const { l, lang } = useI18n()
   const nav = useDeckNavigation(slides)
   const layout = useStageLayout()
@@ -83,7 +102,7 @@ export function Deck({ slides, backHref, printQuery = '' }: DeckProps) {
           break
         case 'p':
         case 'P':
-          setAutoplay((v) => !v)
+          if (allowAutoplay) setAutoplay((v) => !v)
           break
         case 'Escape':
           setOverviewOpen(false)
@@ -92,7 +111,7 @@ export function Deck({ slides, backHref, printQuery = '' }: DeckProps) {
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [next, prev, goTo, slides.length, fullscreen])
+  }, [next, prev, goTo, slides.length, fullscreen, allowAutoplay])
 
   // Autoplay — pauses while the overview is open, stops at the end
   useEffect(() => {
@@ -146,7 +165,11 @@ export function Deck({ slides, backHref, printQuery = '' }: DeckProps) {
 
   return (
     <DeckContext.Provider value={deckValue}>
-      <div ref={stageRef} className="fixed inset-0 overflow-hidden bg-navy" style={{ cursor: idle ? 'none' : undefined }}>
+      <div
+        ref={stageRef}
+        className={`fixed inset-0 overflow-hidden ${atmosphere === 'emerald' ? 'bg-[#022D25]' : 'bg-navy'}`}
+        style={{ cursor: idle ? 'none' : undefined }}
+      >
         {/* progress */}
         <div className="no-print absolute inset-x-0 top-0 z-30 h-[3px] bg-white/10">
           <motion.div className="h-full bg-gradient-to-r from-forest via-leaf to-amber" animate={{ width: `${progress}%` }} transition={{ duration: 0.5, ease: 'easeOut' }} />
@@ -154,7 +177,7 @@ export function Deck({ slides, backHref, printQuery = '' }: DeckProps) {
 
         {layout.mode === 'canvas' ? (
           <div
-            className="absolute overflow-hidden rounded-[2px] bg-ivory shadow-2xl"
+            className={`absolute overflow-hidden rounded-[2px] shadow-2xl ${atmosphere === 'emerald' ? 'bg-[#022D25]' : 'bg-ivory'}`}
             style={{
               width: DESIGN_WIDTH,
               height: DESIGN_HEIGHT,
@@ -182,7 +205,10 @@ export function Deck({ slides, backHref, printQuery = '' }: DeckProps) {
             </div>
           </div>
         ) : (
-          <div ref={scrollRef} className="absolute inset-0 overflow-y-auto overscroll-contain bg-ivory">
+          <div
+            ref={scrollRef}
+            className={`absolute inset-0 overflow-y-auto overscroll-contain ${atmosphere === 'emerald' ? 'bg-[#022D25]' : 'bg-ivory'}`}
+          >
             <div className="@container min-h-full">
               <AnimatePresence initial={false} custom={nav.direction} mode="wait">
                 <motion.div
@@ -213,15 +239,17 @@ export function Deck({ slides, backHref, printQuery = '' }: DeckProps) {
           canPrev={nav.index > 0 || nav.step > 0}
           canNext={!nav.atEnd}
           autoplay={autoplay && !nav.atEnd}
-          onToggleAutoplay={() => setAutoplay((v) => !v)}
+          onToggleAutoplay={allowAutoplay ? () => setAutoplay((v) => !v) : undefined}
           onOverview={() => setOverviewOpen(true)}
           notesOpen={notesOpen}
           onToggleNotes={() => setNotesOpen((v) => !v)}
           fullscreen={fullscreen}
-          onExport={exportPdf}
+          onExport={allowExport ? exportPdf : undefined}
           onShare={share}
           hidden={idle && !overviewOpen}
           backHref={backHref}
+          padIndex={padIndex}
+          extraLink={extraLink}
         />
         <NotesPanel open={notesOpen} slide={slide} next={slides[nav.index + 1]} onClose={() => setNotesOpen(false)} />
         <Overview
