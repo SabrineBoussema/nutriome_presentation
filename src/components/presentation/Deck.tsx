@@ -65,8 +65,8 @@ export function Deck({
   // Keyboard navigation
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      const target = e.target as HTMLElement
-      if (target.closest('input, textarea, select, [contenteditable="true"]')) return
+      const target = e.target
+      if (target instanceof HTMLElement && target.closest('input, textarea, select, [contenteditable="true"]')) return
       if (e.metaKey || e.ctrlKey || e.altKey) return
       switch (e.key) {
         case 'ArrowRight':
