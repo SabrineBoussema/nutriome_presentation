@@ -1333,8 +1333,17 @@ export const products: Product[] = [
   },
 ]
 
+/** Presentation order: metabolic trio first, then magnesium / D3K2 / winter immunity. */
+const DECK_ORDER = ['bioberberine', 'bioq10', 'biodigest', 'bio3mag', 'biod3k2', 'biogrippal']
+
 /** Products shown in the main deck, portfolio and opening. */
-export const catalog = products.filter((p) => !p.hiddenFromDeck)
+export const catalog = products
+  .filter((p) => !p.hiddenFromDeck)
+  .sort((a, b) => {
+    const ia = DECK_ORDER.indexOf(a.id)
+    const ib = DECK_ORDER.indexOf(b.id)
+    return (ia === -1 ? DECK_ORDER.length : ia) - (ib === -1 ? DECK_ORDER.length : ib)
+  })
 
 export function getProduct(slugOrAlias: string): Product | undefined {
   return products.find((p) => p.slug === slugOrAlias || p.aliases?.includes(slugOrAlias))
