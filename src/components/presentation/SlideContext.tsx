@@ -8,6 +8,8 @@ export interface SlideState {
   isPrint: boolean
   /** 'flow' on phones / portrait tablets — slides should use compact spacing */
   layout: 'canvas' | 'flow'
+  /** Jump to a step of the current slide (interactive slides). Absent in print. */
+  goToStep?: (step: number) => void
 }
 
 export const SlideContext = createContext<SlideState>({ step: 0, steps: 1, isPrint: false, layout: 'canvas' })

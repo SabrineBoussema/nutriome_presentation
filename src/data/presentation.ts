@@ -1,4 +1,5 @@
 import { products, themeCatalog } from './products'
+import { hasMechanism, stagesFor, type MechanismMode } from './mechanisms'
 import type { L, Product } from './types'
 
 export const presentationConfig = {
@@ -104,7 +105,7 @@ const SCRIPT: Record<string, { hero: L; composition: L; schema: L; indications: 
   },
 }
 
-function productSlides(p: Product): SlideDef[] {
+function productSlides(p: Product, mode: MechanismMode = 'expert'): SlideDef[] {
   const section: L = { fr: p.name, en: p.name }
   const script = SCRIPT[p.id]
   const base = (kind: SlideKind, title: L, steps = 1, notes?: L): SlideDef => ({
@@ -123,7 +124,8 @@ function productSlides(p: Product): SlideDef[] {
   const schema = base(
     'illustration',
     script ? { fr: 'Mécanismes d’action', en: 'Mechanisms of action' } : { fr: 'Mode d’action', en: 'How it works' },
-    1,
+    // Interactive mechanisms: one deck step per stage, so the clicker / arrow keys walk through the stages
+    hasMechanism(p.id) ? stagesFor(p.id, mode).length : 1,
     script?.schema,
   )
   const indications = base(
@@ -150,10 +152,10 @@ function productSlides(p: Product): SlideDef[] {
   return [hero, composition, schema, indications, posology, ...refs]
 }
 
-export function buildDeck(onlySlug?: string): SlideDef[] {
+export function buildDeck(onlySlug?: string, mode: MechanismMode = 'expert'): SlideDef[] {
   if (onlySlug) {
     const p = products.find((x) => x.slug === onlySlug)
-    return p ? productSlides(p) : []
+    return p ? productSlides(p, mode) : []
   }
   const deck: SlideDef[] = [
     {
@@ -179,7 +181,7 @@ export function buildDeck(onlySlug?: string): SlideDef[] {
         en: 'Show the full range. Tonight we only develop the two theme formulas: Bio3Mag then BioDigest.',
       },
     },
-    ...themeCatalog.flatMap(productSlides),
+    ...themeCatalog.flatMap((p) => productSlides(p, mode)),
     { id: 'closing', kind: 'closing', steps: 1, section: S.end, title: { fr: 'Contact', en: 'Contact' } },
   ]
   if (presentationConfig.showValidationAppendix) {

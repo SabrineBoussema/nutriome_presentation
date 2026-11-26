@@ -15,6 +15,8 @@ export interface Reference {
   source?: string
   url: string
   doi?: string
+  /** PubMed identifier, only when verified on PubMed */
+  pmid?: string
 }
 
 export interface Ingredient {

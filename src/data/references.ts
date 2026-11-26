@@ -102,6 +102,7 @@ const list: Reference[] = [
     title: 'Magnesium in man: implications for health and disease',
     source: 'Physiological Reviews',
     doi: '10.1152/physrev.00012.2014',
+    pmid: '25540137',
     url: 'https://doi.org/10.1152/physrev.00012.2014',
   },
 
@@ -150,6 +151,7 @@ const list: Reference[] = [
     title: 'The role of Zinc L-Carnosine in the prevention and treatment of gastrointestinal mucosal disease in humans: a review',
     source: 'Clinics and Research in Hepatology and Gastroenterology',
     doi: '10.1016/j.clinre.2022.101954',
+    pmid: '35659631',
     url: 'https://doi.org/10.1016/j.clinre.2022.101954',
   },
   {
@@ -159,6 +161,7 @@ const list: Reference[] = [
     title: 'Zinc carnosine, a health food supplement that stabilises small bowel integrity and stimulates gut repair processes',
     source: 'Gut',
     doi: '10.1136/gut.2006.099929',
+    pmid: '16777920',
     url: 'https://doi.org/10.1136/gut.2006.099929',
   },
   {
@@ -249,6 +252,38 @@ const list: Reference[] = [
     title: 'Reishi mushroom',
     source: 'MSKCC — About Herbs',
     url: 'https://www.mskcc.org/cancer-care/integrative-medicine/herbs/reishi-mushroom',
+  },
+
+  // --- Zinc carnosine — added for the interactive mechanism (PMIDs verified on PubMed) ---
+  {
+    id: 'mahmoud-2022',
+    authors: 'Mahmoud A, Abuelazm M, Ahmed AAS, et al.',
+    year: 2022,
+    title: 'Efficacy and safety of polaprezinc-based therapy versus the standard triple therapy for Helicobacter pylori eradication: a systematic review and meta-analysis of randomized controlled trials',
+    source: 'Nutrients',
+    doi: '10.3390/nu14194126',
+    pmid: '36235778',
+    url: 'https://doi.org/10.3390/nu14194126',
+  },
+  {
+    id: 'hewlings-2020',
+    authors: 'Hewlings S, Kalman D',
+    year: 2020,
+    title: 'A review of zinc-L-carnosine and its positive effects on oral mucositis, taste disorders, and gastrointestinal disorders',
+    source: 'Nutrients',
+    doi: '10.3390/nu12030665',
+    pmid: '32121367',
+    url: 'https://doi.org/10.3390/nu12030665',
+  },
+  {
+    id: 'scarpellini-2022',
+    authors: 'Scarpellini E, Balsiger LM, Maurizi V, et al.',
+    year: 2022,
+    title: 'Zinc and gut microbiota in health and gastrointestinal disease under the COVID-19 suggestion',
+    source: 'BioFactors',
+    doi: '10.1002/biof.1829',
+    pmid: '35218585',
+    url: 'https://doi.org/10.1002/biof.1829',
   },
 
   // --- Blood pressure / potassium ---------------------------------------

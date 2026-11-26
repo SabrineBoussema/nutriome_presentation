@@ -125,3 +125,85 @@
     animation-iteration-count: 1 !important;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Interactive mechanisms (components/mechanisms)
+   Loops are CSS animations on `.mech-anim`; the presenter can freeze them and
+   they are disabled for prefers-reduced-motion.
+--------------------------------------------------------------------------- */
+.mech-anim {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.mech-paused .mech-anim {
+  animation-play-state: paused !important;
+}
+.mech-reduced .mech-anim {
+  animation: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .mech-anim {
+    animation: none !important;
+  }
+}
+@keyframes mech-pulse {
+  0% { transform: scale(0.7); opacity: 0.9; }
+  100% { transform: scale(2.1); opacity: 0; }
+}
+.mech-pulse { animation: mech-pulse 1.8s ease-out infinite; }
+
+@keyframes mech-breathe {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+.mech-breathe { animation: mech-breathe 2.4s ease-in-out infinite; }
+
+@keyframes mech-dash {
+  to { stroke-dashoffset: -40; }
+}
+.mech-dash { animation: mech-dash 1.4s linear infinite; }
+
+/* Sarcomere: Z-discs move inwards (contraction) then back (relaxation) */
+@keyframes mech-contract-left {
+  0%, 15% { transform: translateX(0); }
+  45%, 60% { transform: translateX(34px); }
+  90%, 100% { transform: translateX(0); }
+}
+@keyframes mech-contract-right {
+  0%, 15% { transform: translateX(0); }
+  45%, 60% { transform: translateX(-34px); }
+  90%, 100% { transform: translateX(0); }
+}
+.mech-contract-left { animation: mech-contract-left 4s ease-in-out infinite; transform-box: view-box; }
+.mech-contract-right { animation: mech-contract-right 4s ease-in-out infinite; transform-box: view-box; }
+@keyframes mech-ca-phase {
+  0%, 10% { opacity: 0; }
+  25%, 55% { opacity: 1; }
+  70%, 100% { opacity: 0; }
+}
+@keyframes mech-mg-phase {
+  0%, 55% { opacity: 0; }
+  70%, 92% { opacity: 1; }
+  100% { opacity: 0; }
+}
+.mech-ca-phase { animation: mech-ca-phase 4s ease-in-out infinite; }
+.mech-mg-phase { animation: mech-mg-phase 4s ease-in-out infinite; }
+
+/* ROS neutralised (cytoprotection) */
+@keyframes mech-fade-out {
+  0%, 20% { opacity: 1; transform: scale(1); }
+  60%, 100% { opacity: 0; transform: scale(0.3); }
+}
+.mech-fade-out { animation: mech-fade-out 3.2s ease-in infinite; }
+
+/* Bacteria drifting gently */
+@keyframes mech-drift {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(6px, -4px) rotate(8deg); }
+}
+.mech-drift { animation: mech-drift 5s ease-in-out infinite; }
+
+.mech-hotspot:focus-visible .mech-dot {
+  stroke: var(--color-amber);
+  stroke-width: 5;
+}

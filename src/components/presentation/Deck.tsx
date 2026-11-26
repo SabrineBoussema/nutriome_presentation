@@ -139,6 +139,11 @@ export function Deck({
     [slides, goTo],
   )
 
+  const goToStep = useCallback(
+    (s: number) => goTo(nav.index, { step: Math.min(Math.max(s, 0), nav.steps - 1) }),
+    [goTo, nav.index, nav.steps],
+  )
+
   const deckValue = useMemo(() => ({ slides, goToSlideId }), [slides, goToSlideId])
   const progress = ((nav.index + (nav.step + 1) / nav.steps) / slides.length) * 100
 
@@ -158,7 +163,7 @@ export function Deck({
   }
 
   const slideNode = (
-    <SlideContext.Provider value={{ step: nav.step, steps: nav.steps, isPrint: false, layout: layout.mode }}>
+    <SlideContext.Provider value={{ step: nav.step, steps: nav.steps, isPrint: false, layout: layout.mode, goToStep }}>
       <SlideRenderer slide={slide} />
     </SlideContext.Provider>
   )
