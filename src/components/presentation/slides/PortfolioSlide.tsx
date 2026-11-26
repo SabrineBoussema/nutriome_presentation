@@ -41,9 +41,12 @@ export function PortfolioSlide() {
               <motion.button
                 type="button"
                 onClick={() => target && goToSlideId(target)}
-                whileHover={isPrint ? undefined : { y: -6 }}
+                disabled={!target}
+                whileHover={isPrint || !target ? undefined : { y: -6 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 24 }}
-                className="group relative flex h-full w-full flex-col overflow-hidden rounded-3xl border border-navy/[0.06] bg-white text-left shadow-[0_24px_50px_-36px_rgb(14_26_43/0.5)] transition-shadow hover:shadow-[0_40px_70px_-36px_rgb(14_26_43/0.55)]"
+                className={`group relative flex h-full w-full flex-col overflow-hidden rounded-3xl border border-navy/[0.06] bg-white text-left shadow-[0_24px_50px_-36px_rgb(14_26_43/0.5)] ${
+                  target ? 'transition-shadow hover:shadow-[0_40px_70px_-36px_rgb(14_26_43/0.55)]' : 'cursor-default'
+                }`}
               >
                 <div className="relative flex flex-1 items-center justify-center px-3 pb-3 pt-11" style={{ background: `linear-gradient(160deg, ${p.accentSoft}, #fff)` }}>
                   <img
@@ -66,7 +69,9 @@ export function PortfolioSlide() {
                     <div className="mt-0.5 text-lg font-semibold text-ink @4xl:text-[25px]">{p.name}</div>
                     <div className="mt-0.5 line-clamp-1 text-sm leading-snug text-slate">{l(p.tagline)}</div>
                   </div>
-                  <ArrowUpRight className="mt-1 size-5 shrink-0 text-slate transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 no-print" aria-hidden />
+                  {target && (
+                    <ArrowUpRight className="mt-1 size-5 shrink-0 text-slate transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 no-print" aria-hidden />
+                  )}
                 </div>
               </motion.button>
             </Reveal>

@@ -1,4 +1,4 @@
-import { catalog, products } from './products'
+import { products, themeCatalog } from './products'
 import type { L, Product } from './types'
 
 export const presentationConfig = {
@@ -65,8 +65,48 @@ const S = {
   end: { fr: 'Conclusion', en: 'Closing' },
 }
 
+const SCRIPT: Record<string, { hero: L; composition: L; schema: L; indications: L }> = {
+  biodigest: {
+    hero: {
+      fr: 'Le BioDigest est un complément alimentaire innovant axé sur la santé gastro-intestinale. Sa particularité : le Zinc Carnosine, pour traiter et protéger l’estomac sans altérer ses fonctions naturelles.',
+      en: 'BioDigest is an innovative food supplement focused on gastrointestinal health. Its distinctive feature is zinc carnosine, which treats and protects the stomach without altering its natural functions.',
+    },
+    composition: {
+      fr: 'L’innovation, c’est le Zinc Carnosine lévogyre. Contrairement au zinc classique, il n’est pas libéré sous forme libre : il reste complexé, cible directement les zones lésées de la muqueuse gastrique, et assure une action cicatrisante et protectrice prolongée.',
+      en: 'The innovation is L-zinc carnosine. Unlike ordinary zinc, it is not released as a free element: it remains complexed, targets damaged gastric mucosa, and provides a prolonged healing and protective action.',
+    },
+    schema: {
+      fr: 'Cinq temps : action ciblée, cicatrisation des lésions, protection de la muqueuse, respect physiologique, soutien du microbiote. Zinc Carnosine à gauche ; synergie (H. pylori, AINS, ATB, metformine) et microbiote à droite.',
+      en: 'Five stages: targeted action, lesion healing, mucosal protection, physiological respect, microbiota support. Zinc carnosine on the left; synergy (H. pylori, NSAIDs, antibiotics, metformin) and microbiota on the right.',
+    },
+    indications: {
+      fr: 'Cicatrisation et ulcères — AMM au Japon et en Corée du Sud. Respect de la physiologie : n’inhibe pas les sécrétions, contrairement aux IPP, y compris en hypochlorhydrie. Synergie avec la trithérapie anti-H. pylori, les AINS, les antibiotiques et la metformine. Microbiote : amélioration observée en moins de deux semaines.',
+      en: 'Healing and ulcers — MA in Japan and South Korea. Physiological respect: does not inhibit secretions, unlike PPIs, including in hypochlorhydria. Synergy with anti-H. pylori triple therapy, NSAIDs, antibiotics and metformin. Microbiota: improvement observed in under two weeks.',
+    },
+  },
+  bio3mag: {
+    hero: {
+      fr: 'Bio3Mag est un cocktail ultra-complet, orienté énergie, performance et récupération. Trois formes hautement biodisponibles — malate, citrate et bisglycinate — pour un mode de vie actif et sportif.',
+      en: 'Bio3Mag is an all-round cocktail aimed at energy, performance and recovery. Three highly bioavailable forms — malate, citrate and bisglycinate — for an active, sporty lifestyle.',
+    },
+    composition: {
+      fr: 'Le duo malate + citrate s’occupe de l’énergie et des muscles : le malate alimente les mitochondries, le citrate soutient la fonction neuromusculaire. Le bisglycinate détend le système nerveux, favorise le sommeil et tamponne le digestif.',
+      en: 'The malate + citrate duo covers energy and muscles: malate fuels the mitochondria, citrate supports neuromuscular function. Bisglycinate relaxes the nervous system, supports sleep and buffers digestion.',
+    },
+    schema: {
+      fr: 'Cinq temps : assimilation optimisée, énergie cellulaire, contraction musculaire, détente nerveuse, performance et récupération. Malate à gauche, citrate en bas, bisglycinate à droite, synergie Bio3Mag en bas à droite.',
+      en: 'Five stages: optimised assimilation, cellular energy, muscle contraction, nervous relaxation, performance and recovery. Malate on the left, citrate below, bisglycinate on the right, Bio3Mag synergy lower right.',
+    },
+    indications: {
+      fr: 'Formule qualitative pour un mode de vie actif et sportif. Elle coche toutes les cases : contraction musculaire et énergie (citrate + malate) et récupération nerveuse et musculaire en profondeur (bisglycinate). Absorption élevée, sans agresser le système digestif.',
+      en: 'A high-quality formula for an active, sporty lifestyle. It covers muscle contraction and energy (citrate + malate) and deep nervous and muscular recovery (bisglycinate). High absorption, without stressing the digestive system.',
+    },
+  },
+}
+
 function productSlides(p: Product): SlideDef[] {
   const section: L = { fr: p.name, en: p.name }
+  const script = SCRIPT[p.id]
   const base = (kind: SlideKind, title: L, steps = 1, notes?: L): SlideDef => ({
     id: `${p.slug}-${kind}`,
     kind,
@@ -76,12 +116,22 @@ function productSlides(p: Product): SlideDef[] {
     title,
     notes,
   })
-  const composition = base('composition', { fr: 'Composition', en: 'Composition' }, 1, {
+  const composition = base('composition', { fr: 'Composition', en: 'Composition' }, 1, script?.composition ?? {
     fr: 'Rappeler la base de calcul de chaque quantité, et signaler les valeurs en attente de validation.',
     en: 'State the basis of each amount, and point out values pending validation.',
   })
-  const schema = base('illustration', { fr: 'Mode d’action', en: 'How it works' })
-  const indications = base('indications', { fr: 'Indications thérapeutiques', en: 'Therapeutic indications' })
+  const schema = base(
+    'illustration',
+    script ? { fr: 'Mécanismes d’action', en: 'Mechanisms of action' } : { fr: 'Mode d’action', en: 'How it works' },
+    1,
+    script?.schema,
+  )
+  const indications = base(
+    'indications',
+    { fr: 'Indications thérapeutiques', en: 'Therapeutic indications' },
+    1,
+    script?.indications,
+  )
   const posology = base('practical', { fr: 'Posologie', en: 'Dosage' })
   const refs = presentationConfig.showReferences
     ? [base('references', { fr: 'Références', en: 'References' })]
@@ -95,7 +145,7 @@ function productSlides(p: Product): SlideDef[] {
           fr: 'Lancement de BioQ10+.',
           en: 'BioQ10+ launch.',
         })
-      : base('product-hero', { fr: p.name, en: p.name })
+      : base('product-hero', { fr: p.name, en: p.name }, 1, script?.hero)
 
   return [hero, composition, schema, indications, posology, ...refs]
 }
@@ -125,11 +175,11 @@ export function buildDeck(onlySlug?: string): SlideDef[] {
       section: S.range,
       title: { fr: 'Notre gamme', en: 'Our range' },
       notes: {
-        fr: 'Cliquer sur un produit pour accéder directement à sa section.',
-        en: 'Click a product to jump straight to its section.',
+        fr: 'Montrer la gamme complète. Ce soir, on développe seulement les deux formules du thème : Bio3Mag puis BioDigest.',
+        en: 'Show the full range. Tonight we only develop the two theme formulas: Bio3Mag then BioDigest.',
       },
     },
-    ...catalog.flatMap(productSlides),
+    ...themeCatalog.flatMap(productSlides),
     { id: 'closing', kind: 'closing', steps: 1, section: S.end, title: { fr: 'Contact', en: 'Contact' } },
   ]
   if (presentationConfig.showValidationAppendix) {

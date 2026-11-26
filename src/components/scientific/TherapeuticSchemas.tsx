@@ -444,13 +444,13 @@ const T = (frL: string, enL: string, frS: string, enS: string): Target => ({ lab
 
 export const therapeuticSchemas: Record<string, SchemaDef> = {
   bio3mag: {
-    caption: ['Trois formes hautement biodisponibles, une même source de Mg²⁺', 'Three highly bioavailable forms, one source of Mg²⁺'],
+    caption: ['Malate et citrate pour l’énergie et les muscles ; bisglycinate pour la récupération', 'Malate and citrate for energy and muscles; bisglycinate for recovery'],
     Illustration: MagnesiumHub,
     targets: [
-      T('Système nerveux', 'Nervous system', 'Bisglycinate : stress, sommeil', 'Bisglycinate: stress, sleep'),
-      T('Muscles', 'Muscles', 'Citrate : contraction', 'Citrate: contraction'),
-      T('Récupération', 'Recovery', 'Nerveuse et musculaire', 'Nervous and muscular'),
-      T('Énergie', 'Energy', 'Malate : mitochondries', 'Malate: mitochondria'),
+      T('Magnésium malate', 'Magnesium malate', 'Énergie cellulaire, mitochondries', 'Cellular energy, mitochondria'),
+      T('Magnésium citrate', 'Magnesium citrate', 'Contraction neuromusculaire', 'Neuromuscular contraction'),
+      T('Magnésium bisglycinate', 'Magnesium bisglycinate', 'Détente, sommeil, effet tampon', 'Relaxation, sleep, buffering'),
+      T('Synergie Bio3Mag', 'Bio3Mag synergy', 'Absorption élevée, récupération profonde', 'High absorption, deep recovery'),
     ],
   },
   bioq10: {
@@ -474,13 +474,13 @@ export const therapeuticSchemas: Record<string, SchemaDef> = {
     ],
   },
   biodigest: {
-    caption: ['Le zinc carnosine cible les zones lésées de la muqueuse', 'Zinc carnosine targets damaged areas of the mucosa'],
+    caption: ['Cinq temps d’action, de la muqueuse lésée au microbiote', 'Five stages of action, from injured mucosa to the microbiota'],
     Illustration: Stomach,
     targets: [
-      T('Estomac', 'Stomach', 'Sécrétions préservées', 'Secretions preserved'),
-      T('Synergie', 'Synergy', 'H. pylori, AINS, ATB', 'H. pylori, NSAIDs, antibiotics'),
-      T('Muqueuse', 'Mucosa', 'Cicatrisation, ulcère', 'Healing, ulcer'),
-      T('Microbiote', 'Gut flora', 'Amélioré en < 2 semaines', 'Improved in < 2 weeks'),
+      T('Zinc Carnosine', 'Zinc carnosine', 'Forme complexée, non dissociée', 'Complexed, undissociated form'),
+      T('Respect physiologique', 'Physiological respect', 'Sécrétions préservées, vs IPP', 'Secretions preserved, vs PPIs'),
+      T('Synergie thérapeutique', 'Therapeutic synergy', 'H. pylori, AINS, ATB, metformine', 'H. pylori, NSAIDs, antibiotics, metformin'),
+      T('Microbiote', 'Gut flora', 'Flore renforcée en < 2 semaines', 'Flora strengthened in < 2 weeks'),
     ],
   },
   biod3k2: {

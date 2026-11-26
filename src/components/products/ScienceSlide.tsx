@@ -1,8 +1,11 @@
+import bio3magMechanisms from '../../assets/scientific/bio3mag-mecanismes-action.svg'
+import biodigestMechanisms from '../../assets/scientific/biodigest-mecanismes-action.svg'
 import { diagrams } from '../../data/diagrams'
 import type { DiagramId, Product } from '../../data/types'
 import { useI18n } from '../../i18n'
 import { diagramComponents, ScopeBanner, StepCaptions } from '../scientific'
 import { TherapeuticSchema, therapeuticSchemas } from '../scientific/TherapeuticSchemas'
+import { MechanismInfographicSlide } from './MechanismInfographicSlide'
 import { useSlide } from '../presentation/SlideContext'
 import { Eyebrow } from '../ui/Badges'
 import { Reveal } from '../ui/Reveal'
@@ -47,6 +50,24 @@ export function ScienceSlide({ product, diagram, eyebrow, title }: ScienceSlideP
 /** Illustrative therapeutic schema; products without one fall back to their SVG diagram, fully built. */
 export function IllustrationSlide({ product }: { product: Product }) {
   const { t } = useI18n()
+  if (product.id === 'biodigest') {
+    return (
+      <MechanismInfographicSlide
+        product={product}
+        src={biodigestMechanisms}
+        alt="BioDigest : mécanismes d’action. Zinc Carnosine lévogyre, cicatrisation des lésions, protection de la muqueuse, respect physiologique et soutien du microbiote."
+      />
+    )
+  }
+  if (product.id === 'bio3mag') {
+    return (
+      <MechanismInfographicSlide
+        product={product}
+        src={bio3magMechanisms}
+        alt="Bio3Mag : mécanismes d’action. Magnésium malate, citrate et bisglycinate — énergie cellulaire, contraction musculaire, détente nerveuse et récupération."
+      />
+    )
+  }
   const Diagram = diagramComponents[product.diagram]
   const last = diagrams[product.diagram].steps.length - 1
 

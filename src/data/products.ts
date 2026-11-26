@@ -49,12 +49,12 @@ export const products: Product[] = [
     category: { fr: 'Minéraux', en: 'Minerals' },
     tagline: { fr: 'Énergie, performance & récupération', en: 'Energy, performance & recovery' },
     positioning: {
-      fr: 'Un trio ultra-complet — bisglycinate, malate et citrate de magnésium — hautement biodisponible, pour un mode de vie actif et sportif : 75 mg de magnésium élément par gélule.',
-      en: 'An all-round trio — magnesium bisglycinate, malate and citrate — highly bioavailable, for an active, sporty lifestyle: 75 mg of elemental magnesium per capsule.',
+      fr: 'Une association experte de trois formes hautement biodisponibles — malate, citrate et bisglycinate — pour l’énergie, les muscles et la récupération. 75 mg de magnésium élément par gélule.',
+      en: 'An expert combination of three highly bioavailable forms — malate, citrate and bisglycinate — for energy, muscles and recovery. 75 mg of elemental magnesium per capsule.',
     },
     description: {
-      fr: 'Bisglycinate, malate et citrate de magnésium : énergie et muscles (malate + citrate), détente nerveuse et sommeil (bisglycinate).',
-      en: 'Magnesium bisglycinate, malate and citrate: energy and muscles (malate + citrate), nervous relaxation and sleep (bisglycinate).',
+      fr: 'Malate + citrate pour l’énergie et les muscles ; bisglycinate pour la détente nerveuse, le sommeil et un effet tampon digestif.',
+      en: 'Malate + citrate for energy and muscles; bisglycinate for nervous relaxation, sleep and a digestive buffering effect.',
     },
     image: bio3magImg,
     imageAspect: 483 / 370,
@@ -66,24 +66,24 @@ export const products: Product[] = [
         name: { fr: 'Bisglycinate de magnésium', en: 'Magnesium bisglycinate' },
         quantity: 150,
         unit: 'mg',
-        role: { fr: 'Anti-stress et sommeil : détend le système nerveux', en: 'Anti-stress and sleep: relaxes the nervous system' },
-        detail: { fr: 'Effet tampon : respecte le système digestif', en: 'Buffering effect: gentle on the digestive system' },
+        role: { fr: 'Détente du système nerveux, apaisement et sommeil de qualité', en: 'Nervous-system relaxation, calming and quality sleep' },
+        detail: { fr: 'Haute tolérance digestive (effet tampon)', en: 'High digestive tolerance (buffering effect)' },
         status: 'verified',
       },
       {
         name: { fr: 'Malate de magnésium', en: 'Magnesium malate' },
         quantity: 150,
         unit: 'mg',
-        role: { fr: 'Énergie : alimente la production mitochondriale', en: 'Energy: fuels mitochondrial production' },
-        detail: { fr: 'Lutte contre la fatigue physique', en: 'Fights physical fatigue' },
+        role: { fr: 'Alimente la production d’énergie cellulaire (mitochondries)', en: 'Fuels cellular energy production (mitochondria)' },
+        detail: { fr: 'Lutte contre la fatigue physique ; endurance et entraînements', en: 'Fights physical fatigue; endurance and training' },
         status: 'verified',
       },
       {
         name: { fr: 'Citrate de magnésium', en: 'Magnesium citrate' },
         quantity: 200,
         unit: 'mg',
-        role: { fr: 'Muscles : soutient la fonction neuromusculaire', en: 'Muscles: supports neuromuscular function' },
-        detail: { fr: 'Contraction musculaire, entraînements optimisés', en: 'Muscle contraction, optimised training' },
+        role: { fr: 'Soutient la fonction neuromusculaire et la contraction musculaire', en: 'Supports neuromuscular function and muscle contraction' },
+        detail: { fr: 'Haute biodisponibilité', en: 'High bioavailability' },
         status: 'verified',
       },
       {
@@ -101,12 +101,11 @@ export const products: Product[] = [
     ],
     excipients: { fr: 'Excipients : à confirmer sur l’emballage final.', en: 'Excipients: to be confirmed on final packaging.' },
     indications: [
-      { fr: 'Fatigue physique et baisse de tonus', en: 'Physical fatigue and low energy' },
-      { fr: 'Mode de vie actif et sportif : optimisation des entraînements', en: 'Active, sporty lifestyle: optimised training' },
-      { fr: 'Contraction musculaire, crampes et récupération', en: 'Muscle contraction, cramps and recovery' },
-      { fr: 'Stress et tension nerveuse : apaiser le mental', en: 'Stress and nervous tension: calming the mind' },
-      { fr: 'Sommeil de qualité', en: 'Quality sleep' },
-      { fr: 'Carence en magnésium et besoins accrus', en: 'Magnesium deficiency and increased needs' },
+      { fr: 'Énergie cellulaire et fatigue physique (malate)', en: 'Cellular energy and physical fatigue (malate)' },
+      { fr: 'Contraction musculaire et fonction neuromusculaire (citrate)', en: 'Muscle contraction and neuromuscular function (citrate)' },
+      { fr: 'Détente nerveuse, apaisement et sommeil de qualité (bisglycinate)', en: 'Nervous relaxation, calming and quality sleep (bisglycinate)' },
+      { fr: 'Mode de vie actif et sportif : performance et récupération', en: 'Active, sporty lifestyle: performance and recovery' },
+      { fr: 'Assimilation optimisée, sans agresser le système digestif', en: 'Optimised assimilation, without stressing the digestive system' },
     ],
     mechanisms: [
       {
@@ -174,8 +173,12 @@ export const products: Product[] = [
         en: 'Ligands of metabolic origin: glycine (an amino acid), malate and citrate (Krebs cycle intermediates).',
       },
       {
-        fr: 'Trois formes hautement biodisponibles, contrairement au magnésium oxydé ou marin, mal absorbé.',
-        en: 'Three highly bioavailable forms, unlike poorly absorbed magnesium oxide or marine magnesium.',
+        fr: 'Trio ultra-complet : malate + citrate pour l’énergie et les muscles ; bisglycinate pour la récupération nerveuse et musculaire.',
+        en: 'All-round trio: malate + citrate for energy and muscles; bisglycinate for nervous and muscular recovery.',
+      },
+      {
+        fr: 'Trois formes hautement biodisponibles, contrairement au magnésium oxydé ou marin, mal absorbé — sans agresser le système digestif (effet tampon du bisglycinate).',
+        en: 'Three highly bioavailable forms, unlike poorly absorbed magnesium oxide or marine magnesium — without stressing the digestive system (bisglycinate buffering).',
       },
     ],
     usage: {
@@ -670,14 +673,17 @@ export const products: Product[] = [
     slug: 'biodigest',
     name: 'BioDigest',
     category: { fr: 'Digestion', en: 'Digestion' },
-    tagline: { fr: 'Cicatrisation & protection de l’estomac', en: 'Healing & protection of the stomach' },
+    tagline: {
+      fr: 'Protection et cicatrisation de la muqueuse gastrique',
+      en: 'Protection and healing of the gastric mucosa',
+    },
     positioning: {
-      fr: 'Le complexe zinc carnosine traite et protège l’estomac sans altérer ses fonctions naturelles : 66 mg par gélule.',
-      en: 'The zinc carnosine complex treats and protects the stomach without altering its natural functions: 66 mg per capsule.',
+      fr: 'Une solution experte pour la santé gastro-intestinale. Le Zinc Carnosine (lévogyre) traite et protège l’estomac sans altérer ses fonctions naturelles.',
+      en: 'An expert solution for gastrointestinal health. Zinc carnosine (L-form) treats and protects the stomach without altering its natural functions.',
     },
     description: {
-      fr: 'Zinc-L-carnosine 66 mg par gélule : une forme complexée qui cible les zones lésées de la muqueuse gastrique.',
-      en: 'Zinc-L-carnosine 66 mg per capsule: a complexed form that targets damaged areas of the gastric mucosa.',
+      fr: 'Zinc Carnosine lévogyre, 66 mg par gélule : une forme complexée unique, non dissociée, qui cible les zones lésées de la muqueuse gastrique.',
+      en: 'L-zinc carnosine, 66 mg per capsule: a unique, undissociated complexed form that targets damaged areas of the gastric mucosa.',
     },
     image: biodigestImg,
     imageAspect: 305 / 238,
@@ -690,32 +696,40 @@ export const products: Product[] = [
         quantity: 66,
         unit: 'mg',
         detail: {
-          fr: 'Forme complexée (lévogyre) : le zinc n’est pas libéré sous forme libre',
-          en: 'Complexed (L-) form: zinc is not released as a free element',
+          fr: 'Zinc Carnosine (lévogyre) — forme complexée unique, non dissociée',
+          en: 'Zinc carnosine (L-form) — unique undissociated complex',
         },
         role: {
-          fr: 'Cible les zones lésées : action cicatrisante et protectrice prolongée',
-          en: 'Targets damaged areas: prolonged healing and protective action',
+          fr: 'Cible les zones lésées de la muqueuse : action cicatrisante et protectrice prolongée',
+          en: 'Targets damaged mucosal areas: prolonged healing and protective action',
         },
         status: 'verified',
       },
     ],
     indications: [
-      { fr: 'Ulcère gastrique (AMM au Japon et en Corée du Sud)', en: 'Gastric ulcer (licensed in Japan and South Korea)' },
       {
-        fr: 'Gastrite, y compris en cas d’hypochlorhydrie — n’inhibe pas les sécrétions, contrairement aux IPP',
-        en: 'Gastritis, including with hypochlorhydria — does not inhibit secretions, unlike PPIs',
+        fr: 'Cicatrisation et ulcères — reconnu avec AMM au Japon et en Corée du Sud',
+        en: 'Healing and ulcers — licensed (MA) in Japan and South Korea',
       },
-      { fr: 'Optimisation de la trithérapie anti-Helicobacter pylori', en: 'Optimisation of anti-Helicobacter pylori triple therapy' },
-      { fr: 'Protection gastrique sous AINS, antibiotiques ou metformine', en: 'Gastric protection with NSAIDs, antibiotics or metformin' },
-      { fr: 'Amélioration du microbiote en moins de deux semaines', en: 'Improved gut flora in under two weeks' },
+      {
+        fr: 'Respect physiologique : n’inhibe pas les sécrétions gastriques, contrairement aux IPP — y compris en hypochlorhydrie',
+        en: 'Physiological respect: does not inhibit gastric secretions, unlike PPIs — including in hypochlorhydria',
+      },
+      {
+        fr: 'Synergie thérapeutique : trithérapie anti-Helicobacter pylori ; protection sous AINS, antibiotiques ou metformine',
+        en: 'Therapeutic synergy: anti-Helicobacter pylori triple therapy; protection with NSAIDs, antibiotics or metformin',
+      },
+      {
+        fr: 'Microbiote : équilibre et renforcement de la flore intestinale observés en moins de deux semaines',
+        en: 'Microbiota: balance and strengthening of gut flora observed in under two weeks',
+      },
     ],
     mechanisms: [
       {
-        title: { fr: 'Adhésion à la muqueuse', en: 'Mucosal adhesion' },
+        title: { fr: 'Forme complexée, non dissociée', en: 'Undissociated complex' },
         body: {
-          fr: 'Le complexe zinc–carnosine se dissocie lentement dans l’estomac et adhère à la muqueuse lésée, où il libère localement zinc et carnosine.',
-          en: 'The zinc–carnosine complex dissociates slowly in the stomach and adheres to injured mucosa, where it releases zinc and carnosine locally.',
+          fr: 'Contrairement au zinc classique, le Zinc Carnosine lévogyre n’est pas libéré sous forme d’élément libre. Il agit sous sa forme complexée et cible directement les zones lésées de la muqueuse gastrique, pour une action cicatrisante et protectrice prolongée.',
+          en: 'Unlike ordinary zinc, L-zinc carnosine is not released as a free element. It acts in its complexed form and targets damaged gastric mucosa, for a prolonged healing and protective action.',
         },
         evidence: 'human-studies',
         refs: ['efthymakis-2022'],
@@ -752,6 +766,14 @@ export const products: Product[] = [
       {
         fr: 'N’inhibe pas les sécrétions gastriques, contrairement aux IPP : efficace même en cas d’hypochlorhydrie.',
         en: 'Does not inhibit gastric secretions, unlike PPIs: effective even with hypochlorhydria.',
+      },
+      {
+        fr: 'Synergie avec la trithérapie anti-H. pylori et protection sous AINS, antibiotiques ou metformine.',
+        en: 'Synergy with anti-H. pylori triple therapy and protection with NSAIDs, antibiotics or metformin.',
+      },
+      {
+        fr: 'Amélioration de la flore intestinale observée en moins de deux semaines.',
+        en: 'Improvement of gut flora observed in under two weeks.',
       },
       {
         fr: 'Sécurité du zinc L-carnosine évaluée par l’EFSA (nouvel aliment, 2022).',
@@ -1333,17 +1355,25 @@ export const products: Product[] = [
   },
 ]
 
-/** Presentation order: metabolic trio first, then magnesium / D3K2 / winter immunity. */
-const DECK_ORDER = ['bioberberine', 'bioq10', 'biodigest', 'bio3mag', 'biod3k2', 'biogrippal']
+/** Full range order — opening, about and « Notre gamme ». */
+const RANGE_ORDER = ['bioberberine', 'bioq10', 'biodigest', 'bio3mag', 'biod3k2', 'biogrippal']
 
-/** Products shown in the main deck, portfolio and opening. */
-export const catalog = products
-  .filter((p) => !p.hiddenFromDeck)
-  .sort((a, b) => {
-    const ia = DECK_ORDER.indexOf(a.id)
-    const ib = DECK_ORDER.indexOf(b.id)
-    return (ia === -1 ? DECK_ORDER.length : ia) - (ib === -1 ? DECK_ORDER.length : ib)
-  })
+/** Theme of this meeting — detailed slides only. */
+const THEME_ORDER = ['bio3mag', 'biodigest']
+
+function sortBy(order: string[]) {
+  return (a: { id: string }, b: { id: string }) => {
+    const ia = order.indexOf(a.id)
+    const ib = order.indexOf(b.id)
+    return (ia === -1 ? order.length : ia) - (ib === -1 ? order.length : ib)
+  }
+}
+
+/** Full catalogue shown in the opening, about and portfolio. */
+export const catalog = products.filter((p) => !p.hiddenFromDeck).sort(sortBy(RANGE_ORDER))
+
+/** Products developed in the deck after the range overview. */
+export const themeCatalog = catalog.filter((p) => THEME_ORDER.includes(p.id)).sort(sortBy(THEME_ORDER))
 
 export function getProduct(slugOrAlias: string): Product | undefined {
   return products.find((p) => p.slug === slugOrAlias || p.aliases?.includes(slugOrAlias))
