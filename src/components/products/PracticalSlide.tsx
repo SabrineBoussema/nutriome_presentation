@@ -18,7 +18,7 @@ function Field({ icon: Icon, label, field, accent }: { icon: typeof Pill; label:
       <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.14em]" style={{ color: accent }}>
         <Icon className="size-5" aria-hidden /> {label}
       </div>
-      <p className="mt-2 text-xl font-semibold leading-snug text-ink @4xl:text-[28px]">{field ? l(field.text) : t.common.pending}</p>
+      <p className="mt-2 text-xl font-semibold leading-snug text-ink @4xl:text-[32px]">{field ? l(field.text) : t.common.pending}</p>
       {showPending && (!field || field.pending) && <PendingBadge short className="mt-2" />}
     </div>
   )
@@ -55,7 +55,7 @@ export function PracticalSlide({ product }: { product: Product }) {
                 </h3>
                 <ul className="mt-3 flex flex-col gap-2">
                   {contraindications.map((p, i) => (
-                    <li key={i} className="flex gap-3 text-base leading-snug text-ink @4xl:text-[18px]">
+                    <li key={i} className="flex gap-3 text-base leading-snug text-ink @4xl:text-[21.5px]">
                       <span className="mt-[8px] size-2 shrink-0 rounded-full bg-[#b3261e]" />
                       {l(p)}
                     </li>
@@ -70,7 +70,7 @@ export function PracticalSlide({ product }: { product: Product }) {
                 </h3>
                 <ul className="mt-3 flex flex-col gap-2">
                   {precautions.map((p, i) => (
-                    <li key={i} className="flex gap-3 text-base leading-snug text-ink @4xl:text-[18px]">
+                    <li key={i} className="flex gap-3 text-base leading-snug text-ink @4xl:text-[21.5px]">
                       <span className="mt-[8px] size-2 shrink-0 rounded-full bg-amber" />
                       {l(p)}
                     </li>
@@ -107,7 +107,7 @@ export function SafetySlide({ product }: { product: Product }) {
           </h3>
           <ul className="mt-4 flex flex-col gap-3">
             {product.precautions.map((p, i) => (
-              <li key={i} className="flex gap-3 text-base leading-snug text-ink @4xl:text-[22px]">
+              <li key={i} className="flex gap-3 text-base leading-snug text-ink @4xl:text-[26px]">
                 <span className="mt-[9px] size-2 shrink-0 rounded-full bg-amber" />
                 {l(p)}
               </li>
@@ -120,7 +120,7 @@ export function SafetySlide({ product }: { product: Product }) {
           </h3>
           <ul className="mt-4 flex flex-col gap-3">
             {product.hcpNotes.map((p, i) => (
-              <li key={i} className="flex gap-3 text-base leading-snug text-white/95 @4xl:text-[22px]">
+              <li key={i} className="flex gap-3 text-base leading-snug text-white/95 @4xl:text-[26px]">
                 <span className="mt-[9px] size-2 shrink-0 rounded-full" style={{ background: product.accent }} />
                 {l(p)}
               </li>

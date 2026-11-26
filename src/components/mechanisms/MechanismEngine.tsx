@@ -147,7 +147,7 @@ export function MechanismEngine({
           <div className={`flex items-end justify-between gap-6 ${canvas ? '' : 'flex-wrap'}`}>
             <div className="min-w-0">
               <p
-                className={`flex flex-wrap items-center gap-x-3 gap-y-1 font-semibold uppercase ${canvas ? 'text-[15px] tracking-[0.2em]' : 'text-[12px] tracking-[0.14em]'}`}
+                className={`flex flex-wrap items-center gap-x-3 gap-y-1 font-semibold uppercase ${canvas ? 'text-[18px] tracking-[0.2em]' : 'text-[14.5px] tracking-[0.14em]'}`}
                 style={{ color: accent }}
               >
                 <span className="h-px w-8" style={{ background: accent }} aria-hidden />
@@ -160,7 +160,7 @@ export function MechanismEngine({
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -8 }}
                   transition={{ duration: 0.35 }}
-                  className={`font-serif leading-[1.05] tracking-[-0.015em] text-navy ${canvas ? 'mt-1.5 text-[48px]' : 'mt-1 text-[2rem]'}`}
+                  className={`font-serif leading-[1.05] tracking-[-0.015em] text-navy ${canvas ? 'mt-1.5 text-[54px]' : 'mt-1 text-[2.3rem]'}`}
                 >
                   {stage.title}
                 </motion.h2>
@@ -172,7 +172,7 @@ export function MechanismEngine({
                 onClick={() => setRefsOpen(true)}
                 aria-expanded={refsOpen}
                 title="Références scientifiques (B)"
-                className="inline-flex min-h-12 items-center gap-2 rounded-full border border-navy/15 bg-white px-4 text-[15px] font-semibold text-navy hover:bg-navy/5"
+                className="inline-flex min-h-12 items-center gap-2 rounded-full border border-navy/15 bg-white px-4 text-[18px] font-semibold text-navy hover:bg-navy/5"
               >
                 <BookOpen className="size-[18px]" aria-hidden />
                 Références
@@ -198,7 +198,7 @@ export function MechanismEngine({
                   className="flex min-h-0 flex-col gap-4"
                 >
                   {mode === 'express' && (
-                    <p className={`font-medium leading-snug text-navy ${canvas ? 'text-[26px]' : 'text-[1.2rem]'}`}>{stage.lead}</p>
+                    <p className={`font-medium leading-snug text-navy ${canvas ? 'text-[30px]' : 'text-[1.45rem]'}`}>{stage.lead}</p>
                   )}
                   <ul className="flex flex-col gap-3">
                     {visibleClaims.map((c, i) => {
@@ -211,8 +211,8 @@ export function MechanismEngine({
                           transition={{ duration: 0.45, delay: reduced ? 0 : 0.4 + i * 0.8 }}
                           className="rounded-2xl border border-navy/10 bg-white px-4 py-2.5"
                         >
-                          <p className={`leading-snug text-ink ${canvas ? 'text-[16px]' : 'text-base'}`}>{c.fr}</p>
-                          <p className="mt-1.5 flex flex-wrap items-center gap-2 text-[13px] font-semibold">
+                          <p className={`leading-snug text-ink ${canvas ? 'text-[19px]' : 'text-base'}`}>{c.fr}</p>
+                          <p className="mt-1.5 flex flex-wrap items-center gap-2 text-[15.5px] font-semibold">
                             <span className="inline-flex items-center gap-1.5" style={{ color: level.tone }}>
                               <span className="size-2 rounded-full" style={{ background: level.tone }} aria-hidden />
                               {level.short}
@@ -226,7 +226,7 @@ export function MechanismEngine({
                     })}
                   </ul>
                   {stage.caveat && (
-                    <p className={`border-l-2 pl-3 italic leading-snug text-slate ${canvas ? 'text-[15px]' : 'text-sm'}`} style={{ borderColor: accent }}>
+                    <p className={`border-l-2 pl-3 italic leading-snug text-slate ${canvas ? 'text-[18px]' : 'text-sm'}`} style={{ borderColor: accent }}>
                       {stage.caveat}
                     </p>
                   )}
@@ -248,13 +248,13 @@ export function MechanismEngine({
                       onClick={() => go(i)}
                       aria-current={active ? 'step' : undefined}
                       aria-label={`Étape ${i + 1} sur ${stages.length} : ${s.label}`}
-                      className={`inline-flex min-h-11 items-center gap-2 rounded-full border px-3.5 text-[14.5px] font-semibold transition-colors ${
+                      className={`inline-flex min-h-11 items-center gap-2 rounded-full border px-3.5 text-[17.5px] font-semibold transition-colors ${
                         active ? 'border-transparent text-white' : done ? 'border-navy/15 bg-white text-navy' : 'border-navy/10 bg-white/60 text-slate hover:text-navy'
                       }`}
                       style={active ? { background: accent } : undefined}
                     >
                       <span
-                        className={`flex size-6 items-center justify-center rounded-full text-[12.5px] ${active ? 'bg-white/20' : 'bg-navy/5'}`}
+                        className={`flex size-6 items-center justify-center rounded-full text-[15px] ${active ? 'bg-white/20' : 'bg-navy/5'}`}
                         aria-hidden
                       >
                         {i + 1}

@@ -48,8 +48,8 @@ export function Q10HighlightsSlide({ product }: { product: Product }) {
               <Reveal key={i} delay={0.15 + i * 0.08}>
                 <div className="flex h-full flex-col rounded-3xl border border-navy/[0.06] bg-white p-5 shadow-[0_20px_50px_-36px_rgb(14_26_43/0.45)] @4xl:p-6">
                   <Icon className="size-5" style={{ color: product.accent }} aria-hidden />
-                  <div className={`mt-3 font-serif leading-none text-navy ${small ? 'text-2xl @4xl:text-[37px]' : 'text-4xl @4xl:text-[68px]'}`}>{value}</div>
-                  <div className="mt-2 text-sm leading-snug text-slate @4xl:text-[21px]">{label}</div>
+                  <div className={`mt-3 font-serif leading-none text-navy ${small ? 'text-2xl @4xl:text-[43px]' : 'text-4xl @4xl:text-[76px]'}`}>{value}</div>
+                  <div className="mt-2 text-sm leading-snug text-slate @4xl:text-[24px]">{label}</div>
                 </div>
               </Reveal>
             ))}
@@ -57,15 +57,15 @@ export function Q10HighlightsSlide({ product }: { product: Product }) {
         </div>
 
         <Reveal fromStep={1} delay={0.1} className="flex flex-col justify-center rounded-[28px] border border-navy/[0.06] bg-white p-6 shadow-[0_20px_50px_-36px_rgb(14_26_43/0.45)] @4xl:p-8">
-          <h3 className="font-serif text-2xl text-navy @4xl:text-[34px]">{t.coq10.chartTitle}</h3>
-          <p className="mt-1 text-sm text-slate @4xl:text-[18px]">{t.coq10.chartSub}</p>
+          <h3 className="font-serif text-2xl text-navy @4xl:text-[39px]">{t.coq10.chartTitle}</h3>
+          <p className="mt-1 text-sm text-slate @4xl:text-[21.5px]">{t.coq10.chartSub}</p>
           <ul className="mt-6 flex flex-col gap-4 @4xl:gap-5">
             {vitamins.map(({ ing, pct }, i) => {
               const width = Math.min(pct, SCALE_MAX) / SCALE_MAX
               const overflow = pct > SCALE_MAX
               return (
                 <li key={ing.nrvKey}>
-                  <div className="flex items-baseline justify-between gap-3 text-sm @4xl:text-[21px]">
+                  <div className="flex items-baseline justify-between gap-3 text-sm @4xl:text-[24px]">
                     <span className="font-medium text-ink">
                       {l(ing.name)} <span className="text-slate">· {n(ing.quantity!)} {ing.unit}</span>
                     </span>
@@ -88,7 +88,7 @@ export function Q10HighlightsSlide({ product }: { product: Product }) {
               )
             })}
           </ul>
-          <p className="mt-6 text-xs text-slate @4xl:text-[17px]">{t.common.nrvNote}</p>
+          <p className="mt-6 text-xs text-slate @4xl:text-[20.5px]">{t.common.nrvNote}</p>
         </Reveal>
       </div>
     </SlideShell>

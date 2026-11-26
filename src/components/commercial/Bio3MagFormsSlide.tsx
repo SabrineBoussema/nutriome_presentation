@@ -41,11 +41,11 @@ function FormNode({ form, selected, onSelect, delay }: { form: MagForm; selected
       <span className="block h-[78px] w-full">
         <Mol className="h-full w-full" />
       </span>
-      <span className="mt-1 text-[17px] font-bold leading-tight" style={{ color: form.color }}>
+      <span className="mt-1 text-[20.5px] font-bold leading-tight" style={{ color: form.color }}>
         {form.name}
       </span>
-      <span className="mt-0.5 text-[14px] text-slate">
-        <span className="font-serif text-[22px] text-navy">{form.dose.split(' ')[0]}</span> mg par gélule
+      <span className="mt-0.5 text-[17px] text-slate">
+        <span className="font-serif text-[26px] text-navy">{form.dose.split(' ')[0]}</span> mg par gélule
       </span>
     </motion.button>
   )
@@ -62,12 +62,12 @@ function Detail({ form }: { form: MagForm }) {
       className="flex flex-col gap-3"
     >
       <div>
-        <p className="text-[13px] font-semibold uppercase tracking-[0.16em]" style={{ color: form.color }}>
+        <p className="text-[15.5px] font-semibold uppercase tracking-[0.16em]" style={{ color: form.color }}>
           {form.short} · {form.dose}
         </p>
-        <h3 className="mt-1 font-serif text-[32px] leading-tight text-navy">{form.name}</h3>
+        <h3 className="mt-1 font-serif text-[37px] leading-tight text-navy">{form.name}</h3>
       </div>
-      <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5 rounded-2xl border border-navy/10 bg-white px-4 py-3 text-[14.5px]">
+      <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5 rounded-2xl border border-navy/10 bg-white px-4 py-3 text-[17.5px]">
         <dt className="text-slate">Formule</dt>
         <dd className="font-semibold text-ink">{form.formula}</dd>
         <dt className="text-slate">Nature</dt>
@@ -78,22 +78,22 @@ function Detail({ form }: { form: MagForm }) {
         <dd className="text-ink">{form.ligand}</dd>
       </dl>
       <div>
-        <p className="text-[13px] font-semibold uppercase tracking-[0.14em] text-ink">Pourquoi ce choix</p>
-        <p className="mt-1 text-[16px] leading-snug text-ink">{form.rationale}</p>
+        <p className="text-[15.5px] font-semibold uppercase tracking-[0.14em] text-ink">Pourquoi ce choix</p>
+        <p className="mt-1 text-[19px] leading-snug text-ink">{form.rationale}</p>
       </div>
       <div className="flex flex-col gap-2.5">
-        <p className="text-[13px] font-semibold uppercase tracking-[0.14em] text-ink">Données disponibles</p>
+        <p className="text-[15.5px] font-semibold uppercase tracking-[0.14em] text-ink">Données disponibles</p>
         <div className="rounded-2xl border border-navy/10 bg-white px-4 py-3">
-          <p className="flex flex-wrap items-center gap-2 text-[13px] font-semibold text-slate">
+          <p className="flex flex-wrap items-center gap-2 text-[15.5px] font-semibold text-slate">
             Biodisponibilité <LevelChip level={form.bioavailability.level}>Preuve {form.bioavailability.level}</LevelChip>
           </p>
-          <p className="mt-1 text-[15px] leading-snug text-ink">{form.bioavailability.text}</p>
+          <p className="mt-1 text-[18px] leading-snug text-ink">{form.bioavailability.text}</p>
         </div>
         <div className="rounded-2xl border border-navy/10 bg-white px-4 py-3">
-          <p className="flex flex-wrap items-center gap-2 text-[13px] font-semibold text-slate">
+          <p className="flex flex-wrap items-center gap-2 text-[15.5px] font-semibold text-slate">
             Tolérance <LevelChip level={form.tolerability.level}>Preuve {form.tolerability.level}</LevelChip>
           </p>
-          <p className="mt-1 text-[15px] leading-snug text-ink">{form.tolerability.text}</p>
+          <p className="mt-1 text-[18px] leading-snug text-ink">{form.tolerability.text}</p>
         </div>
       </div>
       {form.refs.length > 0 && (
@@ -157,7 +157,7 @@ export function Bio3MagFormsSlide({ product }: { product: Product }) {
             className="absolute top-[57%] left-1/2 flex w-[21%] -translate-x-1/2 -translate-y-1/2 flex-col items-center"
           >
             <img src={product.image} alt="Boîte Bio3Mag" className="w-full rounded-lg object-contain shadow-[0_24px_40px_-22px_rgb(14_26_43/0.6)]" draggable={false} />
-            <span className="mt-3 rounded-full bg-ocean px-3 py-1 text-center text-[12.5px] font-semibold whitespace-nowrap text-white">75 mg de Mg élément · 20 % VNR</span>
+            <span className="mt-3 rounded-full bg-ocean px-3 py-1 text-center text-[15px] font-semibold whitespace-nowrap text-white">75 mg de Mg élément · 20 % VNR</span>
           </motion.div>
           {MAG_FORMS.map((f, i) => (
             <FormNode key={f.id} form={f} selected={f.id === selected} onSelect={() => setSelected(f.id)} delay={0.1 + i * 0.15} />
@@ -168,7 +168,7 @@ export function Bio3MagFormsSlide({ product }: { product: Product }) {
           <AnimatePresence mode="wait">
             <Detail form={form} />
           </AnimatePresence>
-          <p className="mt-3 text-[12.5px] leading-snug text-slate">
+          <p className="mt-3 text-[15px] leading-snug text-slate">
             Teneurs en magnésium : calcul stœchiométrique sur la forme anhydre ; le total déclaré de 75 mg par gélule fait foi.
           </p>
         </div>

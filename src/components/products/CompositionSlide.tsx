@@ -77,7 +77,7 @@ export function CompositionSlide({ product }: { product: Product }) {
               <div className={visuals[i] && !stacked ? `pr-24 ${many ? '@4xl:pr-[88px]' : '@4xl:min-h-[104px] @4xl:pr-[116px]'}` : undefined}>
               <div className="h-1 w-10 rounded-full" style={{ background: ing.derived ? 'rgb(255 255 255 / 0.55)' : shades[i % shades.length] }} />
               <div
-                className={`mt-4 flex items-baseline gap-1.5 font-serif ${ing.derived ? 'text-white' : 'text-navy'} ${many ? 'text-4xl @4xl:text-[47px]' : 'text-5xl @4xl:text-[64px]'}`}
+                className={`mt-4 flex items-baseline gap-1.5 font-serif ${ing.derived ? 'text-white' : 'text-navy'} ${many ? 'text-4xl @4xl:text-[53px]' : 'text-5xl @4xl:text-[72px]'}`}
               >
                 {ing.quantity !== undefined ? (
                   <>
@@ -91,20 +91,20 @@ export function CompositionSlide({ product }: { product: Product }) {
                 )}
               </div>
               </div>
-              <div className={`mt-2 text-base font-semibold leading-tight @4xl:text-[25px] ${ing.derived ? 'text-white' : 'text-ink'}`}>{l(ing.name)}</div>
+              <div className={`mt-2 text-base font-semibold leading-tight @4xl:text-[29px] ${ing.derived ? 'text-white' : 'text-ink'}`}>{l(ing.name)}</div>
               {ing.nrvKey && ing.quantity !== undefined && toMg(ing.quantity, ing.unit) !== undefined && (
                 <div
-                  className="mt-2 inline-flex w-fit items-center rounded-full px-2.5 py-0.5 text-xs font-semibold @4xl:text-[17px]"
+                  className="mt-2 inline-flex w-fit items-center rounded-full px-2.5 py-0.5 text-xs font-semibold @4xl:text-[20.5px]"
                   style={ing.derived ? { background: 'white', color: product.accent } : { background: product.accent, color: 'white' }}
                 >
                   {n(nrvPercent(ing.nrvKey, toMg(ing.quantity, ing.unit)!))} % {t.common.nrv}
                 </div>
               )}
               {ing.detail && (showPending || !isValidationPlaceholder(l(ing.detail))) && (
-                <div className={`mt-1 text-sm @4xl:text-[20px] ${ing.derived ? 'text-white/80' : 'text-slate'}`}>{l(ing.detail)}</div>
+                <div className={`mt-1 text-sm @4xl:text-[23px] ${ing.derived ? 'text-white/80' : 'text-slate'}`}>{l(ing.detail)}</div>
               )}
               {ing.role && !ing.derived && (
-                <div className="mt-3 text-sm font-semibold leading-snug @4xl:text-[19px]" style={{ color: product.accent }}>
+                <div className="mt-3 text-sm font-semibold leading-snug @4xl:text-[23px]" style={{ color: product.accent }}>
                   {l(ing.role)}
                 </div>
               )}
@@ -133,14 +133,14 @@ export function CompositionSlide({ product }: { product: Product }) {
               />
             ))}
           </div>
-          <p className="mt-2 text-xs text-slate @4xl:text-[17px]">
+          <p className="mt-2 text-xs text-slate @4xl:text-[20.5px]">
             {product.story === 'bio3mag' ? t.bio3mag.compoundNote : `${n(total)} mg — ${l(product.doseBasis).toLowerCase()}`}
           </p>
         </Reveal>
       )}
       </div>
 
-      <Reveal delay={0.5} className="pt-4 text-xs text-slate @4xl:text-[17px]">
+      <Reveal delay={0.5} className="pt-4 text-xs text-slate @4xl:text-[20.5px]">
         {excipients && <p>{l(excipients)}</p>}
         {product.ingredients.some((i) => i.nrvKey) && <p className="mt-1">{t.common.nrvNote}</p>}
         {(photos.length > 0 || hasStructures) && (

@@ -25,15 +25,15 @@ export function ProductHeroSlide({ product }: { product: Product }) {
             </Eyebrow>
           </Reveal>
           <Reveal delay={0.1}>
-            <h1 className="mt-5 font-serif text-6xl leading-[0.95] tracking-[-0.03em] text-navy @4xl:text-[136px]">{product.name}</h1>
+            <h1 className="mt-5 font-serif text-6xl leading-[0.95] tracking-[-0.03em] text-navy @4xl:text-[144px]">{product.name}</h1>
           </Reveal>
           <Reveal delay={0.2}>
-            <p className="mt-5 font-serif text-2xl italic text-ink/80 @4xl:text-[39px]" style={{ color: product.accent }}>
+            <p className="mt-5 font-serif text-2xl italic text-ink/80 @4xl:text-[45px]" style={{ color: product.accent }}>
               {l(product.tagline)}
             </p>
           </Reveal>
           <Reveal delay={0.3}>
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-slate @4xl:text-[27px]">{l(product.positioning)}</p>
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-slate @4xl:text-[31px]">{l(product.positioning)}</p>
           </Reveal>
           <Reveal delay={0.4} className="mt-8 flex flex-wrap items-center gap-2.5">
             {product.format && (

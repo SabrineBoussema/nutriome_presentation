@@ -9,8 +9,8 @@ function ClaimItem({ claim, review }: { claim: Claim; review: boolean }) {
   const level = LEVEL_LABEL[claim.level]
   return (
     <li className="rounded-2xl border border-navy/10 bg-white p-4">
-      <p className="text-[17px] leading-snug text-ink">{claim.fr}</p>
-      <div className="mt-2 flex flex-wrap items-center gap-2 text-[13px]">
+      <p className="text-[20.5px] leading-snug text-ink">{claim.fr}</p>
+      <div className="mt-2 flex flex-wrap items-center gap-2 text-[15.5px]">
         <span className="rounded-full px-2.5 py-0.5 font-semibold text-white" style={{ background: level.tone }}>
           {level.fr}
         </span>
@@ -21,14 +21,14 @@ function ClaimItem({ claim, review }: { claim: Claim; review: boolean }) {
           </span>
         )}
       </div>
-      {review && claim.reviewNote && <p className="mt-2 text-[13px] leading-snug text-slate">Note de revue : {claim.reviewNote}</p>}
+      {review && claim.reviewNote && <p className="mt-2 text-[15.5px] leading-snug text-slate">Note de revue : {claim.reviewNote}</p>}
       {claim.refs.length > 0 && (
         <ul className="mt-3 space-y-1.5 border-t border-navy/10 pt-2.5">
           {claim.refs.map((id) => {
             const r = references[id]
             if (!r) return null
             return (
-              <li key={id} className="text-[13px] leading-snug text-slate">
+              <li key={id} className="text-[15.5px] leading-snug text-slate">
                 <span className="font-semibold text-ink">{r.authors}</span>
                 {r.year ? ` (${r.year}). ` : '. '}
                 {r.title}. <span className="italic">{r.source}</span>.{' '}
@@ -62,7 +62,7 @@ function ClaimItem({ claim, review }: { claim: Claim; review: boolean }) {
           })}
         </ul>
       )}
-      {claim.refs.length === 0 && review && <p className="mt-2 text-[13px] italic text-slate">Aucune source citée.</p>}
+      {claim.refs.length === 0 && review && <p className="mt-2 text-[15.5px] italic text-slate">Aucune source citée.</p>}
     </li>
   )
 }
@@ -111,8 +111,8 @@ export function ReferencesPanel({
     >
       <header className="flex items-center justify-between gap-4 border-b border-navy/10 px-7 py-5">
         <div>
-          <p className="text-[13px] font-semibold uppercase tracking-[0.2em] text-slate">Références scientifiques</p>
-          <h3 className="font-serif text-[30px] leading-tight text-navy">{stage.title}</h3>
+          <p className="text-[15.5px] font-semibold uppercase tracking-[0.2em] text-slate">Références scientifiques</p>
+          <h3 className="font-serif text-[35px] leading-tight text-navy">{stage.title}</h3>
         </div>
         <button
           ref={closeRef}
@@ -126,7 +126,7 @@ export function ReferencesPanel({
       </header>
       <div className="flex-1 space-y-6 overflow-y-auto overscroll-contain px-7 py-6">
         <section>
-          <h4 className="mb-3 text-[14px] font-semibold uppercase tracking-[0.16em] text-ink">Étape en cours</h4>
+          <h4 className="mb-3 text-[17px] font-semibold uppercase tracking-[0.16em] text-ink">Étape en cours</h4>
           <ul className="space-y-3">
             {current.map((c) => (
               <ClaimItem key={c.id} claim={c} review={review} />
@@ -135,7 +135,7 @@ export function ReferencesPanel({
         </section>
         {others.length > 0 && (
           <section>
-            <h4 className="mb-3 text-[14px] font-semibold uppercase tracking-[0.16em] text-ink">Autres données du mécanisme</h4>
+            <h4 className="mb-3 text-[17px] font-semibold uppercase tracking-[0.16em] text-ink">Autres données du mécanisme</h4>
             <ul className="space-y-3">
               {others.map((c) => (
                 <ClaimItem key={c.id} claim={c} review={review} />
@@ -145,8 +145,8 @@ export function ReferencesPanel({
         )}
         {review && flagged.length > 0 && (
           <section>
-            <h4 className="mb-1 text-[14px] font-semibold uppercase tracking-[0.16em] text-[#9a5612]">En revue médicale — non affiché</h4>
-            <p className="mb-3 text-[13px] text-slate">Allégations sans source vérifiable : elles ne sont jamais présentées comme des faits.</p>
+            <h4 className="mb-1 text-[17px] font-semibold uppercase tracking-[0.16em] text-[#9a5612]">En revue médicale — non affiché</h4>
+            <p className="mb-3 text-[15.5px] text-slate">Allégations sans source vérifiable : elles ne sont jamais présentées comme des faits.</p>
             <ul className="space-y-3">
               {flagged.map((c) => (
                 <ClaimItem key={c.id} claim={c} review />
@@ -154,7 +154,7 @@ export function ReferencesPanel({
             </ul>
           </section>
         )}
-        <p className="text-[12.5px] leading-snug text-slate">
+        <p className="text-[15px] leading-snug text-slate">
           Les niveaux de preuve distinguent les allégations autorisées, la physiologie établie, les études mécanistiques et les études cliniques
           sur l’ingrédient. Aucune étude n’a été menée sur le produit fini.
         </p>

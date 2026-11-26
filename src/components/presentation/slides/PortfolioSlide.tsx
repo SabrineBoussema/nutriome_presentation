@@ -28,7 +28,7 @@ export function PortfolioSlide() {
           </Reveal>
         </div>
         <Reveal delay={0.12}>
-          <p className="max-w-sm text-sm text-slate @4xl:text-right @4xl:text-[21px]">{t.portfolio.subtitle}</p>
+          <p className="max-w-sm text-sm text-slate @4xl:text-right @4xl:text-[24px]">{t.portfolio.subtitle}</p>
         </Reveal>
       </div>
 
@@ -60,7 +60,7 @@ export function PortfolioSlide() {
                     <div className="text-xs font-semibold uppercase tracking-[0.18em]" style={{ color: p.accent }}>
                       {l(p.category)}
                     </div>
-                    <div className="mt-0.5 text-lg font-semibold text-ink @4xl:text-[25px]">{p.name}</div>
+                    <div className="mt-0.5 text-lg font-semibold text-ink @4xl:text-[29px]">{p.name}</div>
                     <div className="mt-0.5 line-clamp-1 text-sm leading-snug text-slate">{l(p.tagline)}</div>
                   </div>
                   {target && (

@@ -47,7 +47,7 @@ function ProgramCard({
 
       <div className="flex items-start justify-between gap-3">
         <span
-          className="font-serif text-[2rem] leading-none tracking-[-0.04em] @4xl:text-[2.35rem]"
+          className="font-serif text-[2.3rem] leading-none tracking-[-0.04em] @4xl:text-[2.7rem]"
           style={{ color: accent ? NL.orange : 'rgb(6 61 50 / 0.28)' }}
         >
           {step.n}
@@ -63,11 +63,11 @@ function ProgramCard({
         </div>
       </div>
 
-      <h3 className="mt-4 font-serif text-[1.12rem] leading-snug tracking-[-0.02em] text-[#022D25] @4xl:text-[1.28rem]">
+      <h3 className="mt-4 font-serif text-[1.35rem] leading-snug tracking-[-0.02em] text-[#022D25] @4xl:text-[1.45rem]">
         {step.title}
       </h3>
       <p
-        className="mt-3 inline-flex w-fit rounded-full px-2.5 py-1 text-[11px] font-semibold tracking-wide @4xl:text-xs"
+        className="mt-3 inline-flex w-fit rounded-full px-2.5 py-1 text-[13px] font-semibold tracking-wide @4xl:text-xs"
         style={{
           background: accent ? 'rgb(244 123 32 / 0.12)' : 'rgb(6 61 50 / 0.08)',
           color: accent ? NL.orange : NL.emerald,
@@ -75,7 +75,7 @@ function ProgramCard({
       >
         {step.speaker}
       </p>
-      {step.detail && <p className="mt-2 text-sm leading-snug text-[#063D32]/65 @4xl:text-[0.95rem]">{step.detail}</p>}
+      {step.detail && <p className="mt-2 text-sm leading-snug text-[#063D32]/65 @4xl:text-[1.15rem]">{step.detail}</p>}
     </motion.article>
   )
 }
@@ -88,12 +88,12 @@ export function ProgramSlide() {
 
       <header className="relative z-10 px-6 pt-6 @4xl:px-12 @4xl:pt-8">
         <Reveal y={8}>
-          <p className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#063D32]/55 @4xl:text-xs">
+          <p className="flex items-center gap-3 text-[13px] font-semibold uppercase tracking-[0.28em] text-[#063D32]/55 @4xl:text-xs">
             Nutriome Labs
             <span className="inline-block size-1 rounded-full bg-[#F47B20]" />
             5 novembre 2026
           </p>
-          <h1 className="mt-2 font-serif text-[1.85rem] leading-[1.08] tracking-[-0.03em] text-[#022D25] @4xl:text-[2.45rem]">
+          <h1 className="mt-2 font-serif text-[2.15rem] leading-[1.08] tracking-[-0.03em] text-[#022D25] @4xl:text-[2.8rem]">
             Déroulement de notre rencontre scientifique
           </h1>
         </Reveal>

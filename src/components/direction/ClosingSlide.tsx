@@ -28,7 +28,7 @@ export function ClosingSlide() {
         </motion.div>
 
         <motion.p
-          className="mt-5 text-[11px] font-semibold uppercase tracking-[0.32em] text-[#F47B20] @4xl:mt-7 @4xl:text-xs"
+          className="mt-5 text-[13px] font-semibold uppercase tracking-[0.32em] text-[#F47B20] @4xl:mt-7 @4xl:text-xs"
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, delay: 0.08, ease: easeOut }}
@@ -37,7 +37,7 @@ export function ClosingSlide() {
         </motion.p>
 
         <motion.h1
-          className="mt-1.5 max-w-[18ch] font-serif text-[1.85rem] leading-[1.05] tracking-[-0.03em] text-white @4xl:mt-2 @4xl:text-[3.4rem]"
+          className="mt-1.5 max-w-[18ch] font-serif text-[2.15rem] leading-[1.05] tracking-[-0.03em] text-white @4xl:mt-2 @4xl:text-[3.8rem]"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.12, ease: easeOut }}
@@ -46,7 +46,7 @@ export function ClosingSlide() {
         </motion.h1>
 
         <motion.p
-          className="mt-3 max-w-[34rem] font-serif text-[0.95rem] italic leading-relaxed text-white/75 @4xl:mt-4 @4xl:text-[1.4rem]"
+          className="mt-3 max-w-[34rem] font-serif text-[1.15rem] italic leading-relaxed text-white/75 @4xl:mt-4 @4xl:text-[1.6rem]"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, delay: 0.22, ease: easeOut }}
@@ -76,7 +76,7 @@ export function ClosingSlide() {
                 <div className="flex size-8 items-center justify-center rounded-full bg-[#F47B20]/15 text-[#F47B20] @4xl:size-10">
                   <Icon className="size-4 @4xl:size-5" />
                 </div>
-                <p className="mt-2 font-serif text-[1.05rem] leading-snug text-white @4xl:mt-3 @4xl:text-[1.3rem]">{item.who}</p>
+                <p className="mt-2 font-serif text-[1.25rem] leading-snug text-white @4xl:mt-3 @4xl:text-[1.5rem]">{item.who}</p>
                 <p className="mt-0.5 text-xs text-white/60 @4xl:text-sm">{item.why}.</p>
               </motion.li>
             )
@@ -84,7 +84,7 @@ export function ClosingSlide() {
         </ul>
 
         <motion.p
-          className="mt-5 text-[10px] font-medium uppercase tracking-[0.26em] text-white/40 @4xl:mt-7 @4xl:text-xs"
+          className="mt-5 text-[12px] font-medium uppercase tracking-[0.26em] text-white/40 @4xl:mt-7 @4xl:text-xs"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.7, delay: 0.7, ease: easeOut }}

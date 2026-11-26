@@ -20,15 +20,15 @@ export function Q10RevealSlide({ product }: { product: Product }) {
             <Eyebrow color={product.accent}>{t.coq10.launch} · {l(product.category)}</Eyebrow>
           </Reveal>
           <Reveal delay={0.15}>
-            <h1 className="mt-5 font-serif text-5xl leading-[0.98] tracking-[-0.02em] text-navy @4xl:text-[102px]">
+            <h1 className="mt-5 font-serif text-5xl leading-[0.98] tracking-[-0.02em] text-navy @4xl:text-[108px]">
               {t.coq10.revealTitle}
             </h1>
           </Reveal>
           <Reveal delay={0.3}>
-            <p className="mt-6 font-serif text-2xl italic @4xl:text-[39px]" style={{ color: product.accent }}>{product.name}</p>
+            <p className="mt-6 font-serif text-2xl italic @4xl:text-[45px]" style={{ color: product.accent }}>{product.name}</p>
           </Reveal>
           <Reveal delay={0.4}>
-            <p className="mt-4 max-w-xl text-base leading-relaxed text-slate @4xl:text-[27px]">{l(product.positioning)}</p>
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-slate @4xl:text-[31px]">{l(product.positioning)}</p>
           </Reveal>
           {presentationConfig.showValidationBadges && (
             <Reveal delay={0.5} className="mt-8">

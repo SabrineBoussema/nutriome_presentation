@@ -21,7 +21,7 @@ export function IndicationsSlide({ product }: { product: Product }) {
         <ul className="flex flex-col gap-3 @4xl:gap-4">
           {product.indications.map((d, i) => (
             <Reveal key={i} delay={0.12 + i * 0.07} x={-24} y={0}>
-              <li className="flex items-center gap-4 rounded-3xl border border-navy/[0.06] bg-white p-4 text-lg font-semibold leading-snug text-ink shadow-[0_20px_50px_-38px_rgb(14_26_43/0.5)] @4xl:p-5 @4xl:text-[26px]">
+              <li className="flex items-center gap-4 rounded-3xl border border-navy/[0.06] bg-white p-4 text-lg font-semibold leading-snug text-ink shadow-[0_20px_50px_-38px_rgb(14_26_43/0.5)] @4xl:p-5 @4xl:text-[30px]">
                 <span className="flex size-9 shrink-0 items-center justify-center rounded-full text-white @4xl:size-11" style={{ background: product.accent }}>
                   <Stethoscope className="size-4 @4xl:size-5" aria-hidden />
                 </span>
@@ -56,8 +56,8 @@ export function DifferentiationSlide({ product }: { product: Product }) {
           <Reveal key={i} delay={0.12 + i * 0.06}>
             <article className="h-full rounded-3xl border border-navy/[0.06] bg-white p-5 shadow-[0_20px_50px_-36px_rgb(14_26_43/0.45)] @4xl:p-7">
               <EvidenceChip level={m.evidence} />
-              <h3 className="mt-3 text-lg font-bold text-ink @4xl:text-[26px]">{l(m.title)}</h3>
-              <p className="mt-2 text-base leading-relaxed text-slate @4xl:text-[20px]">{l(m.body)}</p>
+              <h3 className="mt-3 text-lg font-bold text-ink @4xl:text-[30px]">{l(m.title)}</h3>
+              <p className="mt-2 text-base leading-relaxed text-slate @4xl:text-[23px]">{l(m.body)}</p>
             </article>
           </Reveal>
         ))}
@@ -84,7 +84,7 @@ export function FormulationSlide({ product }: { product: Product }) {
         <ul className="flex flex-col gap-4 @4xl:gap-5">
           {product.differentiators.map((d, i) => (
             <Reveal key={i} delay={0.18 + i * 0.08} x={24} y={0}>
-              <li className="flex gap-4 rounded-3xl bg-white/85 p-5 text-lg font-medium leading-snug text-ink shadow-[0_20px_50px_-38px_rgb(14_26_43/0.5)] @4xl:p-6 @4xl:text-[24px]">
+              <li className="flex gap-4 rounded-3xl bg-white/85 p-5 text-lg font-medium leading-snug text-ink shadow-[0_20px_50px_-38px_rgb(14_26_43/0.5)] @4xl:p-6 @4xl:text-[28px]">
                 <span className="mt-1 flex size-7 shrink-0 items-center justify-center rounded-full text-white @4xl:size-8" style={{ background: product.accent }}>
                   <Check className="size-4" aria-hidden />
                 </span>

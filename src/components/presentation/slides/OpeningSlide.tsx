@@ -34,7 +34,7 @@ export function OpeningSlide() {
           <p className="mt-6 text-xs font-semibold uppercase tracking-[0.35em] text-slate @4xl:text-sm">{t.opening.eyebrow}</p>
         </Reveal>
         <Reveal delay={0.4}>
-          <h1 className="mt-4 font-serif text-5xl leading-none tracking-[-0.03em] text-navy @4xl:text-[117px]">
+          <h1 className="mt-4 font-serif text-5xl leading-none tracking-[-0.03em] text-navy @4xl:text-[124px]">
             Nutriome <span className="italic text-forest">Labs</span>
           </h1>
         </Reveal>

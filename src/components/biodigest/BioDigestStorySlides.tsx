@@ -28,10 +28,10 @@ function useFlags() {
   return { canvas: layout === 'canvas', reduced }
 }
 
-function Heading({ children, size = 48 }: { children: ReactNode; size?: number }) {
+function Heading({ children, size = 54 }: { children: ReactNode; size?: number }) {
   const { canvas } = useFlags()
   return (
-    <h2 className="font-serif leading-[1.05] tracking-[-0.015em] text-navy text-balance" style={{ fontSize: canvas ? size : '1.8rem', marginTop: 6 }}>
+    <h2 className="font-serif leading-[1.05] tracking-[-0.015em] text-navy text-balance" style={{ fontSize: canvas ? size : '2.05rem', marginTop: 6 }}>
       {children}
     </h2>
   )
@@ -40,7 +40,7 @@ function Heading({ children, size = 48 }: { children: ReactNode; size?: number }
 /** Always-visible regulatory distinction */
 function StatusNote({ children }: { children?: ReactNode }) {
   return (
-    <p className="flex items-start gap-2 rounded-xl bg-sage px-3 py-2 text-[13.5px] leading-snug text-forest">
+    <p className="flex items-start gap-2 rounded-xl bg-sage px-3 py-2 text-[16px] leading-snug text-forest">
       <ShieldCheck className="mt-0.5 size-4 shrink-0" aria-hidden />
       {children ?? commercialClaims['biodigest-not-a-drug'].text}
     </p>
@@ -72,7 +72,7 @@ export function Drawer({ title, onClose, children }: { title: string; onClose: (
       onKeyDown={(e) => e.stopPropagation()}
     >
       <header className="flex items-center justify-between border-b border-navy/10 px-6 py-4">
-        <h3 className="font-serif text-[28px] text-navy">{title}</h3>
+        <h3 className="font-serif text-[32px] text-navy">{title}</h3>
         <button type="button" onClick={onClose} aria-label="Fermer" className="flex size-11 items-center justify-center rounded-full border border-navy/15 text-navy hover:bg-navy/5">
           <X className="size-5" aria-hidden />
         </button>
@@ -89,14 +89,14 @@ export function BibliographyButton() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="inline-flex min-h-11 items-center gap-2 rounded-full border border-navy/15 bg-white px-4 text-[14.5px] font-semibold text-navy hover:bg-navy/5"
+        className="inline-flex min-h-11 items-center gap-2 rounded-full border border-navy/15 bg-white px-4 text-[17.5px] font-semibold text-navy hover:bg-navy/5"
       >
         <BookOpen className="size-[18px]" aria-hidden /> Bibliographie
       </button>
       <AnimatePresence>
         {open && (
           <Drawer title="Bibliographie" onClose={() => setOpen(false)}>
-            <p className="mb-3 text-[13px] text-slate">Études menées avec le polaprezinc / zinc L-carnosine — aucune sur BioDigest lui-même.</p>
+            <p className="mb-3 text-[15.5px] text-slate">Études menées avec le polaprezinc / zinc L-carnosine — aucune sur BioDigest lui-même.</p>
             <ul className="flex flex-col gap-2.5">
               {BIBLIOGRAPHY.map((id) => (
                 <RefLine key={id} id={id} />
@@ -117,15 +117,15 @@ export function ProofsList() {
         <li key={p.id} className="flex items-start gap-3 rounded-2xl border border-navy/10 bg-white px-4 py-3">
           {p.status === 'available' ? <FileCheck2 className="mt-0.5 size-5 shrink-0 text-forest" aria-hidden /> : <FileX2 className="mt-0.5 size-5 shrink-0 text-slate/60" aria-hidden />}
           <div className="min-w-0">
-            <p className="text-[15px] font-semibold text-ink">{p.label}</p>
+            <p className="text-[18px] font-semibold text-ink">{p.label}</p>
             {p.status === 'available' && p.file ? (
-              <a href={p.file} target="_blank" rel="noreferrer" className="text-[13.5px] font-medium text-ocean hover:underline">
+              <a href={p.file} target="_blank" rel="noreferrer" className="text-[16px] font-medium text-ocean hover:underline">
                 Consulter le document
               </a>
             ) : (
-              <p className="text-[13px] text-slate">Document non fourni — l’allégation associée reste désactivée.</p>
+              <p className="text-[15.5px] text-slate">Document non fourni — l’allégation associée reste désactivée.</p>
             )}
-            {p.note && <p className="text-[12.5px] text-slate">{p.note}</p>}
+            {p.note && <p className="text-[15px] text-slate">{p.note}</p>}
           </div>
         </li>
       ))}
@@ -144,7 +144,7 @@ function ProofsButton() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="inline-flex min-h-11 items-center gap-2 rounded-full border border-navy/15 bg-white px-4 text-[14.5px] font-semibold text-navy hover:bg-navy/5"
+        className="inline-flex min-h-11 items-center gap-2 rounded-full border border-navy/15 bg-white px-4 text-[17.5px] font-semibold text-navy hover:bg-navy/5"
       >
         <FileCheck2 className="size-[18px]" aria-hidden /> Justificatifs
       </button>
@@ -250,10 +250,10 @@ export function BdIntroSlide({ product }: { product: Product }) {
             BioDigest — L’expertise <em className="text-forest">japonaise</em> au service de la muqueuse digestive
           </Heading>
           <motion.div {...appear(0.6)} className="mt-7 flex items-end gap-6">
-            <p className={`font-serif leading-none text-forest ${canvas ? 'text-[120px]' : 'text-[64px]'}`}>1994</p>
-            <p className={`pb-3 leading-snug text-ink ${canvas ? 'max-w-[440px] text-[20px]' : 'text-base'}`}>{claimText('biodigest-heritage')}</p>
+            <p className={`font-serif leading-none text-forest ${canvas ? 'text-[127px]' : 'text-[72px]'}`}>1994</p>
+            <p className={`pb-3 leading-snug text-ink ${canvas ? 'max-w-[440px] text-[23px]' : 'text-base'}`}>{claimText('biodigest-heritage')}</p>
           </motion.div>
-          <motion.p {...appear(1)} className={`mt-5 font-serif leading-snug text-navy ${canvas ? 'text-[26px]' : 'text-lg'}`}>
+          <motion.p {...appear(1)} className={`mt-5 font-serif leading-snug text-navy ${canvas ? 'text-[30px]' : 'text-lg'}`}>
             {claimText('biodigest-exclusivity')}
           </motion.p>
           <motion.div {...appear(1.3)} className="mt-5 max-w-[760px]">
@@ -264,7 +264,7 @@ export function BdIntroSlide({ product }: { product: Product }) {
           <div className="flex w-full items-center justify-between px-6">
             <motion.div {...appear(0.2)} className="flex flex-col items-center gap-1">
               <FlagJapan className="w-[96px] drop-shadow" />
-              <span className="text-[13px] font-semibold text-slate">Japon · développement</span>
+              <span className="text-[15.5px] font-semibold text-slate">Japon · développement</span>
             </motion.div>
             <svg viewBox="0 0 200 40" className="mx-2 h-10 flex-1" aria-hidden>
               <motion.path
@@ -280,7 +280,7 @@ export function BdIntroSlide({ product }: { product: Product }) {
             </svg>
             <motion.div {...appear(0.4)} className="flex flex-col items-center gap-1">
               <FlagTunisia className="w-[96px] drop-shadow" />
-              <span className="text-[13px] font-semibold text-slate">Tunisie · BioDigest</span>
+              <span className="text-[15.5px] font-semibold text-slate">Tunisie · BioDigest</span>
             </motion.div>
           </div>
           <Packshot product={product} className={canvas ? 'mt-4 w-[380px]' : 'mt-3 w-[220px]'} eager />
@@ -352,8 +352,8 @@ export function BdOriginSlide({ product }: { product: Product }) {
                 transition={{ delay: 0.6 + i * 0.3, duration: 0.5, ease: EASE }}
                 className="rounded-2xl border border-navy/10 bg-white px-4 py-3"
               >
-                <p className="font-serif text-[24px] leading-tight text-forest">{f.k}</p>
-                <p className="text-[15.5px] leading-snug text-ink">{f.v}</p>
+                <p className="font-serif text-[28px] leading-tight text-forest">{f.k}</p>
+                <p className="text-[18.5px] leading-snug text-ink">{f.v}</p>
               </motion.div>
             ))}
             <motion.div
@@ -362,10 +362,10 @@ export function BdOriginSlide({ product }: { product: Product }) {
               transition={{ delay: 1.7 }}
               className="flex flex-col gap-2 rounded-2xl bg-forest px-4 py-3 text-white"
             >
-              <p className="text-[15.5px] font-semibold">{claimText('biodigest-japan-raw-material')}</p>
-              <p className="text-[15.5px] leading-snug">{claimText('biodigest-exclusivity')}</p>
+              <p className="text-[18.5px] font-semibold">{claimText('biodigest-japan-raw-material')}</p>
+              <p className="text-[18.5px] leading-snug">{claimText('biodigest-exclusivity')}</p>
             </motion.div>
-            <p className="text-[12.5px] text-slate">Source : Li et al., Exp Ther Med 2021. Les allégations commerciales s’affichent une fois leurs justificatifs fournis.</p>
+            <p className="text-[15px] text-slate">Source : Li et al., Exp Ther Med 2021. Les allégations commerciales s’affichent une fois leurs justificatifs fournis.</p>
           </div>
         </div>
       </MotionRuntime>
@@ -413,8 +413,8 @@ export function BdTimelineSlide({ product }: { product: Product }) {
                   >
                     <span className="size-3 rounded-full" style={{ background: sel === i ? 'white' : KIND_COLOR[t.kind] }} />
                   </span>
-                  <span className={`font-serif leading-none ${t.year.length > 4 ? 'text-[20px]' : 'text-[28px]'} text-navy`}>{t.year}</span>
-                  <span className="text-[13.5px] leading-tight font-semibold text-slate">{t.title}</span>
+                  <span className={`font-serif leading-none ${t.year.length > 4 ? 'text-[23px]' : 'text-[32px]'} text-navy`}>{t.year}</span>
+                  <span className="text-[16px] leading-tight font-semibold text-slate">{t.title}</span>
                 </button>
               </motion.li>
             ))}
@@ -432,13 +432,13 @@ export function BdTimelineSlide({ product }: { product: Product }) {
             className="rounded-3xl border bg-white px-6 py-5"
             style={{ borderColor: `${KIND_COLOR[m.kind]}55` }}
           >
-            <p className="text-[13px] font-semibold uppercase tracking-[0.14em]" style={{ color: KIND_COLOR[m.kind] }}>
+            <p className="text-[15.5px] font-semibold uppercase tracking-[0.14em]" style={{ color: KIND_COLOR[m.kind] }}>
               {KIND_LABEL[m.kind]}
             </p>
-            <p className="mt-1 font-serif text-[32px] leading-tight text-navy">
+            <p className="mt-1 font-serif text-[37px] leading-tight text-navy">
               {m.year} — {m.title}
             </p>
-            <p className={`mt-2 leading-snug text-ink ${canvas ? 'text-[19px]' : 'text-base'}`}>{m.text}</p>
+            <p className={`mt-2 leading-snug text-ink ${canvas ? 'text-[23px]' : 'text-base'}`}>{m.text}</p>
             {m.refs.length > 0 && (
               <ul className="mt-3 flex flex-col gap-1">
                 {m.refs.map((id) => (
@@ -450,7 +450,7 @@ export function BdTimelineSlide({ product }: { product: Product }) {
         </AnimatePresence>
         <div className="flex flex-col justify-center gap-3">
           {(['drug', 'study', 'supplement'] as const).map((k) => (
-            <p key={k} className="flex items-center gap-3 text-[15px] text-ink">
+            <p key={k} className="flex items-center gap-3 text-[18px] text-ink">
               <span className="size-4 rounded-full" style={{ background: KIND_COLOR[k] }} />
               {KIND_LABEL[k]}
             </p>
@@ -597,9 +597,9 @@ export function BdMoleculeSlide({ product }: { product: Product }) {
                     type="button"
                     onClick={() => goToStep?.(i)}
                     aria-current={i === s ? 'step' : undefined}
-                    className={`inline-flex min-h-10 items-center gap-2 rounded-full border px-3.5 text-[14px] font-semibold ${i === s ? 'border-transparent bg-forest text-white' : 'border-navy/12 bg-white text-slate hover:text-navy'}`}
+                    className={`inline-flex min-h-10 items-center gap-2 rounded-full border px-3.5 text-[17px] font-semibold ${i === s ? 'border-transparent bg-forest text-white' : 'border-navy/12 bg-white text-slate hover:text-navy'}`}
                   >
-                    <span className={`flex size-5 items-center justify-center rounded-full text-[11.5px] ${i === s ? 'bg-white/20' : 'bg-navy/5'}`}>{i + 1}</span>
+                    <span className={`flex size-5 items-center justify-center rounded-full text-[14px] ${i === s ? 'bg-white/20' : 'bg-navy/5'}`}>{i + 1}</span>
                     {l}
                   </button>
                 </li>
@@ -610,7 +610,7 @@ export function BdMoleculeSlide({ product }: { product: Product }) {
                 <MoleculeScene step={s} />
               </div>
             </div>
-            <p className="mt-2 text-[12.5px] text-slate">
+            <p className="mt-2 text-[15px] text-slate">
               Schéma d’après Matsukura &amp; Tanaka (2000) : chaque Zn²⁺ est lié aux azotes aminé et amide et à l’oxygène carboxylate d’une L-carnosine, et à l’azote
               imidazole de la suivante.
             </p>
@@ -629,15 +629,15 @@ export function BdMoleculeSlide({ product }: { product: Product }) {
                   aria-selected={view === id}
                   type="button"
                   onClick={() => setView(id)}
-                  className={`min-h-10 flex-1 rounded-full px-3 text-[13.5px] font-semibold ${view === id ? 'bg-forest text-white' : 'text-slate hover:text-navy'}`}
+                  className={`min-h-10 flex-1 rounded-full px-3 text-[16px] font-semibold ${view === id ? 'bg-forest text-white' : 'text-slate hover:text-navy'}`}
                 >
                   {label}
                 </button>
               ))}
             </div>
-            <dl className="min-h-0 flex-1 divide-y divide-navy/8 overflow-y-auto rounded-2xl border border-navy/10 bg-white text-[14.5px]">
+            <dl className="min-h-0 flex-1 divide-y divide-navy/8 overflow-y-auto rounded-2xl border border-navy/10 bg-white text-[17.5px]">
               {view === 'compare' && (
-                <div className="grid grid-cols-[120px_1fr_1fr] gap-3 bg-sage/50 px-4 py-2 text-[12.5px] font-semibold uppercase tracking-[0.08em]">
+                <div className="grid grid-cols-[120px_1fr_1fr] gap-3 bg-sage/50 px-4 py-2 text-[15px] font-semibold uppercase tracking-[0.08em]">
                   <span />
                   <span className="text-slate">Zinc conventionnel</span>
                   <span className="text-forest">Zinc L-carnosine</span>
@@ -695,19 +695,19 @@ export function BdAxesSlide({ product }: { product: Product }) {
               style={{ flex: canvas ? (on ? 2.4 : 1) : undefined, borderColor: on ? LEAF : 'rgb(14 26 43 / 0.1)' }}
             >
               <button type="button" onClick={() => setOpen(a.id)} aria-expanded={on} className="flex flex-col gap-2 px-4 pt-4 pb-3 text-left">
-                <span className="flex size-9 items-center justify-center rounded-full bg-sage font-serif text-[18px] text-forest">{i + 1}</span>
-                <span className={`font-semibold leading-tight text-navy ${canvas ? 'text-[19px]' : 'text-base'}`}>{a.title}</span>
+                <span className="flex size-9 items-center justify-center rounded-full bg-sage font-serif text-[21.5px] text-forest">{i + 1}</span>
+                <span className={`font-semibold leading-tight text-navy ${canvas ? 'text-[23px]' : 'text-base'}`}>{a.title}</span>
                 {!on && canvas && <ChevronDown className="size-4 text-slate" aria-hidden />}
               </button>
               <AnimatePresence initial={false}>
                 {(on || !canvas) && (
                   <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex min-h-0 flex-1 flex-col gap-2.5 overflow-y-auto px-4 pb-4">
-                    <p className={`leading-snug text-ink ${canvas ? 'text-[16.5px]' : 'text-sm'}`}>{a.summary}</p>
+                    <p className={`leading-snug text-ink ${canvas ? 'text-[20px]' : 'text-sm'}`}>{a.summary}</p>
                     <div className="rounded-2xl bg-ivory px-3 py-2.5">
                       <LevelChip level={a.level}>{a.level === 'usage' ? 'Pharmacologie' : a.level === 'clinique' ? 'Clinique (polaprezinc)' : 'Mécanistique'}</LevelChip>
-                      <p className="mt-1.5 text-[14.5px] leading-snug text-ink">{a.evidence}</p>
+                      <p className="mt-1.5 text-[17.5px] leading-snug text-ink">{a.evidence}</p>
                     </div>
-                    {a.caveat && <p className="border-l-2 border-forest pl-2.5 text-[13.5px] italic leading-snug text-slate">{a.caveat}</p>}
+                    {a.caveat && <p className="border-l-2 border-forest pl-2.5 text-[16px] italic leading-snug text-slate">{a.caveat}</p>}
                     <ul className="flex flex-col gap-1">
                       {a.refs.map((id) => (
                         <RefLine key={id} id={id} />
@@ -720,7 +720,7 @@ export function BdAxesSlide({ product }: { product: Product }) {
                           const idx = stageIds.indexOf(a.stage)
                           if (idx >= 0) goToSlideId(mechanism.id, Math.min(idx, mechanism.steps - 1))
                         }}
-                        className="mt-auto inline-flex min-h-11 w-fit items-center gap-2 rounded-full bg-forest px-4 text-[14px] font-semibold text-white"
+                        className="mt-auto inline-flex min-h-11 w-fit items-center gap-2 rounded-full bg-forest px-4 text-[17px] font-semibold text-white"
                       >
                         <PlayCircle className="size-[18px]" aria-hidden /> Voir l’animation
                       </button>
@@ -766,25 +766,25 @@ export function BdWhySlide({ product }: { product: Product }) {
               className="rounded-3xl border border-navy/10 bg-white px-5 py-4"
             >
               <p className="flex items-center gap-2.5">
-                <span className="flex size-8 items-center justify-center rounded-full bg-forest text-[14px] font-bold text-white">{i + 1}</span>
-                <span className={`font-semibold text-navy ${canvas ? 'text-[19px]' : 'text-base'}`}>{w.title}</span>
+                <span className="flex size-8 items-center justify-center rounded-full bg-forest text-[17px] font-bold text-white">{i + 1}</span>
+                <span className={`font-semibold text-navy ${canvas ? 'text-[23px]' : 'text-base'}`}>{w.title}</span>
               </p>
-              <p className={`mt-1.5 leading-snug text-ink ${canvas ? 'text-[15.5px]' : 'text-sm'}`}>{w.text}</p>
+              <p className={`mt-1.5 leading-snug text-ink ${canvas ? 'text-[18.5px]' : 'text-sm'}`}>{w.text}</p>
             </motion.div>
           ))}
         </div>
         <div className="flex min-h-0 flex-col">
-          <p className="mb-2 text-[13px] font-semibold uppercase tracking-[0.14em] text-slate">Questions fréquentes</p>
+          <p className="mb-2 text-[15.5px] font-semibold uppercase tracking-[0.14em] text-slate">Questions fréquentes</p>
           <ul className="flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto overscroll-contain pr-1">
             {faq.map((f, i) => (
               <li key={f.q} className="rounded-2xl border border-navy/10 bg-white">
-                <button type="button" onClick={() => setQ(q === i ? null : i)} aria-expanded={q === i} className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left text-[15.5px] font-semibold text-navy">
+                <button type="button" onClick={() => setQ(q === i ? null : i)} aria-expanded={q === i} className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left text-[18.5px] font-semibold text-navy">
                   {f.q}
                   <ChevronDown className={`size-4 shrink-0 transition-transform ${q === i ? 'rotate-180' : ''}`} aria-hidden />
                 </button>
                 <AnimatePresence initial={false}>
                   {q === i && (
-                    <motion.p initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="px-4 pb-3 text-[14.5px] leading-snug text-ink">
+                    <motion.p initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="px-4 pb-3 text-[17.5px] leading-snug text-ink">
                       {f.a}
                     </motion.p>
                   )}
@@ -822,7 +822,7 @@ export function BdSynthesisSlide({ product }: { product: Product }) {
                     initial={reduced ? false : { opacity: 0, scale: 0.6, left: '50%', top: '50%' }}
                     animate={{ opacity: 1, scale: 1, left: `${x}%`, top: `${y}%` }}
                     transition={{ delay: 0.4 + i * 0.15, duration: 0.8, ease: EASE }}
-                    className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full border border-forest/25 bg-white px-5 py-2.5 text-center text-[19px] font-semibold whitespace-nowrap text-navy shadow-[0_14px_30px_-22px_rgb(14_26_43/0.5)]"
+                    className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full border border-forest/25 bg-white px-5 py-2.5 text-center text-[23px] font-semibold whitespace-nowrap text-navy shadow-[0_14px_30px_-22px_rgb(14_26_43/0.5)]"
                   >
                     {a}
                   </motion.span>
@@ -846,11 +846,11 @@ export function BdSynthesisSlide({ product }: { product: Product }) {
           initial={reduced ? false : { opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.5, duration: 0.7 }}
-          className={`max-w-[1150px] text-center font-serif leading-snug text-navy ${canvas ? 'mt-2 text-[34px]' : 'mt-4 text-xl'}`}
+          className={`max-w-[1150px] text-center font-serif leading-snug text-navy ${canvas ? 'mt-2 text-[39px]' : 'mt-4 text-xl'}`}
         >
           {claimText('biodigest-slogan-final')}
         </motion.p>
-        <p className="mt-2 text-[13px] text-slate">Complément alimentaire — ne remplace pas un traitement prescrit.</p>
+        <p className="mt-2 text-[15.5px] text-slate">Complément alimentaire — ne remplace pas un traitement prescrit.</p>
       </div>
     </SlideShell>
   )

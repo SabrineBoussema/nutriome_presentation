@@ -85,7 +85,7 @@ export function Callout({
   to,
   anchor = 'start',
   color = INK,
-  size = 15,
+  size = 17,
   weight = 600,
   sub,
 }: {
@@ -194,7 +194,7 @@ export function Hotspot({
         x={labelSide === 'right' ? x + 16 : x - 16}
         y={y + 5}
         textAnchor={labelSide === 'right' ? 'start' : 'end'}
-        fontSize={14}
+        fontSize={16}
         fontWeight={active ? 700 : 500}
         fill={active ? color : SLATE}
         paintOrder="stroke"

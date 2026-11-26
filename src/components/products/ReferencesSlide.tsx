@@ -20,7 +20,7 @@ export function ReferencesSlide({ product, dark = false }: { product: Product; d
       <Reveal delay={0.16} className="mt-6 @4xl:mt-8">
         <ol className={`grid gap-x-10 gap-y-3 ${refs.length > 5 ? '@4xl:grid-cols-2' : ''}`}>
           {refs.map((r, i) => (
-            <li key={r.id} className="flex gap-3 text-sm leading-snug @4xl:text-[19px]">
+            <li key={r.id} className="flex gap-3 text-sm leading-snug @4xl:text-[23px]">
               <span className="w-6 shrink-0 text-right font-semibold" style={{ color: dark ? '#e9c46a' : product.accent }}>
                 {i + 1}.
               </span>

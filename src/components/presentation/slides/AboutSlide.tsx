@@ -18,19 +18,19 @@ export function AboutSlide() {
             <Eyebrow color="#1d5a39">{t.about.eyebrow}</Eyebrow>
           </Reveal>
           <Reveal delay={0.08}>
-            <SlideTitle className="mt-4 text-navy @4xl:text-[72px]">{t.about.title}</SlideTitle>
+            <SlideTitle className="mt-4 text-navy @4xl:text-[81px]">{t.about.title}</SlideTitle>
           </Reveal>
           <Reveal delay={0.16}>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate @4xl:text-[24px]">{l(company.intro)}</p>
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate @4xl:text-[28px]">{l(company.intro)}</p>
           </Reveal>
           <div className="mt-8 grid gap-4 @4xl:grid-cols-2">
             <Reveal delay={0.24} className="rounded-3xl bg-forest p-6 text-white">
               <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">{t.about.vision}</div>
-              <p className="mt-2 font-serif text-xl leading-snug @4xl:text-[23px]">{l(company.vision)}</p>
+              <p className="mt-2 font-serif text-xl leading-snug @4xl:text-[27px]">{l(company.vision)}</p>
             </Reveal>
             <Reveal delay={0.3} className="rounded-3xl bg-navy p-6 text-white">
               <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">{t.about.mission}</div>
-              <p className="mt-2 font-serif text-xl leading-snug @4xl:text-[23px]">{l(company.mission)}</p>
+              <p className="mt-2 font-serif text-xl leading-snug @4xl:text-[27px]">{l(company.mission)}</p>
             </Reveal>
           </div>
           <Reveal delay={0.38} className="mt-auto flex flex-wrap gap-x-12 gap-y-4 pt-8">
@@ -40,7 +40,7 @@ export function AboutSlide() {
               { k: t.about.base, v: 'Monastir' },
             ].map(({ k, v }) => (
               <div key={k}>
-                <div className="font-serif text-4xl text-navy @4xl:text-[48px]">{v}</div>
+                <div className="font-serif text-4xl text-navy @4xl:text-[54px]">{v}</div>
                 <div className="text-xs font-medium uppercase tracking-[0.18em] text-slate">{k}</div>
               </div>
             ))}
@@ -56,8 +56,8 @@ export function AboutSlide() {
                     <Icon className="size-6" aria-hidden />
                   </span>
                   <div>
-                    <h3 className="text-lg font-semibold text-ink @4xl:text-[23px]">{l(p.title)}</h3>
-                    <p className="mt-1 text-sm leading-snug text-slate @4xl:text-[18px]">{l(p.body)}</p>
+                    <h3 className="text-lg font-semibold text-ink @4xl:text-[27px]">{l(p.title)}</h3>
+                    <p className="mt-1 text-sm leading-snug text-slate @4xl:text-[21.5px]">{l(p.body)}</p>
                   </div>
                 </div>
               </Reveal>

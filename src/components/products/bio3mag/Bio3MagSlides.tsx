@@ -48,10 +48,10 @@ export function MagPillarsSlide({ product }: { product: Product }) {
                     <div className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: BLUES[i] }}>
                       {t.bio3mag.pillar} {i + 1}
                     </div>
-                    <div className="mt-1 text-lg font-semibold leading-tight text-ink @4xl:text-[28px]">{l(ing.name)}</div>
-                    {ing.role && <div className="mt-1 text-sm text-slate @4xl:text-[20px]">{l(ing.role)}</div>}
+                    <div className="mt-1 text-lg font-semibold leading-tight text-ink @4xl:text-[32px]">{l(ing.name)}</div>
+                    {ing.role && <div className="mt-1 text-sm text-slate @4xl:text-[23px]">{l(ing.role)}</div>}
                   </div>
-                  <div className="text-right font-serif text-4xl text-navy @4xl:text-[55px]">
+                  <div className="text-right font-serif text-4xl text-navy @4xl:text-[62px]">
                     {n(ing.quantity ?? 0)}
                     <span className="ml-1 font-sans text-base text-slate">mg</span>
                   </div>
@@ -60,7 +60,7 @@ export function MagPillarsSlide({ product }: { product: Product }) {
             )
           })}
           <Reveal delay={0.5}>
-            <p className="px-2 text-xs text-slate @4xl:text-[18px]">{t.bio3mag.compoundNote}</p>
+            <p className="px-2 text-xs text-slate @4xl:text-[21.5px]">{t.bio3mag.compoundNote}</p>
           </Reveal>
         </div>
 
@@ -104,7 +104,7 @@ export function MagPillarsSlide({ product }: { product: Product }) {
               <div className="absolute inset-y-0 right-0 w-1/2 bg-gradient-to-b from-white to-[#dbe9f3]" />
               <div className="absolute inset-x-3 top-1.5 h-2 rounded-full bg-white/50" />
             </div>
-            <div className="mt-5 font-serif text-3xl text-navy @4xl:text-[42px]">
+            <div className="mt-5 font-serif text-3xl text-navy @4xl:text-[47px]">
               {elemental ? (
                 <>
                   {n(elemental.quantity ?? 0)}
@@ -118,7 +118,7 @@ export function MagPillarsSlide({ product }: { product: Product }) {
           </motion.div>
           <div className="absolute -bottom-4 left-0 right-0 flex flex-wrap justify-center gap-x-4 gap-y-1 @4xl:-bottom-8">
             {items.map((ing, i) => (
-              <span key={i} className="flex items-center gap-1.5 text-xs text-slate @4xl:text-[17px]">
+              <span key={i} className="flex items-center gap-1.5 text-xs text-slate @4xl:text-[20.5px]">
                 <span className="size-2.5 rounded-full" style={{ background: BLUES[i] }} />
                 {l(ing.name)}
               </span>
@@ -149,8 +149,8 @@ export function MagMoleculesSlide({ product }: { product: Product }) {
           return (
             <Reveal key={i} fromStep={i} delay={0.15} className="flex flex-col rounded-[28px] border border-navy/[0.06] bg-white p-5 shadow-[0_30px_60px_-45px_rgb(14_26_43/0.5)] @4xl:p-6">
               <div className="flex items-baseline justify-between gap-3">
-                <h3 className="text-lg font-semibold text-ink @4xl:text-[29px]">{l(ing.name)}</h3>
-                <span className="font-serif text-2xl @4xl:text-[37px]" style={{ color: BLUES[i] }}>
+                <h3 className="text-lg font-semibold text-ink @4xl:text-[34px]">{l(ing.name)}</h3>
+                <span className="font-serif text-2xl @4xl:text-[43px]" style={{ color: BLUES[i] }}>
                   {n(ing.quantity ?? 0)}
                   <span className="ml-1 font-sans text-sm text-slate">mg</span>
                 </span>
@@ -158,12 +158,12 @@ export function MagMoleculesSlide({ product }: { product: Product }) {
               <div className="mx-auto my-3 w-full max-w-[340px] rounded-2xl bg-paper @4xl:my-3">
                 <Molecule className="h-auto w-full" />
               </div>
-              <p className="mt-auto text-sm leading-snug text-slate @4xl:text-[20px]">{captions[i]}</p>
+              <p className="mt-auto text-sm leading-snug text-slate @4xl:text-[23px]">{captions[i]}</p>
             </Reveal>
           )
         })}
       </div>
-      <p className="mt-5 text-xs text-slate @4xl:text-[17px]">
+      <p className="mt-5 text-xs text-slate @4xl:text-[20.5px]">
         {t.common.schematic}. {t.bio3mag.compoundNote}
       </p>
     </SlideShell>

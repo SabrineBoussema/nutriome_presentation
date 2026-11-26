@@ -9,7 +9,7 @@ export function RefLine({ id }: { id: string }) {
   if (!r) return null
   const href = r.url?.includes('pmc.ncbi') || !r.pmid ? r.url : `https://pubmed.ncbi.nlm.nih.gov/${r.pmid}/`
   return (
-    <li className="text-[13px] leading-snug text-slate">
+    <li className="text-[15.5px] leading-snug text-slate">
       <span className="font-semibold text-ink">{(r.authors ?? r.source ?? '').split(',')[0]}</span>
       {r.authors?.includes(',') ? ' et al.' : ''} {r.year ? `(${r.year}). ` : ''}{r.title}. <span className="italic">{r.source}</span>.{' '}
       <a href={href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-0.5 font-medium text-ocean hover:underline">
@@ -31,7 +31,7 @@ const LEVEL_STYLE: Record<string, string> = {
 
 export function LevelChip({ level, children }: { level: string; children?: ReactNode }) {
   return (
-    <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-[12px] font-semibold ${LEVEL_STYLE[level] ?? 'bg-navy/8 text-slate'}`}>
+    <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-[14.5px] font-semibold ${LEVEL_STYLE[level] ?? 'bg-navy/8 text-slate'}`}>
       {children ?? level}
     </span>
   )
@@ -41,7 +41,7 @@ export function Eyebrow({ color, children }: { color: string; children: ReactNod
   const { layout } = useSlide()
   return (
     <p
-      className={`flex items-center gap-3 font-semibold uppercase ${layout === 'canvas' ? 'text-[15px] tracking-[0.2em]' : 'text-[12px] tracking-[0.14em]'}`}
+      className={`flex items-center gap-3 font-semibold uppercase ${layout === 'canvas' ? 'text-[18px] tracking-[0.2em]' : 'text-[14.5px] tracking-[0.14em]'}`}
       style={{ color }}
     >
       <span className="h-px w-8" style={{ background: color }} aria-hidden />
@@ -53,7 +53,7 @@ export function Eyebrow({ color, children }: { color: string; children: ReactNod
 export function Title({ children }: { children: ReactNode }) {
   const { layout } = useSlide()
   return (
-    <h2 className={`font-serif leading-[1.05] tracking-[-0.015em] text-navy text-balance ${layout === 'canvas' ? 'mt-1.5 text-[48px]' : 'mt-1 text-[1.9rem]'}`}>
+    <h2 className={`font-serif leading-[1.05] tracking-[-0.015em] text-navy text-balance ${layout === 'canvas' ? 'mt-1.5 text-[54px]' : 'mt-1 text-[2.2rem]'}`}>
       {children}
     </h2>
   )

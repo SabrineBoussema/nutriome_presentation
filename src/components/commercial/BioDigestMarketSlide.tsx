@@ -97,8 +97,8 @@ function InfoCard({ icon, title, children }: { icon: ReactNode; title: string; c
     <div className="flex gap-3 rounded-2xl border border-navy/10 bg-white px-4 py-3">
       <span className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-full bg-sage text-forest">{icon}</span>
       <div>
-        <p className="text-[15.5px] font-semibold text-ink">{title}</p>
-        <div className="text-[14px] leading-snug text-slate">{children}</div>
+        <p className="text-[18.5px] font-semibold text-ink">{title}</p>
+        <div className="text-[17px] leading-snug text-slate">{children}</div>
       </div>
     </div>
   )
@@ -109,7 +109,7 @@ function StepPositioning() {
   const exclusivityValidated = commercialClaims['biodigest-exclusivity'].status === 'validated'
   return (
     <div className="flex flex-col gap-4">
-      <p className="font-serif text-[30px] leading-[1.15] text-navy">{claim}</p>
+      <p className="font-serif text-[35px] leading-[1.15] text-navy">{claim}</p>
       {!exclusivityValidated && (
         <p className="sr-only">Allégation d’exclusivité en attente de validation documentaire.</p>
       )}
@@ -138,17 +138,17 @@ function StepComparison() {
     <div className="flex flex-col gap-3">
       <div className="grid grid-cols-2 gap-3">
         <div className="rounded-2xl border border-navy/10 bg-white px-4 pt-3 pb-2">
-          <p className="text-[15px] font-bold text-slate">Zinc classique</p>
+          <p className="text-[18px] font-bold text-slate">Zinc classique</p>
           <ZincSalt />
         </div>
         <div className="rounded-2xl border-2 bg-white px-4 pt-3 pb-2" style={{ borderColor: LEAF }}>
-          <p className="text-[15px] font-bold" style={{ color: GREEN }}>
+          <p className="text-[18px] font-bold" style={{ color: GREEN }}>
             Zinc L-carnosine
           </p>
           <ZincCarnosine />
         </div>
       </div>
-      <dl className="divide-y divide-navy/8 rounded-2xl border border-navy/10 bg-white text-[14px]">
+      <dl className="divide-y divide-navy/8 rounded-2xl border border-navy/10 bg-white text-[17px]">
         {rows.map(([k, a, b]) => (
           <div key={k} className="grid grid-cols-[150px_1fr_1fr] gap-3 px-4 py-2">
             <dt className="font-semibold text-ink">{k}</dt>
@@ -157,7 +157,7 @@ function StepComparison() {
           </div>
         ))}
       </dl>
-      <p className="border-l-2 pl-3 text-[15px] leading-snug text-ink" style={{ borderColor: LEAF }}>
+      <p className="border-l-2 pl-3 text-[18px] leading-snug text-ink" style={{ borderColor: LEAF }}>
         <span className="font-semibold">Pourquoi ce choix : </span>
         les études sur la muqueuse gastrique portent sur ce complexe, et non sur les sels de zinc classiques.
       </p>
@@ -177,14 +177,14 @@ function StepDocumentation() {
       <div className="grid grid-cols-2 gap-3">
         {docs.map((d) => (
           <div key={d.title} className="flex flex-col gap-1.5 rounded-2xl border border-navy/10 bg-white px-4 py-3">
-            <p className="flex items-center justify-between gap-2 text-[15.5px] font-semibold text-ink">
+            <p className="flex items-center justify-between gap-2 text-[18.5px] font-semibold text-ink">
               <span className="flex items-center gap-2">
                 <Globe2 className="size-4 text-forest" aria-hidden />
                 {d.title}
               </span>
               <LevelChip level={d.level}>{d.levelLabel}</LevelChip>
             </p>
-            <p className="text-[14px] leading-snug text-slate">{d.text}</p>
+            <p className="text-[17px] leading-snug text-slate">{d.text}</p>
           </div>
         ))}
       </div>
@@ -193,7 +193,7 @@ function StepDocumentation() {
           <RefLine key={id} id={id} />
         ))}
       </ul>
-      <p className="text-[13px] text-slate">Données sur l’ingrédient : aucune étude n’a été menée sur BioDigest lui-même.</p>
+      <p className="text-[15.5px] text-slate">Données sur l’ingrédient : aucune étude n’a été menée sur BioDigest lui-même.</p>
     </div>
   )
 }
@@ -209,7 +209,7 @@ export function BioDigestMarketSlide({ product }: { product: Product }) {
   return (
     <SlideShell product={product} headerPackshot={false}>
       <Eyebrow color={product.accent}>BioDigest · Marché tunisien</Eyebrow>
-      <h2 className={`font-serif leading-[1.05] tracking-[-0.015em] text-navy text-balance ${canvas ? 'mt-1.5 text-[44px]' : 'mt-1 text-[1.8rem]'}`}>
+      <h2 className={`font-serif leading-[1.05] tracking-[-0.015em] text-navy text-balance ${canvas ? 'mt-1.5 text-[50px]' : 'mt-1 text-[2.15rem]'}`}>
         BioDigest : une formulation différenciante sur le marché tunisien
       </h2>
       <div className={`mt-4 min-h-0 flex-1 gap-8 ${canvas ? 'grid grid-cols-[500px_minmax(0,1fr)] grid-rows-[minmax(0,1fr)]' : 'flex flex-col'}`}>
@@ -237,11 +237,11 @@ export function BioDigestMarketSlide({ product }: { product: Product }) {
                   type="button"
                   onClick={() => goToStep?.(i)}
                   aria-current={i === s ? 'step' : undefined}
-                  className={`inline-flex min-h-10 items-center gap-2 rounded-full border px-3.5 text-[14px] font-semibold transition-colors ${
+                  className={`inline-flex min-h-10 items-center gap-2 rounded-full border px-3.5 text-[17px] font-semibold transition-colors ${
                     i === s ? 'border-transparent bg-forest text-white' : 'border-navy/12 bg-white text-slate hover:text-navy'
                   }`}
                 >
-                  <span className={`flex size-5 items-center justify-center rounded-full text-[11.5px] ${i === s ? 'bg-white/20' : 'bg-navy/5'}`}>{i + 1}</span>
+                  <span className={`flex size-5 items-center justify-center rounded-full text-[14px] ${i === s ? 'bg-white/20' : 'bg-navy/5'}`}>{i + 1}</span>
                   {label}
                 </button>
               </li>
@@ -260,7 +260,7 @@ export function BioDigestMarketSlide({ product }: { product: Product }) {
               </motion.div>
             </AnimatePresence>
           </div>
-          <p className="mt-3 flex items-start gap-2 rounded-xl bg-sage px-3 py-2 text-[13.5px] leading-snug text-forest">
+          <p className="mt-3 flex items-start gap-2 rounded-xl bg-sage px-3 py-2 text-[16px] leading-snug text-forest">
             <ShieldCheck className="mt-0.5 size-4 shrink-0" aria-hidden />
             {commercialClaims['biodigest-not-a-drug'].text}
           </p>

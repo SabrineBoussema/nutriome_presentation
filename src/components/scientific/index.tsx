@@ -32,7 +32,7 @@ export function ScopeBanner({ id, dark = false }: { id: DiagramId; dark?: boolea
   const Icon = meta.scope === 'preclinical' ? FlaskConical : Info
   return (
     <div
-      className={`flex items-start gap-2 rounded-xl px-3 py-2 text-xs @4xl:text-[17px] leading-snug ${
+      className={`flex items-start gap-2 rounded-xl px-3 py-2 text-xs @4xl:text-[20.5px] leading-snug ${
         dark ? 'bg-white/8 text-white/75' : 'bg-navy/[0.04] text-slate'
       }`}
     >
@@ -67,7 +67,7 @@ export function StepCaptions({ id, accent, dark = false }: { id: DiagramId; acce
             >
               {i + 1}
             </span>
-            <span className={`text-sm leading-snug ${meta.steps.length > 4 ? '@4xl:text-[18px]' : '@4xl:text-[21px]'} ${dark ? 'text-white/90' : 'text-ink'}`}>{l(caption)}</span>
+            <span className={`text-sm leading-snug ${meta.steps.length > 4 ? '@4xl:text-[21.5px]' : '@4xl:text-[24px]'} ${dark ? 'text-white/90' : 'text-ink'}`}>{l(caption)}</span>
           </li>
         )
       })}

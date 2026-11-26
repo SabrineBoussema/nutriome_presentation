@@ -25,7 +25,7 @@ export function WelcomeSlide() {
 
         <div className="text-center">
           <motion.p
-            className="text-[10px] font-semibold uppercase tracking-[0.34em] text-white/50 @4xl:text-[11px]"
+            className="text-[12px] font-semibold uppercase tracking-[0.34em] text-white/50 @4xl:text-[13px]"
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, ease: easeOut }}
@@ -33,7 +33,7 @@ export function WelcomeSlide() {
             Rencontre scientifique · Direction
           </motion.p>
           <motion.h1
-            className="mt-1 font-serif text-[1.35rem] leading-tight tracking-[-0.03em] text-white @4xl:text-[1.85rem]"
+            className="mt-1 font-serif text-[1.55rem] leading-tight tracking-[-0.03em] text-white @4xl:text-[2.15rem]"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75, delay: 0.08, ease: easeOut }}
@@ -43,7 +43,7 @@ export function WelcomeSlide() {
         </div>
 
         <motion.p
-          className="hidden text-right text-[11px] font-medium tracking-wide text-white/55 @4xl:block"
+          className="hidden text-right text-[13px] font-medium tracking-wide text-white/55 @4xl:block"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.7, delay: 0.2, ease: easeOut }}

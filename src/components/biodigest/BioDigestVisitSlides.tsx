@@ -36,7 +36,7 @@ function useFlags() {
 
 function StatusNote({ children }: { children?: ReactNode }) {
   return (
-    <p className="flex items-start gap-2 rounded-xl bg-sage px-3 py-2 text-[13.5px] leading-snug text-forest">
+    <p className="flex items-start gap-2 rounded-xl bg-sage px-3 py-2 text-[16px] leading-snug text-forest">
       <ShieldCheck className="mt-0.5 size-4 shrink-0" aria-hidden />
       {children ?? commercialClaims['biodigest-not-a-drug'].text}
     </p>
@@ -52,14 +52,14 @@ function ClaimBlock({ ids, caveat }: { ids: string[]; caveat?: string }) {
         return (
           <li key={c.id} className="rounded-2xl border border-navy/10 bg-white px-4 py-3">
             <p className="leading-snug text-ink">{c.fr}</p>
-            <p className="mt-1.5 flex flex-wrap items-center gap-2 text-[13px] font-semibold" style={{ color: level.tone }}>
+            <p className="mt-1.5 flex flex-wrap items-center gap-2 text-[15.5px] font-semibold" style={{ color: level.tone }}>
               <span className="size-2 rounded-full" style={{ background: level.tone }} aria-hidden />
               {level.short}
             </p>
           </li>
         )
       })}
-      {caveat && <li className="border-l-2 border-forest pl-3 text-[14px] italic leading-snug text-slate">{caveat}</li>}
+      {caveat && <li className="border-l-2 border-forest pl-3 text-[17px] italic leading-snug text-slate">{caveat}</li>}
     </ul>
   )
 }
@@ -234,7 +234,7 @@ export function BdComplexSlide({ product }: { product: Product }) {
   return (
     <SlideShell product={product} headerPackshot={false} tone="tint">
       <Eyebrow color={product.accent}>BioDigest · Mécanisme d’action</Eyebrow>
-      <h2 className={`font-serif leading-[1.05] tracking-[-0.015em] text-navy text-balance ${canvas ? 'mt-1.5 text-[48px]' : 'mt-1 text-[2rem]'}`}>
+      <h2 className={`font-serif leading-[1.05] tracking-[-0.015em] text-navy text-balance ${canvas ? 'mt-1.5 text-[54px]' : 'mt-1 text-[2.3rem]'}`}>
         Comment agit le zinc carnosine ?
       </h2>
       <MotionRuntime>
@@ -249,9 +249,9 @@ export function BdComplexSlide({ product }: { product: Product }) {
       <AnimatePresence>
         {selected && (
           <SceneDrawer title={selected.lines.join(' ')} scene={selected.scene} onClose={() => setSelected(null)}>
-            <p className="mb-4 text-[16px] leading-snug text-navy">{selected.lead}</p>
+            <p className="mb-4 text-[19px] leading-snug text-navy">{selected.lead}</p>
             <ClaimBlock ids={selected.claims} caveat={selected.caveat} />
-            <p className="mt-4 text-[13px] text-slate">Cliquer une carte pour l’animation détaillée. Estomac et intestin sont interactifs.</p>
+            <p className="mt-4 text-[15.5px] text-slate">Cliquer une carte pour l’animation détaillée. Estomac et intestin sont interactifs.</p>
           </SceneDrawer>
         )}
       </AnimatePresence>
@@ -312,7 +312,7 @@ export function BdHeritageSlide({ product }: { product: Product }) {
   return (
     <SlideShell product={product} headerPackshot={false} tone="tint">
       <Eyebrow color={product.accent}>BioDigest · {exclusive ? 'Exclusivité Nutriome Labs' : 'Zinc Carnosine'}</Eyebrow>
-      <h2 className={`font-serif leading-[1.05] tracking-[-0.015em] text-navy text-balance ${canvas ? 'mt-1.5 text-[46px]' : 'mt-1 text-[1.85rem]'}`}>
+      <h2 className={`font-serif leading-[1.05] tracking-[-0.015em] text-navy text-balance ${canvas ? 'mt-1.5 text-[52px]' : 'mt-1 text-[2.15rem]'}`}>
         {exclusive ? (
           <>
             Le zinc carnosine, en Tunisie, <em className="text-forest">uniquement</em> chez Nutriome Labs
@@ -336,7 +336,7 @@ export function BdHeritageSlide({ product }: { product: Product }) {
             <div className="flex items-center gap-3">
               <div className="flex flex-col items-center gap-1">
                 <FlagJapan className={canvas ? 'w-[64px]' : 'w-[48px]'} />
-                <span className="text-[12px] font-semibold text-white/80">Molécule japonaise</span>
+                <span className="text-[14.5px] font-semibold text-white/80">Molécule japonaise</span>
               </div>
               <svg viewBox="0 0 300 40" className="h-10 flex-1" aria-hidden>
                 <path d="M6 28 C100 0 200 0 294 28" fill="none" stroke="white" strokeOpacity={0.55} strokeWidth={2} strokeDasharray="7 6" />
@@ -344,7 +344,7 @@ export function BdHeritageSlide({ product }: { product: Product }) {
               </svg>
               <div className="flex flex-col items-center gap-1">
                 <FlagTunisia className={canvas ? 'w-[64px]' : 'w-[48px]'} />
-                <span className="text-[12px] font-semibold text-white/80">Nutriome Labs</span>
+                <span className="text-[14.5px] font-semibold text-white/80">Nutriome Labs</span>
               </div>
             </div>
 
@@ -364,12 +364,12 @@ export function BdHeritageSlide({ product }: { product: Product }) {
               </div>
               <div className="min-w-0">
                 {exclusive && (
-                  <span className="inline-flex items-center rounded-full bg-[#f3c86b] px-3 py-1 text-[12.5px] font-bold uppercase tracking-[0.16em] text-[#3d2a05]">
+                  <span className="inline-flex items-center rounded-full bg-[#f3c86b] px-3 py-1 text-[15px] font-bold uppercase tracking-[0.16em] text-[#3d2a05]">
                     Seul importateur en Tunisie
                   </span>
                 )}
-                <p className={`mt-3 font-serif leading-snug ${canvas ? 'text-[30px]' : 'text-xl'}`}>{exclusivity}</p>
-                <p className={`mt-3 leading-snug text-white/80 ${canvas ? 'text-[16px]' : 'text-sm'}`}>
+                <p className={`mt-3 font-serif leading-snug ${canvas ? 'text-[35px]' : 'text-xl'}`}>{exclusivity}</p>
+                <p className={`mt-3 leading-snug text-white/80 ${canvas ? 'text-[19px]' : 'text-sm'}`}>
                   Proposée en Tunisie avec BioDigest, en complément alimentaire.
                 </p>
               </div>
@@ -384,7 +384,7 @@ export function BdHeritageSlide({ product }: { product: Product }) {
               transition={{ delay: 0.15, duration: 0.55, ease: EASE }}
               className="rounded-[24px] border border-navy/10 bg-white/90 px-5 py-3"
             >
-              <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-forest">Complexe zinc · L-carnosine · 1:1</p>
+              <p className="text-[14.5px] font-semibold uppercase tracking-[0.16em] text-forest">Complexe zinc · L-carnosine · 1:1</p>
               <PolymerChain units={2} className={`mt-1 w-full ${canvas ? 'h-[130px]' : 'h-[110px]'}`} />
             </motion.div>
             {MOLECULE_CARDS.map((card, i) => (
@@ -397,8 +397,8 @@ export function BdHeritageSlide({ product }: { product: Product }) {
               >
                 <span className="mt-1 h-8 w-1 shrink-0 rounded-full bg-forest" aria-hidden />
                 <div>
-                  <p className={`font-semibold leading-snug text-navy ${canvas ? 'text-[17px]' : 'text-base'}`}>{card.title}</p>
-                  <p className={`mt-0.5 leading-snug text-slate ${canvas ? 'text-[14.5px]' : 'text-[13px]'}`}>{card.text}</p>
+                  <p className={`font-semibold leading-snug text-navy ${canvas ? 'text-[20.5px]' : 'text-base'}`}>{card.title}</p>
+                  <p className={`mt-0.5 leading-snug text-slate ${canvas ? 'text-[17.5px]' : 'text-[15.5px]'}`}>{card.text}</p>
                 </div>
               </motion.div>
             ))}
@@ -426,7 +426,7 @@ export function BdMucosaSlide({ product }: { product: Product }) {
   return (
     <SlideShell product={product} headerPackshot={false}>
       <Eyebrow color={product.accent}>BioDigest · Données cliniques</Eyebrow>
-      <h2 className={`font-serif leading-[1.05] tracking-[-0.015em] text-navy text-balance ${canvas ? 'mt-1.5 text-[44px]' : 'mt-1 text-[1.85rem]'}`}>
+      <h2 className={`font-serif leading-[1.05] tracking-[-0.015em] text-navy text-balance ${canvas ? 'mt-1.5 text-[50px]' : 'mt-1 text-[2.15rem]'}`}>
         Ce que montrent les études sur le zinc L-carnosine
       </h2>
       <div className={`mt-4 grid min-h-0 flex-1 gap-4 ${canvas ? 'grid-cols-[1fr_1fr_380px]' : 'grid-cols-1'}`}>
@@ -441,25 +441,25 @@ export function BdMucosaSlide({ product }: { product: Product }) {
             className="flex min-h-0 flex-col rounded-[24px] border border-navy/10 bg-white px-6 py-5 text-left shadow-[0_18px_40px_-32px_rgb(14_26_43/0.4)] hover:border-forest/40"
           >
             <div className="flex items-center justify-between gap-3">
-              <span className="flex size-8 items-center justify-center rounded-full bg-sage font-serif text-[16px] text-forest">{i + 1}</span>
+              <span className="flex size-8 items-center justify-center rounded-full bg-sage font-serif text-[19px] text-forest">{i + 1}</span>
               <LevelChip level={card.level} />
             </div>
-            <p className={`mt-3 font-serif leading-snug text-navy ${canvas ? 'text-[26px]' : 'text-lg'}`}>{card.title}</p>
-            <p className={`mt-2 leading-snug text-slate ${canvas ? 'text-[16px]' : 'text-sm'}`}>{card.summary}</p>
+            <p className={`mt-3 font-serif leading-snug text-navy ${canvas ? 'text-[30px]' : 'text-lg'}`}>{card.title}</p>
+            <p className={`mt-2 leading-snug text-slate ${canvas ? 'text-[19px]' : 'text-sm'}`}>{card.summary}</p>
             <div className="mt-auto pt-4">
-              <p className={`font-serif leading-none text-forest ${canvas ? 'text-[46px]' : 'text-3xl'}`}>{card.figure.value}</p>
-              <p className="mt-1.5 text-[13.5px] leading-snug text-slate">{card.figure.label}</p>
-              <p className="mt-3 text-[13px] font-semibold text-forest">Animation, études et limites →</p>
+              <p className={`font-serif leading-none text-forest ${canvas ? 'text-[52px]' : 'text-3xl'}`}>{card.figure.value}</p>
+              <p className="mt-1.5 text-[16px] leading-snug text-slate">{card.figure.label}</p>
+              <p className="mt-3 text-[15.5px] font-semibold text-forest">Animation, études et limites →</p>
             </div>
           </motion.button>
         ))}
         <div className="flex min-h-0 flex-col rounded-[24px] border border-amber/30 bg-[#fdf6ec] px-5 py-5">
-          <p className="flex items-center gap-2 text-[12.5px] font-semibold uppercase tracking-[0.14em] text-[#9a5b12]">
+          <p className="flex items-center gap-2 text-[15px] font-semibold uppercase tracking-[0.14em] text-[#9a5b12]">
             <ShieldAlert className="size-4" aria-hidden /> Limites des données
           </p>
           <ul className="mt-3 flex flex-col gap-2.5">
             {DATA_LIMITS.map((l) => (
-              <li key={l} className="flex gap-2 text-[14.5px] leading-snug text-ink">
+              <li key={l} className="flex gap-2 text-[17.5px] leading-snug text-ink">
                 <span className="mt-[7px] size-1.5 shrink-0 rounded-full bg-amber" aria-hidden />
                 {l}
               </li>
@@ -473,7 +473,7 @@ export function BdMucosaSlide({ product }: { product: Product }) {
             key={e.id}
             type="button"
             onClick={() => setDrawer(e.id)}
-            className="inline-flex min-h-10 items-center gap-2 rounded-full border border-navy/15 bg-white px-3.5 text-[13.5px] font-semibold text-navy hover:bg-navy/5"
+            className="inline-flex min-h-10 items-center gap-2 rounded-full border border-navy/15 bg-white px-3.5 text-[16px] font-semibold text-navy hover:bg-navy/5"
           >
             <e.icon className="size-4" aria-hidden />
             {e.label}
@@ -484,9 +484,9 @@ export function BdMucosaSlide({ product }: { product: Product }) {
       <AnimatePresence>
         {open && (
           <SceneDrawer title={open.title} scene={open.scene} onClose={() => setOpen(null)}>
-            <p className="mb-3 text-[16px] leading-snug text-navy">{open.summary}</p>
+            <p className="mb-3 text-[19px] leading-snug text-navy">{open.summary}</p>
             <ClaimBlock ids={open.claims} caveat={open.caveat} />
-            <p className="mt-5 mb-2 text-[12px] font-semibold uppercase tracking-[0.14em] text-slate">Études</p>
+            <p className="mt-5 mb-2 text-[14.5px] font-semibold uppercase tracking-[0.14em] text-slate">Études</p>
             <ul className="flex flex-col gap-2">
               {open.refs.map((id) => (
                 <RefLine key={id} id={id} />
@@ -496,15 +496,15 @@ export function BdMucosaSlide({ product }: { product: Product }) {
         )}
         {drawer === 'composition' && (
           <Drawer title="Composition" onClose={() => setDrawer(null)}>
-            <p className="mb-3 text-[13px] font-semibold uppercase tracking-[0.12em] text-slate">{product.doseBasis.fr}</p>
+            <p className="mb-3 text-[15.5px] font-semibold uppercase tracking-[0.12em] text-slate">{product.doseBasis.fr}</p>
             <ul className="flex flex-col gap-3">
               {product.ingredients.map((ing) => (
                 <li key={ing.name.fr} className="rounded-2xl border border-navy/10 bg-white px-4 py-3">
-                  <p className="font-serif text-[28px] text-navy">
+                  <p className="font-serif text-[32px] text-navy">
                     {ing.quantity} <span className="font-sans text-base text-slate">{ing.unit}</span>
                   </p>
                   <p className="font-semibold text-ink">{ing.name.fr}</p>
-                  {ing.detail && <p className="text-[14px] text-slate">{ing.detail.fr}</p>}
+                  {ing.detail && <p className="text-[17px] text-slate">{ing.detail.fr}</p>}
                 </li>
               ))}
             </ul>
@@ -514,7 +514,7 @@ export function BdMucosaSlide({ product }: { product: Product }) {
           <Drawer title="Précautions" onClose={() => setDrawer(null)}>
             <ul className="mb-4 flex flex-col gap-2">
               {precautions.map((p) => (
-                <li key={p.fr} className="flex gap-2 text-[15px] leading-snug text-ink">
+                <li key={p.fr} className="flex gap-2 text-[18px] leading-snug text-ink">
                   <span className="mt-[7px] size-1.5 shrink-0 rounded-full bg-amber" />
                   {p.fr}
                 </li>
@@ -525,7 +525,7 @@ export function BdMucosaSlide({ product }: { product: Product }) {
         )}
         {drawer === 'biblio' && (
           <Drawer title="Bibliographie" onClose={() => setDrawer(null)}>
-            <p className="mb-3 text-[13px] text-slate">Études menées avec le polaprezinc / zinc L-carnosine — aucune sur BioDigest lui-même.</p>
+            <p className="mb-3 text-[15.5px] text-slate">Études menées avec le polaprezinc / zinc L-carnosine — aucune sur BioDigest lui-même.</p>
             <ul className="flex flex-col gap-2.5">
               {BIBLIOGRAPHY.map((id) => (
                 <RefLine key={id} id={id} />

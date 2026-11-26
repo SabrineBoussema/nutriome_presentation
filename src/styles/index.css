@@ -57,13 +57,18 @@
 /* Inside the 1600×900 slide canvas, theme text sizes are enlarged so labels, chips and
    footnotes stay readable on a projector once the canvas is scaled down. */
 .slide-canvas {
-  --text-xs: 0.95rem;
+  --text-xs: 1.12rem;
   --text-xs--line-height: 1.35;
-  --text-sm: 1.125rem;
+  --text-sm: 1.32rem;
   --text-sm--line-height: 1.45;
-  --text-base: 1.3rem;
-  --text-lg: 1.45rem;
-  --text-xl: 1.6rem;
+  --text-base: 1.52rem;
+  --text-lg: 1.7rem;
+  --text-xl: 1.9rem;
+  --text-2xl: 2.15rem;
+  --text-3xl: 2.55rem;
+  --text-4xl: 3.05rem;
+  --text-5xl: 3.55rem;
+  --text-6xl: 4.15rem;
 }
 
 @keyframes dash-flow {

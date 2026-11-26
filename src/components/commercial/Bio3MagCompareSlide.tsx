@@ -50,7 +50,7 @@ export function Bio3MagCompareSlide({ product }: { product: Product }) {
         </div>
         <dl className="mt-3 divide-y divide-navy/10 rounded-2xl border border-navy/10 bg-white">
           {rows.map((r) => (
-            <div key={r.label} className="grid grid-cols-[42%_1fr] gap-3 px-4 py-2.5 text-[15px]">
+            <div key={r.label} className="grid grid-cols-[42%_1fr] gap-3 px-4 py-2.5 text-[18px]">
               <dt className="font-semibold text-slate">{r.label}</dt>
               <dd>
                 <CellView cell={r.cells[focus ?? 3]} highlight={focus === 3} />
@@ -68,7 +68,7 @@ export function Bio3MagCompareSlide({ product }: { product: Product }) {
       <Eyebrow color={product.accent}>Bio3Mag · Comparaison</Eyebrow>
       <Title>Tous les magnésiums ne se valent pas</Title>
       <div className="mt-5 min-h-0 flex-1 overflow-hidden rounded-[26px] border border-navy/10 bg-white/85 shadow-[0_24px_50px_-36px_rgb(14_26_43/0.4)]">
-        <table className="h-full w-full table-fixed border-collapse text-[15.5px]">
+        <table className="h-full w-full table-fixed border-collapse text-[18.5px]">
           <colgroup>
             <col className="w-[22%]" />
             <col className="w-[19.5%]" />
@@ -78,7 +78,7 @@ export function Bio3MagCompareSlide({ product }: { product: Product }) {
           </colgroup>
           <thead>
             <tr>
-              <th scope="col" className="px-5 py-3 text-left text-[13px] font-semibold uppercase tracking-[0.14em] text-slate">
+              <th scope="col" className="px-5 py-3 text-left text-[15.5px] font-semibold uppercase tracking-[0.14em] text-slate">
                 Critère
               </th>
               {COMPARE_COLUMNS.map((c, i) => (
@@ -86,7 +86,7 @@ export function Bio3MagCompareSlide({ product }: { product: Product }) {
                   key={c}
                   scope="col"
                   onMouseEnter={() => setFocus(i)}
-                  className={`px-4 py-3 text-left text-[16px] font-bold ${i === 3 ? 'bg-ocean text-white' : focus === i ? 'bg-ocean-soft text-navy' : 'text-navy'}`}
+                  className={`px-4 py-3 text-left text-[19px] font-bold ${i === 3 ? 'bg-ocean text-white' : focus === i ? 'bg-ocean-soft text-navy' : 'text-navy'}`}
                 >
                   <span className="flex items-center gap-2">
                     {i === 3 && <img src={product.image} alt="" className="h-9 w-auto rounded-sm" draggable={false} />}
@@ -128,12 +128,12 @@ export function Bio3MagCompareSlide({ product }: { product: Product }) {
             initial={reduced ? false : { opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.4, duration: 0.6 }}
-            className="font-serif text-[27px] italic leading-snug text-navy"
+            className="font-serif text-[31px] italic leading-snug text-navy"
           >
             {slogan}
           </motion.p>
         )}
-        <details className="max-w-[520px] text-right text-[12.5px] text-slate">
+        <details className="max-w-[520px] text-right text-[15px] text-slate">
           <summary className="cursor-pointer select-none font-semibold text-ink">
             Sources de la biodisponibilité · aucune étude sur le produit fini
           </summary>

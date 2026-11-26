@@ -21,10 +21,10 @@ export function ClosingSlide() {
             <Logo className="h-16 w-auto @4xl:h-24" />
           </Reveal>
           <Reveal delay={0.1}>
-            <h2 className="mt-8 font-serif text-4xl leading-[1.04] tracking-[-0.02em] text-navy text-balance @4xl:text-[81px]">{t.closing.title}</h2>
+            <h2 className="mt-8 font-serif text-4xl leading-[1.04] tracking-[-0.02em] text-navy text-balance @4xl:text-[86px]">{t.closing.title}</h2>
           </Reveal>
           <Reveal delay={0.2}>
-            <p className="mt-6 font-serif text-xl italic text-forest @4xl:text-[32px]">{l(company.signature)}</p>
+            <p className="mt-6 font-serif text-xl italic text-forest @4xl:text-[37px]">{l(company.signature)}</p>
           </Reveal>
         </div>
         <div className="flex flex-col gap-5">
@@ -32,7 +32,7 @@ export function ClosingSlide() {
           <div className="text-xs font-semibold uppercase tracking-[0.2em] text-slate">{t.closing.contact}</div>
           <ul className="mt-4 flex flex-col gap-3">
             {items.map(({ icon: Icon, value, href }) => (
-              <li key={value} className="flex items-center gap-3 text-base text-ink @4xl:text-[25px]">
+              <li key={value} className="flex items-center gap-3 text-base text-ink @4xl:text-[29px]">
                 <Icon className="size-5 shrink-0 text-forest" aria-hidden />
                 {href ? (
                   <a href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noreferrer" className="hover:underline">
@@ -54,10 +54,10 @@ export function ClosingSlide() {
             >
               <img src={p.image} alt={p.name} className="h-16 w-auto shrink-0 rounded-md object-contain shadow-sm @4xl:h-20" draggable={false} />
               <div className="min-w-0">
-                <p className="font-semibold text-navy @4xl:text-[18px]" style={{ color: p.accent }}>
+                <p className="font-semibold text-navy @4xl:text-[21.5px]" style={{ color: p.accent }}>
                   {p.name}
                 </p>
-                <p className="text-[13px] leading-snug text-slate @4xl:text-[14px]">{p.usage?.text.fr}</p>
+                <p className="text-[15.5px] leading-snug text-slate @4xl:text-[17px]">{p.usage?.text.fr}</p>
               </div>
             </Reveal>
           ))}

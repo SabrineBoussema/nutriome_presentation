@@ -53,7 +53,7 @@ export function SlideShell({ children, accent, label, product, headerPackshot = 
 export function SlideTitle({ children, className = '' }: { children: ReactNode; className?: string }) {
   return (
     <h2
-      className={`font-serif text-[2.1rem] leading-[1.05] tracking-[-0.015em] text-balance @4xl:text-[68px] ${className}`}
+      className={`font-serif text-[2.4rem] leading-[1.05] tracking-[-0.015em] text-balance @4xl:text-[76px] ${className}`}
     >
       {children}
     </h2>
