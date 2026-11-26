@@ -92,4 +92,4 @@ export function useTr() {
   return (fr: string, en: string) => (lang === 'fr' ? fr : en)
 }
 
-export const FONT = { fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }
+export const FONT = { fontFamily: "'Source Sans 3', ui-sans-serif, system-ui, sans-serif" }

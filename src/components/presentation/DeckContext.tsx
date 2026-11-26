@@ -3,7 +3,7 @@ import type { SlideDef } from '../../data/presentation'
 
 interface DeckActions {
   slides: SlideDef[]
-  goToSlideId: (id: string) => void
+  goToSlideId: (id: string, step?: number) => void
 }
 
 export const DeckContext = createContext<DeckActions>({ slides: [], goToSlideId: () => {} })

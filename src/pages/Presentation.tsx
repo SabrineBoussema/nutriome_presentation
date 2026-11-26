@@ -1,12 +1,11 @@
-import { useMemo } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useCallback } from 'react'
 import { Deck } from '../components/presentation/Deck'
-import { parseMode } from '../data/mechanisms'
+import type { PresentationMode } from '../data/modes'
 import { buildDeck } from '../data/presentation'
+import { usePresentationMode } from '../hooks/usePresentationMode'
 
 export default function Presentation() {
-  const [params] = useSearchParams()
-  const mode = parseMode(params.get('mode'))
-  const slides = useMemo(() => buildDeck(undefined, mode), [mode])
-  return <Deck slides={slides} />
+  const build = useCallback((m: PresentationMode) => buildDeck(undefined, m), [])
+  const { mode, slides, setMode } = usePresentationMode(build)
+  return <Deck slides={slides} modeSwitch={{ mode, onChange: setMode }} />
 }

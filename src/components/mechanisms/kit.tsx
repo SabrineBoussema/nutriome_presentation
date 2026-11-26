@@ -15,7 +15,7 @@ export const useRuntime = () => useContext(RuntimeContext)
 export const INK = '#16222f'
 export const SLATE = '#46515e'
 export const MG = '#1b6fa8'
-export const FONT_STYLE = { fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }
+export const FONT_STYLE = { fontFamily: "'Source Sans 3', ui-sans-serif, system-ui, sans-serif" }
 
 /**
  * Particles travelling along an SVG path (SMIL animateMotion: GPU-cheap, pausable with svg.pauseAnimations()).

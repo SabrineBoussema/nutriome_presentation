@@ -11,8 +11,12 @@ import {
   Play,
   Check,
   Home,
+  SlidersHorizontal,
+  ClipboardList,
 } from 'lucide-react'
-import { useState, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { createPortal } from 'react-dom'
+import { PRESENTATION_MODES, type PresentationMode } from '../../data/modes'
 import { Link } from 'react-router-dom'
 import { presentationConfig } from '../../data/presentation'
 import { useI18n } from '../../i18n'
@@ -39,6 +43,90 @@ interface ControlBarProps {
   backHref?: string
   padIndex?: boolean
   extraLink?: { to: string; label: string }
+  modeSwitch?: { mode: PresentationMode; onChange: (mode: PresentationMode) => void }
+  /** Field sales kit for the current product */
+  kitHref?: string
+}
+
+/** Presentation mode menu (Scientifique / Commercial / Visite express) + link to the field sales kit. */
+function ModeMenu({ modeSwitch, kitHref }: { modeSwitch: NonNullable<ControlBarProps['modeSwitch']>; kitHref?: string }) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+  const menuRef = useRef<HTMLDivElement>(null)
+  const current = PRESENTATION_MODES.find((m) => m.id === modeSwitch.mode)!
+  useEffect(() => {
+    if (!open) return
+    const close = (e: PointerEvent) => {
+      if (!ref.current?.contains(e.target as Node) && !menuRef.current?.contains(e.target as Node)) setOpen(false)
+    }
+    const esc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.stopPropagation()
+        setOpen(false)
+      }
+    }
+    window.addEventListener('pointerdown', close)
+    window.addEventListener('keydown', esc, true)
+    return () => {
+      window.removeEventListener('pointerdown', close)
+      window.removeEventListener('keydown', esc, true)
+    }
+  }, [open])
+  return (
+    <div ref={ref} className="relative shrink-0">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-haspopup="menu"
+        aria-expanded={open}
+        title="Mode de présentation"
+        className={`flex h-9 items-center gap-1.5 rounded-full px-3 text-[12px] font-semibold transition-colors ${open ? 'bg-white text-navy' : 'text-white/85 ring-1 ring-white/15 hover:bg-white/10'}`}
+      >
+        <SlidersHorizontal className="size-3.5" aria-hidden />
+        {current.label}
+      </button>
+      {open &&
+        createPortal(
+        <div
+          ref={menuRef}
+          role="menu"
+          aria-label="Mode de présentation"
+          className="no-print fixed bottom-[76px] left-1/2 z-[60] w-[300px] -translate-x-1/2 rounded-2xl bg-navy p-2 text-white shadow-[0_24px_60px_-20px_rgb(0_0_0/0.7)] ring-1 ring-white/10"
+        >
+          {PRESENTATION_MODES.map((m) => (
+            <button
+              key={m.id}
+              type="button"
+              role="menuitemradio"
+              aria-checked={m.id === modeSwitch.mode}
+              onClick={() => {
+                modeSwitch.onChange(m.id)
+                setOpen(false)
+              }}
+              className={`flex w-full flex-col items-start rounded-xl px-3 py-2 text-left transition-colors ${m.id === modeSwitch.mode ? 'bg-white/15' : 'hover:bg-white/10'}`}
+            >
+              <span className="text-[13px] font-semibold">{m.label}</span>
+              <span className="text-[11.5px] leading-snug text-white/60">{m.hint}</span>
+            </button>
+          ))}
+          {kitHref && (
+            <Link
+              to={kitHref}
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              className="mt-1 flex items-center gap-2 rounded-xl border-t border-white/10 px-3 pt-2.5 pb-2 text-[13px] font-semibold text-amber hover:bg-white/10"
+              onClick={() => setOpen(false)}
+            >
+              <ClipboardList className="size-4" aria-hidden />
+              Argumentaire terrain (nouvel onglet)
+            </Link>
+          )}
+        </div>,
+          document.body,
+        )}
+    </div>
+  )
 }
 
 function IconButton({ label, onClick, active, children, disabled }: { label: string; onClick?: () => void; active?: boolean; children: ReactNode; disabled?: boolean }) {
@@ -135,6 +223,13 @@ export function ControlBar(props: ControlBarProps) {
           <IconButton label={props.fullscreen.isFullscreen ? t.nav.exitFullscreen : t.nav.fullscreen} onClick={props.fullscreen.toggle}>
             {props.fullscreen.isFullscreen ? <Minimize className="size-4" /> : <Maximize className="size-4" />}
           </IconButton>
+        )}
+
+        {props.modeSwitch && (
+          <>
+            <span className="mx-1 h-6 w-px shrink-0 bg-white/15" />
+            <ModeMenu modeSwitch={props.modeSwitch} kitHref={props.kitHref} />
+          </>
         )}
 
         {props.extraLink && (

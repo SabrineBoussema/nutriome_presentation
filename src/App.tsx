@@ -6,6 +6,7 @@ import Presentation from './pages/Presentation'
 const Direction = lazy(() => import('./pages/Direction'))
 const ProductDetail = lazy(() => import('./pages/ProductDetail'))
 const PrintDeck = lazy(() => import('./pages/PrintDeck'))
+const SalesKit = lazy(() => import('./pages/SalesKit'))
 
 function NotFound() {
   const { t } = useI18n()
@@ -30,6 +31,7 @@ export default function App() {
             <Route path="/nutriome_direction" element={<Direction />} />
             <Route path="/products/:slug" element={<ProductDetail />} />
             <Route path="/print" element={<PrintDeck />} />
+            <Route path="/argumentaire" element={<SalesKit />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

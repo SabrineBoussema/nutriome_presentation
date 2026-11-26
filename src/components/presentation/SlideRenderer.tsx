@@ -1,4 +1,23 @@
 import { getProduct } from '../../data/products'
+import {
+  Bio3MagComfortSlide,
+  Bio3MagComplementSlide,
+  Bio3MagEnzymesSlide,
+  Bio3MagIntroSlide,
+  Bio3MagSaltsSlide,
+  Bio3MagSynthesisSlide,
+} from '../bio3mag/Bio3MagStorySlides'
+import {
+  BdAxesSlide,
+  BdIntroSlide,
+  BdMoleculeSlide,
+  BdOriginSlide,
+  BdSynthesisSlide,
+  BdTimelineSlide,
+  BdWhySlide,
+} from '../biodigest/BioDigestStorySlides'
+import { BdComplexSlide, BdHeritageSlide, BdMucosaSlide } from '../biodigest/BioDigestVisitSlides'
+import { ProductPitchSlide } from '../commercial/ProductPitchSlide'
 import type { SlideDef } from '../../data/presentation'
 import { useI18n } from '../../i18n'
 import { MagMoleculesSlide, MagPillarsSlide } from '../products/bio3mag/Bio3MagSlides'
@@ -73,6 +92,40 @@ export function SlideRenderer({ slide }: { slide: SlideDef }) {
       return <MagMoleculesSlide product={product} />
     case 'mag-physiology':
       return <ScienceSlide product={product} diagram="magnesium-atp" eyebrow={t.bio3mag.physiologyEyebrow} title={t.bio3mag.physiologyTitle} />
+    case 'b3m-intro':
+      return <Bio3MagIntroSlide product={product} />
+    case 'b3m-salts':
+      return <Bio3MagSaltsSlide product={product} />
+    case 'b3m-complement':
+      return <Bio3MagComplementSlide product={product} />
+    case 'b3m-enzymes':
+      return <Bio3MagEnzymesSlide product={product} />
+    case 'b3m-comfort':
+      return <Bio3MagComfortSlide product={product} />
+    case 'b3m-synthesis':
+      return <Bio3MagSynthesisSlide product={product} />
+    case 'bd-intro':
+      return <BdIntroSlide product={product} />
+    case 'bd-origin':
+      return <BdOriginSlide product={product} />
+    case 'bd-timeline':
+      return <BdTimelineSlide product={product} />
+    case 'bd-molecule':
+      return <BdMoleculeSlide product={product} />
+    case 'bd-axes':
+      return <BdAxesSlide product={product} />
+    case 'bd-why':
+      return <BdWhySlide product={product} />
+    case 'bd-synthesis':
+      return <BdSynthesisSlide product={product} />
+    case 'bd-complex':
+      return <BdComplexSlide product={product} />
+    case 'bd-heritage':
+      return <BdHeritageSlide product={product} />
+    case 'bd-mucosa':
+      return <BdMucosaSlide product={product} />
+    case 'product-pitch':
+      return <ProductPitchSlide product={product} />
     case 'q10-highlights':
       return <Q10HighlightsSlide product={product} />
     case 'q10-reveal':

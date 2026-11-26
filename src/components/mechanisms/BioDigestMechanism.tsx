@@ -188,65 +188,6 @@ function AlterationScene() {
   )
 }
 
-function ZncScene() {
-  const { reduced } = useRuntime()
-  const film = [-46, -24, 0, 24, 46]
-  return (
-    <Scene>
-      <Mucosa state="damaged" />
-      {/* inset: the complex */}
-      <g transform="translate(398,22)">
-        <rect width={178} height={112} rx={14} fill="white" stroke="#d5dee7" />
-        <ZnGlyph x={50} y={56} s={2} />
-        <text x={96} y={44} fontSize={12.5} fontWeight={700} fill={INK}>
-          Zinc
-        </text>
-        <text x={96} y={62} fontSize={12.5} fontWeight={700} fill={LEAF}>
-          + L-carnosine
-        </text>
-        <text x={96} y={80} fontSize={11.5} fill={SLATE}>
-          complexe 1:1
-        </text>
-      </g>
-      {[0, 1, 2].map((i) => (
-        <PathParticlesZn key={i} d={`M${120 + i * 70} 40 C${160 + i * 50} 110 ${lesionCenter - 30 + i * 30} 140 ${lesionCenter - 30 + i * 30} 228`} delay={i * 0.8} />
-      ))}
-      {/* accumulation on the damaged area */}
-      {film.map((dx, i) => (
-        <motion.g key={dx} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: reduced ? 0 : 1.4 + i * 0.25, duration: 0.5 }}>
-          <ZnGlyph x={lesionCenter + dx} y={EPI_TOP + 40 - Math.abs(dx) * 0.4} s={0.9} />
-        </motion.g>
-      ))}
-      <Appear delay={0.6}>
-        <Callout x={30} y={60} text="Zinc-L-carnosine" color={LEAF} size={15} sub="66 mg par gélule" />
-      </Appear>
-      <Appear delay={2}>
-        <Callout x={lesionCenter} y={334} text="Interaction locale avec la zone lésée" color={GREEN} size={15} anchor="middle" />
-        <text x={lesionCenter} y={354} textAnchor="middle" fontSize={12.5} fill={SLATE}>
-          (données principalement expérimentales)
-        </text>
-      </Appear>
-    </Scene>
-  )
-}
-
-/** Zinc-carnosine complexes drifting toward the lesion. */
-function PathParticlesZn({ d, delay }: { d: string; delay: number }) {
-  const { reduced } = useRuntime()
-  return (
-    <g>
-      <g>
-        <ZnGlyph x={0} y={0} s={0.9} />
-        {reduced ? (
-          <animateMotion dur="1s" path={d} keyPoints="0.5;0.5" keyTimes="0;1" calcMode="linear" fill="freeze" />
-        ) : (
-          <animateMotion dur="3.6s" path={d} begin={`${-delay}s`} repeatCount="indefinite" />
-        )}
-      </g>
-    </g>
-  )
-}
-
 function CytoprotectionScene() {
   return (
     <Scene>
@@ -478,18 +419,191 @@ function MicrobiotaScene() {
   )
 }
 
+function HPyloriScene() {
+  const { reduced } = useRuntime()
+  const bars = [
+    { label: 'Trithérapie seule', value: 61.4, color: '#9aa3ad' },
+    { label: '+ polaprezinc 75 mg ×2', value: 81.1, color: LEAF },
+    { label: '+ polaprezinc 150 mg ×2', value: 83.3, color: GREEN },
+  ]
+  const H = 190
+  return (
+    <Scene>
+      <text x={18} y={30} fontSize={13} fontWeight={700} fill={SLATE} letterSpacing="2">
+        ESTOMAC · H. PYLORI
+      </text>
+      {/* bacteria on the mucosa, triple therapy, zinc-carnosine */}
+      <rect x={18} y={120} width={250} height={26} rx={8} fill="#f3e7c9" />
+      {[0, 1, 2, 3, 4].map((i) => (
+        <rect key={i} x={18 + i * 50} y={148} width={46} height={64} rx={9} fill="#fbe3dc" stroke="#e3a99b" />
+      ))}
+      <Bacterium x={70} y={104} rot={-10} color="#7b6a9e" />
+      <Bacterium x={150} y={92} rot={16} color="#7b6a9e" />
+      <Bacterium x={220} y={108} rot={-24} color="#7b6a9e" />
+      {['IPP', 'ATB', 'ATB'].map((t, i) => (
+        <g key={i} transform={`translate(${46 + i * 62},58)`}>
+          <rect x={-24} y={-11} width={48} height={22} rx={11} fill="white" stroke={SLATE} strokeWidth={1.5} />
+          <text y={5} textAnchor="middle" fontSize={11} fontWeight={700} fill={SLATE}>
+            {t}
+          </text>
+        </g>
+      ))}
+      <ZnGlyph x={238} y={58} s={1} />
+      <text x={143} y={246} textAnchor="middle" fontSize={12.5} fill={SLATE}>
+        Trithérapie + zinc L-carnosine (polaprezinc)
+      </text>
+      {/* Tan 2017 — per-protocol eradication */}
+      <g transform="translate(300,40)">
+        <text x={0} y={0} fontSize={13} fontWeight={700} fill={INK}>
+          Éradication de H. pylori
+        </text>
+        <text x={0} y={18} fontSize={11.5} fill={SLATE}>
+          Tan 2017 · 303 patients · per protocole
+        </text>
+        <line x1={0} y1={40 + H} x2={276} y2={40 + H} stroke="#d5dee7" />
+        {bars.map((b, i) => {
+          const h = (b.value / 100) * H
+          const x = 14 + i * 90
+          return (
+            <g key={b.label}>
+              <motion.rect
+                x={x}
+                width={62}
+                rx={8}
+                fill={b.color}
+                initial={reduced ? false : { y: 40 + H, height: 0 }}
+                animate={{ y: 40 + H - h, height: h }}
+                transition={{ delay: 0.5 + i * 0.25, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+              />
+              <text x={x + 31} y={40 + H - h - 8} textAnchor="middle" fontSize={15} fontWeight={800} fill={b.color === '#9aa3ad' ? SLATE : GREEN}>
+                {b.value.toLocaleString('fr-FR')} %
+              </text>
+              {b.label.split(' ').reduce<string[]>((lines, w) => {
+                const last = lines[lines.length - 1]
+                if (last && (last + ' ' + w).length <= 13) lines[lines.length - 1] = last + ' ' + w
+                else lines.push(w)
+                return lines
+              }, []).map((line, k) => (
+                <text key={k} x={x + 31} y={40 + H + 18 + k * 14} textAnchor="middle" fontSize={11} fill={SLATE}>
+                  {line}
+                </text>
+              ))}
+            </g>
+          )
+        })}
+      </g>
+      <text x={295} y={340} textAnchor="middle" fontSize={12.5} fontWeight={600} fill={GREEN}>
+        Méta-analyse 2022 : 3 essais, 396 participants — preuves encore limitées
+      </text>
+      <text x={295} y={360} textAnchor="middle" fontSize={12} fill={SLATE}>
+        Résultats du polaprezinc médicament, pas de BioDigest
+      </text>
+    </Scene>
+  )
+}
+
+function DrugsScene() {
+  const villi = Array.from({ length: 7 }, (_, i) => 20 + i * 80)
+  const lesions = [1, 3, 5]
+  return (
+    <Scene>
+      <text x={18} y={30} fontSize={13} fontWeight={700} fill={SLATE} letterSpacing="2">
+        INTESTIN GRÊLE
+      </text>
+      {/* NSAID / aspirin tablets */}
+      {[
+        { x: 120, label: 'AINS' },
+        { x: 230, label: 'Aspirine' },
+      ].map((t) => (
+        <g key={t.label} transform={`translate(${t.x},64)`}>
+          <circle r={16} fill="white" stroke={SLATE} strokeWidth={1.5} />
+          <line x1={-11} y1={0} x2={11} y2={0} stroke={SLATE} strokeWidth={1.5} />
+          <text y={34} textAnchor="middle" fontSize={12.5} fontWeight={700} fill={SLATE}>
+            {t.label}
+          </text>
+        </g>
+      ))}
+      {[380, 430, 480].map((x, i) => (
+        <ZnGlyph key={x} x={x} y={70 + (i % 2) * 18} s={0.9} />
+      ))}
+      <text x={430} y={124} textAnchor="middle" fontSize={12.5} fontWeight={600} fill={GREEN}>
+        Zinc L-carnosine
+      </text>
+      {villi.map((x, i) => (
+        <g key={x}>
+          <path
+            d={`M${x} 300 L${x} 190 Q${x} 160 ${x + 35} 160 Q${x + 70} 160 ${x + 70} 190 L${x + 70} 300 Z`}
+            fill="#fbe3dc"
+            stroke="#e3a99b"
+            strokeWidth={1.3}
+          />
+          {lesions.includes(i) && (
+            <g className="mech-anim mech-breathe">
+              <ellipse cx={x + 35} cy={178} rx={14} ry={7} fill={ACID} opacity={0.7} />
+            </g>
+          )}
+        </g>
+      ))}
+      <rect x={6} y={300} width={578} height={30} rx={8} fill="#fbe9e4" />
+      <Appear delay={0.6}>
+        <g transform="translate(14,346)">
+          <rect width={272} height={76} rx={14} fill="white" stroke="#d5dee7" />
+          <text x={14} y={24} fontSize={11.5} fontWeight={800} fill={GREEN} letterSpacing="1">
+            AINS · MAHMOOD 2007 (GUT)
+          </text>
+          <text x={14} y={46} fontSize={13} fill={INK}>
+            10 volontaires sains, indométacine :
+          </text>
+          <text x={14} y={64} fontSize={13} fill={INK}>
+            hausse de perméabilité limitée
+          </text>
+        </g>
+        <g transform="translate(302,346)">
+          <rect width={272} height={76} rx={14} fill="white" stroke="#d5dee7" />
+          <text x={14} y={24} fontSize={11.5} fontWeight={800} fill={GREEN} letterSpacing="1">
+            ASPIRINE · WATARI 2013
+          </text>
+          <text x={14} y={46} fontSize={13} fill={INK}>
+            Essai pilote, 20 patients :
+          </text>
+          <text x={14} y={64} fontSize={13} fill={INK}>
+            moins de lésions en vidéocapsule
+          </text>
+        </g>
+      </Appear>
+    </Scene>
+  )
+}
+
 const SCENES: Record<string, () => React.ReactElement> = {
   alteration: AlterationScene,
-  znc: ZncScene,
+  hpylori: HPyloriScene,
+  drugs: DrugsScene,
   cytoprotection: CytoprotectionScene,
   repair: RepairScene,
   physiology: PhysiologyScene,
   microbiota: MicrobiotaScene,
 }
 
+/** Standalone scene for drawers / modals on the condensed BioDigest visit slides. */
+export function BioDigestScene({ id }: { id: string }) {
+  const Comp = SCENES[id]
+  if (!Comp) return null
+  return (
+    <svg viewBox={`0 0 ${PANEL_W} ${PANEL_H}`} className="h-auto w-full" style={FONT_STYLE} role="img">
+      <defs>
+        <marker id="bd-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M1 1L8 5L1 9" fill="none" stroke={LEAF} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+        </marker>
+      </defs>
+      <Comp />
+    </svg>
+  )
+}
+
 export function BioDigestVisual({ stage, stages, goToStageId, replayKey, interactive = true }: VisualContext & { interactive?: boolean }) {
   const SceneComp = SCENES[stage.id]
-  const focus = stage.id === 'microbiota' ? 'intestine' : 'stomach'
+  const focus = stage.id === 'microbiota' || stage.id === 'drugs' ? 'intestine' : 'stomach'
   const target = HOTSPOTS.find((h) => h.id === focus)!
   const available = new Set(stages.map((s) => s.id))
   return (

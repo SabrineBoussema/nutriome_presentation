@@ -3,7 +3,7 @@ import { AnimatePresence, MotionConfig, motion, useReducedMotion } from 'motion/
 import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { evidence, LEVEL_LABEL, STATUS_LABEL } from '../../data/evidence'
-import { parseMode, stagesFor, type MechanismMode, type MechanismProductId, type MechanismStage } from '../../data/mechanisms'
+import { parseMode, stagesFor, type MechanismProductId, type MechanismStage } from '../../data/mechanisms'
 import { presentationConfig } from '../../data/presentation'
 import type { Product } from '../../data/types'
 import { useSlide } from '../presentation/SlideContext'
@@ -43,7 +43,7 @@ export function MechanismEngine({
   renderVisual: (ctx: VisualContext) => ReactNode
 }) {
   const { step, goToStep, layout } = useSlide()
-  const [params, setParams] = useSearchParams()
+  const [params] = useSearchParams()
   const mode = parseMode(params.get('mode'))
   const review = presentationConfig.showValidationBadges || params.get('review') === '1'
   const stages = stagesFor(productId, mode)
@@ -70,21 +70,6 @@ export function MechanismEngine({
     },
     [stages, go],
   )
-
-  const setMode = (m: MechanismMode) => {
-    if (m === mode) return
-    setParams(
-      (prev) => {
-        const next = new URLSearchParams(prev)
-        if (m === 'express') next.set('mode', 'express')
-        else next.delete('mode')
-        return next
-      },
-      { replace: true },
-    )
-    // stage lists differ between modes: restart from the first stage
-    window.setTimeout(() => goToStep?.(0), 0)
-  }
 
   const restart = useCallback(() => {
     setReplayKey((k) => k + 1)
@@ -124,7 +109,7 @@ export function MechanismEngine({
     return () => document.removeEventListener('visibilitychange', onVis)
   }, [])
 
-  // Local shortcuts (the deck owns ←/→/space): K = play/pause, R = restart, E = express/expert, B = references
+  // Local shortcuts (the deck owns ←/→/space): K = play/pause, R = restart, B = references
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.metaKey || e.ctrlKey || e.altKey) return
@@ -137,9 +122,6 @@ export function MechanismEngine({
         case 'r':
           restart()
           break
-        case 'e':
-          setMode(mode === 'express' ? 'expert' : 'express')
-          break
         case 'b':
           setRefsOpen((v) => !v)
           break
@@ -150,7 +132,7 @@ export function MechanismEngine({
   })
 
   // Express: one key message. Expert: the evidence cards. Never both (they would repeat each other).
-  const visibleClaims = (mode === 'express' ? [] : stage.claims)
+  const visibleClaims = (mode === 'express' ? [] : stage.claims.slice(0, 2))
     .map((id) => evidence[id])
     .filter((c) => c && c.status !== 'unsupported')
 
@@ -185,22 +167,6 @@ export function MechanismEngine({
               </AnimatePresence>
             </div>
             <div className="flex shrink-0 items-center gap-3">
-              <div role="radiogroup" aria-label="Mode de présentation" className="flex rounded-full border border-navy/15 bg-white p-1">
-                {(['express', 'expert'] as const).map((m) => (
-                  <button
-                    key={m}
-                    type="button"
-                    role="radio"
-                    aria-checked={mode === m}
-                    onClick={() => setMode(m)}
-                    title={m === 'express' ? 'Visite courte : étapes clés (E)' : 'Discussion scientifique : toutes les étapes (E)'}
-                    className={`min-h-10 rounded-full px-4 text-[15px] font-semibold transition-colors ${mode === m ? 'text-white' : 'text-slate hover:text-navy'}`}
-                    style={mode === m ? { background: accent } : undefined}
-                  >
-                    {m === 'express' ? 'Express' : 'Expert'}
-                  </button>
-                ))}
-              </div>
               <button
                 type="button"
                 onClick={() => setRefsOpen(true)}

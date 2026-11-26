@@ -24,7 +24,7 @@ export function SlideShell({ children, accent, label, product, headerPackshot = 
     <section className={`relative flex min-h-full w-full flex-col overflow-hidden bg-ivory grain @4xl:h-full ${className}`}>
       {!hideLogo && (
         <header className="relative z-10 flex items-center justify-between gap-5 px-6 pt-5 @4xl:px-20 @4xl:pt-7">
-          <Logo className="h-14 w-auto @4xl:h-20" />
+          <Logo className="h-14 w-auto shrink-0 @4xl:h-20" />
           {showHeaderPackshot && product ? (
             <img
               src={product.image}
@@ -45,7 +45,7 @@ export function SlideShell({ children, accent, label, product, headerPackshot = 
           )}
         </header>
       )}
-      <div className="relative z-10 flex flex-1 flex-col px-6 pb-28 pt-5 @4xl:px-20 @4xl:pb-24 @4xl:pt-5">{children}</div>
+      <div className="relative z-10 flex flex-1 flex-col px-6 pb-28 pt-5 @4xl:min-h-0 @4xl:px-20 @4xl:pb-24 @4xl:pt-5">{children}</div>
     </section>
   )
 }

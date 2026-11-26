@@ -587,7 +587,7 @@ export function TherapeuticSchema({ product, className }: { product: Product; cl
       ))}
 
       <Appear delay={0.9}>
-        <text x={CX} y={H - 22} textAnchor="middle" fontSize={24} fontStyle="italic" fill="#46515e" style={{ fontFamily: "'Fraunces', Georgia, serif" }}>
+        <text x={CX} y={H - 22} textAnchor="middle" fontSize={24} fontStyle="italic" fill="#46515e" style={{ fontFamily: "'Newsreader', Georgia, serif" }}>
           {tr(def.caption[0], def.caption[1])}
         </text>
       </Appear>

@@ -1,9 +1,9 @@
 @import 'tailwindcss';
 
 @theme {
-  /* Highly legible pairing for projection: Fraunces (headlines) + Plus Jakarta Sans (text) */
-  --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-serif: 'Fraunces', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  /* Scientific pairing for projection: Newsreader (titres, fonderie Production Type) + Source Sans 3 (texte) */
+  --font-sans: 'Source Sans 3', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-serif: 'Newsreader', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
 
   /* Nutriome identity — derived from the logo (forest green + amber) and the navy of the existing deck */
   --color-ivory: #faf7f0;
@@ -207,3 +207,13 @@
   stroke: var(--color-amber);
   stroke-width: 5;
 }
+
+/* Mini animations (Bio3Mag storyline) */
+@keyframes mech-mini-left { 0%, 15% { transform: translateX(0); } 45%, 60% { transform: translateX(12px); } 90%, 100% { transform: translateX(0); } }
+@keyframes mech-mini-right { 0%, 15% { transform: translateX(0); } 45%, 60% { transform: translateX(-12px); } 90%, 100% { transform: translateX(0); } }
+.mech-mini-left { animation: mech-mini-left 3.2s ease-in-out infinite; transform-box: view-box; }
+.mech-mini-right { animation: mech-mini-right 3.2s ease-in-out infinite; transform-box: view-box; }
+@keyframes mech-spin { to { transform: rotate(360deg); } }
+.mech-spin { animation: mech-spin 9s linear infinite; }
+@keyframes mech-wave { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+.mech-wave { animation: mech-wave 3.4s ease-in-out infinite; }

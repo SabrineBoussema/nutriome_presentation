@@ -10,6 +10,8 @@ export interface SlideState {
   layout: 'canvas' | 'flow'
   /** Jump to a step of the current slide (interactive slides). Absent in print. */
   goToStep?: (step: number) => void
+  /** Key message of the current slide, displayed by SlideShell */
+  takeaway?: string
 }
 
 export const SlideContext = createContext<SlideState>({ step: 0, steps: 1, isPrint: false, layout: 'canvas' })

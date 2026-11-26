@@ -1,4 +1,4 @@
-import { ArrowUpRight, FlaskRound, Sparkles } from 'lucide-react'
+import { ArrowUpRight, FlaskRound } from 'lucide-react'
 import { motion } from 'motion/react'
 import { catalog } from '../../../data/products'
 import { useI18n } from '../../../i18n'
@@ -35,7 +35,6 @@ export function PortfolioSlide() {
       <div className="mt-6 grid flex-1 grid-cols-1 gap-3 @md:grid-cols-2 @4xl:mt-8 @4xl:grid-cols-4 @4xl:grid-rows-2 @4xl:gap-4">
         {catalog.map((p, i) => {
           const target = firstSlideId(p.slug)
-          const isNew = p.story !== 'standard'
           return (
             <Reveal key={p.id} delay={0.12 + i * 0.06} className="min-h-0">
               <motion.button
@@ -48,18 +47,13 @@ export function PortfolioSlide() {
                   target ? 'transition-shadow hover:shadow-[0_40px_70px_-36px_rgb(14_26_43/0.55)]' : 'cursor-default'
                 }`}
               >
-                <div className="relative flex flex-1 items-center justify-center px-3 pb-3 pt-11" style={{ background: `linear-gradient(160deg, ${p.accentSoft}, #fff)` }}>
+                <div className="relative flex flex-1 items-center justify-center px-3 py-3" style={{ background: `linear-gradient(160deg, ${p.accentSoft}, #fff)` }}>
                   <img
                     src={p.image}
                     alt={p.name}
                     loading="lazy"
                     className="max-h-28 w-auto max-w-full rounded-[4px] object-contain shadow-md transition-transform duration-500 group-hover:scale-[1.04] @4xl:max-h-[118px]"
                   />
-                  {isNew && (
-                    <span className="absolute left-3 top-2.5 inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold text-white" style={{ background: p.accent }}>
-                      <Sparkles className="size-3" aria-hidden /> {t.common.newProduct}
-                    </span>
-                  )}
                 </div>
                 <div className="flex items-start justify-between gap-2 px-4 pb-3 pt-2">
                   <div className="min-w-0">

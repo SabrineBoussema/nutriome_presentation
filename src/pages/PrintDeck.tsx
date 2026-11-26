@@ -68,7 +68,7 @@ export default function PrintDeck() {
             className="print-slide slide-canvas @container relative overflow-hidden bg-ivory shadow-xl"
             style={{ width: DESIGN_WIDTH, height: DESIGN_HEIGHT }}
           >
-            <SlideContext.Provider value={{ step: slide.steps - 1, steps: slide.steps, isPrint: true, layout: 'canvas' }}>
+            <SlideContext.Provider value={{ step: slide.steps - 1, steps: slide.steps, isPrint: true, layout: 'canvas', takeaway: slide.takeaway }}>
               <SlideRenderer slide={slide} />
             </SlideContext.Provider>
           </div>

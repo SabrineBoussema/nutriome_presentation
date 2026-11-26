@@ -10,7 +10,7 @@ import { useSlide } from '../SlideContext'
 export function OpeningSlide() {
   const { l, t } = useI18n()
   const { isPrint, layout } = useSlide()
-  const spread = layout === 'flow' ? 62 : 168
+  const spread = layout === 'flow' ? 92 : 252
   const fan = catalog.slice(0, 5)
   const center = (fan.length - 1) / 2
 
@@ -43,10 +43,16 @@ export function OpeningSlide() {
         </Reveal>
 
         {/* product collection */}
-        <div className="relative mt-10 flex min-h-56 w-full max-w-5xl flex-1 items-end justify-center @4xl:mt-6">
+        <div className="relative mt-10 flex min-h-56 w-full max-w-[1400px] flex-1 items-end justify-center @4xl:mt-4">
           {fan.map((p, i) => {
             const offset = i - center
-            const final = { x: offset * spread, y: Math.abs(offset) * (layout === 'flow' ? 12 : 26), rotate: offset * 6, opacity: 1, scale: 1 - Math.abs(offset) * 0.06 }
+            const final = {
+              x: offset * spread,
+              y: Math.abs(offset) * (layout === 'flow' ? 10 : 18),
+              rotate: offset * 7.5,
+              opacity: 1,
+              scale: 1 - Math.abs(offset) * 0.04,
+            }
             return (
               <motion.div
                 key={p.id}

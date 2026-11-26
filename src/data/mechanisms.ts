@@ -100,21 +100,11 @@ export const mechanismStages: Record<MechanismProductId, MechanismStage[]> = {
       duration: 9,
     },
     {
-      id: 'znc',
-      label: 'Zinc-L-carnosine',
-      title: 'Le complexe zinc-L-carnosine',
-      lead: 'Le zinc-L-carnosine est un complexe zinc / L-carnosine dont l’action locale sur la muqueuse lésée a été étudiée.',
-      claims: ['znc-local', 'znc-complex'],
-      express: true,
-      highlight: 'znc',
-      duration: 10,
-    },
-    {
       id: 'cytoprotection',
-      label: 'Cytoprotection',
+      label: 'Protection',
       title: 'Cytoprotection',
       lead: 'Les études décrivent une action antioxydante, une stabilisation des membranes et une modulation de l’inflammation locale.',
-      claims: ['znc-cytoprotection', 'zinc-oxidative'],
+      claims: ['znc-cytoprotection', 'zinc-oxidative', 'znc-stability'],
       express: false,
       highlight: 'znc',
       duration: 10,
@@ -140,6 +130,28 @@ export const mechanismStages: Record<MechanismProductId, MechanismStage[]> = {
       duration: 10,
     },
     {
+      id: 'hpylori',
+      label: 'H. pylori',
+      title: 'En complément de la prise en charge de H. pylori',
+      lead: 'Ajouté à la trithérapie, le polaprezinc a amélioré le taux d’éradication dans plusieurs essais ; les preuves restent limitées.',
+      claims: ['znc-hpylori', 'znc-hpylori-negative', 'znc-hpylori-tan'],
+      express: true,
+      highlight: 'znc',
+      caveat: 'Résultats obtenus avec le polaprezinc médicament, pas avec BioDigest.',
+      duration: 12,
+    },
+    {
+      id: 'drugs',
+      label: 'AINS et aspirine',
+      title: 'Agressions médicamenteuses',
+      lead: 'Des études ont porté sur certaines lésions digestives associées aux AINS et à l’aspirine.',
+      claims: ['znc-indomethacin', 'znc-aspirin'],
+      express: false,
+      hotspot: 'intestine',
+      caveat: 'Pas de donnée spécifique pour les antibiotiques ou la metformine.',
+      duration: 11,
+    },
+    {
       id: 'microbiota',
       label: 'Environnement intestinal',
       title: 'Barrière intestinale et microbiote',
@@ -161,6 +173,7 @@ export function hasMechanism(productId: string): productId is MechanismProductId
   return productId in mechanismStages
 }
 
+/** Mechanism depth derived from the presentation mode in the URL (?mode=…) */
 export function parseMode(value: string | null): MechanismMode {
-  return value === 'express' ? 'express' : 'expert'
+  return value === 'express' || value === 'commercial' ? 'express' : 'expert'
 }

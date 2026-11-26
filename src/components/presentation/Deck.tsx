@@ -7,6 +7,7 @@ import { useIdle } from '../../hooks/useIdle'
 import { DESIGN_HEIGHT, DESIGN_WIDTH, useStageLayout } from '../../hooks/useStageLayout'
 import { useSwipe } from '../../hooks/useSwipe'
 import { useI18n } from '../../i18n'
+import type { PresentationMode } from '../../data/modes'
 import { ControlBar } from '../navigation/ControlBar'
 import { NotesPanel } from '../navigation/NotesPanel'
 import { Overview } from '../navigation/Overview'
@@ -30,6 +31,8 @@ interface DeckProps {
   atmosphere?: 'navy' | 'emerald'
   /** Discrete extra link in the control bar (does not auto-navigate). */
   extraLink?: { to: string; label: string }
+  /** Scientifique / Commercial / Visite express switch in the control bar */
+  modeSwitch?: { mode: PresentationMode; onChange: (mode: PresentationMode) => void }
 }
 
 const variants = {
@@ -47,6 +50,7 @@ export function Deck({
   padIndex = false,
   atmosphere = 'navy',
   extraLink,
+  modeSwitch,
 }: DeckProps) {
   const { l, lang } = useI18n()
   const nav = useDeckNavigation(slides)
@@ -66,6 +70,7 @@ export function Deck({
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const target = e.target
+      if (document.querySelector('[role="dialog"]')) return
       if (target instanceof HTMLElement && target.closest('input, textarea, select, [contenteditable="true"]')) return
       if (e.metaKey || e.ctrlKey || e.altKey) return
       switch (e.key) {
@@ -132,9 +137,9 @@ export function Deck({
   }, [slide, l])
 
   const goToSlideId = useCallback(
-    (id: string) => {
+    (id: string, step?: number) => {
       const i = slides.findIndex((s) => s.id === id)
-      if (i >= 0) goTo(i)
+      if (i >= 0) goTo(i, step !== undefined ? { step } : undefined)
     },
     [slides, goTo],
   )
@@ -163,7 +168,7 @@ export function Deck({
   }
 
   const slideNode = (
-    <SlideContext.Provider value={{ step: nav.step, steps: nav.steps, isPrint: false, layout: layout.mode, goToStep }}>
+    <SlideContext.Provider value={{ step: nav.step, steps: nav.steps, isPrint: false, layout: layout.mode, goToStep, takeaway: slide?.takeaway }}>
       <SlideRenderer slide={slide} />
     </SlideContext.Provider>
   )
@@ -255,6 +260,8 @@ export function Deck({
           backHref={backHref}
           padIndex={padIndex}
           extraLink={extraLink}
+          modeSwitch={modeSwitch}
+          kitHref={`/argumentaire?product=${slide?.productSlug === 'biodigest' ? 'biodigest' : 'bio3mag'}${modeSwitch && modeSwitch.mode !== 'scientifique' ? `&mode=${modeSwitch.mode}` : ''}`}
         />
         <NotesPanel open={notesOpen} slide={slide} next={slides[nav.index + 1]} onClose={() => setNotesOpen(false)} />
         <Overview

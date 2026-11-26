@@ -1,5 +1,7 @@
 import { products, themeCatalog } from './products'
-import { hasMechanism, stagesFor, type MechanismMode } from './mechanisms'
+import { hasMechanism } from './mechanisms'
+import { TAKEAWAYS } from './pitch'
+import { type PresentationMode } from './modes'
 import type { L, Product } from './types'
 
 export const presentationConfig = {
@@ -48,6 +50,23 @@ export type SlideKind =
   | 'direction-welcome'
   | 'direction-program'
   | 'direction-closing'
+  | 'b3m-intro'
+  | 'b3m-salts'
+  | 'b3m-complement'
+  | 'b3m-enzymes'
+  | 'b3m-comfort'
+  | 'b3m-synthesis'
+  | 'bd-intro'
+  | 'bd-origin'
+  | 'bd-timeline'
+  | 'bd-molecule'
+  | 'bd-axes'
+  | 'bd-why'
+  | 'bd-synthesis'
+  | 'bd-complex'
+  | 'bd-heritage'
+  | 'bd-mucosa'
+  | 'product-pitch'
 
 export interface SlideDef {
   id: string
@@ -60,6 +79,8 @@ export interface SlideDef {
   section: L
   title: L
   notes?: L
+  /** One-line key message shown in the slide header (« À retenir ») */
+  takeaway?: string
 }
 
 const S = {
@@ -107,7 +128,7 @@ const SCRIPT: Record<string, { hero: L; composition: L; schema: L; indications: 
   },
 }
 
-function productSlides(p: Product, mode: MechanismMode = 'expert'): SlideDef[] {
+function productSlides(p: Product, mode: PresentationMode = 'scientifique'): SlideDef[] {
   const section: L = { fr: p.name, en: p.name }
   const script = SCRIPT[p.id]
   const base = (kind: SlideKind, title: L, steps = 1, notes?: L): SlideDef => ({
@@ -118,18 +139,19 @@ function productSlides(p: Product, mode: MechanismMode = 'expert'): SlideDef[] {
     section,
     title,
     notes,
+    takeaway: TAKEAWAYS[kind],
   })
   const composition = base('composition', { fr: 'Composition', en: 'Composition' }, 1, script?.composition ?? {
     fr: 'Rappeler la base de calcul de chaque quantité, et signaler les valeurs en attente de validation.',
     en: 'State the basis of each amount, and point out values pending validation.',
   })
-  const schema = base(
-    'illustration',
-    script ? { fr: 'Mécanismes d’action', en: 'Mechanisms of action' } : { fr: 'Mode d’action', en: 'How it works' },
-    // Interactive mechanisms: one deck step per stage, so the clicker / arrow keys walk through the stages
-    hasMechanism(p.id) ? stagesFor(p.id, mode).length : 1,
-    script?.schema,
-  )
+  // Mécanismes d’action — commenté pour l’instant (infographies conservées dans le codebase).
+  // const schema = base(
+  //   'illustration',
+  //   script ? { fr: 'Mécanismes d’action', en: 'Mechanisms of action' } : { fr: 'Mode d’action', en: 'How it works' },
+  //   hasMechanism(p.id) ? stagesFor(p.id, mechanismModeFor(mode)).length : 1,
+  //   script?.schema,
+  // )
   const indications = base(
     'indications',
     { fr: 'Indications thérapeutiques', en: 'Therapeutic indications' },
@@ -152,10 +174,83 @@ function productSlides(p: Product, mode: MechanismMode = 'expert'): SlideDef[] {
       : base('product-hero', { fr: p.name, en: p.name }, 1, script?.hero)
 
   const withIndications = !hasMechanism(p.id) || presentationConfig.showIndicationsWithMechanism
-  return [hero, composition, schema, ...(withIndications ? [indications] : []), posology, ...refs]
+
+  // Commercial & scientific argumentation layer (see data/commercialClaims.ts)
+  if (p.id === 'bio3mag') {
+    // Storyline A → F (data/bio3magStory.ts). The interactive anatomical mechanism stays in scientific mode.
+    const s = (kind: SlideKind, fr: string, notes: string) => base(kind, { fr, en: fr }, 1, { fr: notes, en: notes })
+    const intro = s('b3m-intro', 'Bio3Mag', 'Ouvrir sur la logique de formulation : trois formes choisies pour quatre piliers.')
+    const salts = s(
+      'b3m-salts',
+      'Trois formes de magnésium',
+      'Cliquer sur chaque carte. Distinguer ce qui est propre au sel (ligand, chélation, données d’absorption) de ce qui est une fonction du magnésium.',
+    )
+    const complement = s(
+      'b3m-complement',
+      'Complémentarité',
+      'Malate + citrate : énergie et muscle ; bisglycinate : nerveux et confort digestif. Complémentarité de formulation, pas de synergie démontrée.',
+    )
+    const enzymes = s('b3m-enzymes', 'Plus de 300 systèmes enzymatiques', 'Fonctions générales du magnésium, communes aux trois sels (NIH ODS).')
+    const comfort = s(
+      'b3m-comfort',
+      'Biodisponibilité et confort digestif',
+      'Pas de pourcentage d’absorption. Le bisglycinate ne neutralise pas l’effet des autres sels. Magnésium marin = origine, pas une forme.',
+    )
+    const synthesis = s('b3m-synthesis', 'Synthèse scientifique', 'Trois sels, un même ion Mg²⁺ ; six fonctions autorisées du magnésium (Règl. UE 432/2012). Aucun sel n’agit exclusivement sur un organe.')
+    const pitch = s(
+      'product-pitch',
+      'Bio3Mag en pratique',
+      'Arguments, composition, indications, posologie et contre-indications sur une seule diapositive. Précautions par le bouton.',
+    )
+    // Posology, contraindications and precautions now sit on the commercial synthesis (no separate dosage slide).
+    // Condensed: 3 slides. Intro, complementarity, enzymes and comfort slides stay in the codebase (unused);
+    // their key points are folded into the salts slide and the product synthesis (composition, indications, dosage).
+    void intro
+    void complement
+    void enzymes
+    void comfort
+    const byMode: Record<PresentationMode, SlideDef[]> = {
+      scientifique: [salts, synthesis, pitch],
+      commercial: [salts, synthesis, pitch],
+      express: [salts, pitch],
+    }
+    return [...byMode[mode], ...refs]
+  }
+  if (p.id === 'biodigest') {
+    // Visit médicale condensée : 3 diapos. Polaprezinc = médicament (Japon, Corée) ; BioDigest = complément alimentaire.
+    const s = (kind: SlideKind, fr: string, notes: string) => base(kind, { fr, en: fr }, 1, { fr: notes, en: notes })
+    const complex = s(
+      'bd-complex',
+      'Mécanismes de protection',
+      'Cliquer chaque carte. Distinguer mécanismes du complexe (polaprezinc / zinc L-carnosine) et statut de BioDigest, complément alimentaire.',
+    )
+    const heritage = s(
+      'bd-heritage',
+      'Zinc Carnosine',
+      'Ouvrir sur la molécule : complexe zinc / L-carnosine, distinct d’un zinc classique. Souligner que Nutriome Labs est le seul laboratoire en Tunisie à importer cette molécule. Intérêt étudié sur la muqueuse, sans effet antisécrétoire.',
+    )
+    // const mucosa = s(
+    //   'bd-mucosa',
+    //   'Données cliniques',
+    //   'Deux cartes cliniques : H. pylori et AINS (les mécanismes sont sur la diapositive précédente). Composition, précautions et bibliographie en bas. Rappeler les limites des données.',
+    // )
+    const pitch = s(
+      'product-pitch',
+      'BioDigest en pratique',
+      'Arguments, exclusivité, composition, indications, posologie et contre-indications sur une seule diapositive.',
+    )
+    // Commercial hook first (heritage), then mechanism, then commercial synthesis.
+    const byMode: Record<PresentationMode, SlideDef[]> = {
+      scientifique: [heritage, complex, /* mucosa, */ pitch],
+      commercial: [heritage, complex, /* mucosa, */ pitch],
+      express: [heritage, pitch],
+    }
+    return byMode[mode]
+  }
+  return [hero, composition, /* schema, */ ...(withIndications ? [indications] : []), posology, ...refs]
 }
 
-export function buildDeck(onlySlug?: string, mode: MechanismMode = 'expert'): SlideDef[] {
+export function buildDeck(onlySlug?: string, mode: PresentationMode = 'scientifique'): SlideDef[] {
   if (onlySlug) {
     const p = products.find((x) => x.slug === onlySlug)
     return p ? productSlides(p, mode) : []
@@ -172,10 +267,10 @@ export function buildDeck(onlySlug?: string, mode: MechanismMode = 'expert'): Sl
         en: 'Welcome. Nutriome Labs: science-based micronutrition distributed through healthcare professionals.',
       },
     },
-    { id: 'about', kind: 'about', steps: 1, section: S.intro, title: { fr: 'À propos', en: 'About' } },
-    {
+    // « À propos » removed to keep the deck short: the opening slide already introduces Nutriome Labs.
+    ...(mode === 'express' ? [] : [{
       id: 'portfolio',
-      kind: 'portfolio',
+      kind: 'portfolio' as const,
       steps: 1,
       section: S.range,
       title: { fr: 'Notre gamme', en: 'Our range' },
@@ -183,7 +278,7 @@ export function buildDeck(onlySlug?: string, mode: MechanismMode = 'expert'): Sl
         fr: 'Montrer la gamme complète. Ce soir, on développe seulement les deux formules du thème : BioDigest puis Bio3Mag.',
         en: 'Show the full range. Tonight we only develop the two theme formulas: BioDigest then Bio3Mag.',
       },
-    },
+    }]),
     ...themeCatalog.flatMap((p) => productSlides(p, mode)),
     { id: 'closing', kind: 'closing', steps: 1, section: S.end, title: { fr: 'Contact', en: 'Contact' } },
   ]
