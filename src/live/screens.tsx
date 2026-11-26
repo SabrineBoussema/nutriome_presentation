@@ -404,7 +404,7 @@ const COLLAB = [
 function Collaborate({ config }: ScreenProps) {
   return (
     <Frame>
-      <div className="grid h-full grid-cols-[1fr_560px] gap-16 px-[120px] py-[90px]">
+      <div className="grid h-full grid-cols-[minmax(0,1fr)_680px] gap-12 px-[100px] py-[90px]">
         <div className="flex flex-col justify-center">
           <motion.div {...up(0)}>
             <Eyebrow>Collaborons ensemble</Eyebrow>
@@ -636,7 +636,7 @@ function Thanks({ config }: ScreenProps) {
             ))}
           </div>
           <motion.p {...up(0.9)} className="mt-auto flex items-center gap-4 text-[30px] text-white/80">
-            <Globe className="size-8 text-[#f2c26f]" /> {config.websiteLabel} · Découvrez Nutriome Academy
+            <Globe className="size-8 text-[#f2c26f]" /> {config.websiteLabel}
           </motion.p>
         </div>
         <motion.div
@@ -646,7 +646,7 @@ function Thanks({ config }: ScreenProps) {
           className="flex flex-col items-center justify-center gap-10"
         >
           <Portrait src={config.speaker.portrait || DEFAULT_PORTRAIT} size={300} />
-          <QrCard url={config.academyUrl} label={config.websiteLabel} caption="Nutriome Academy" />
+          <QrCard url={config.academyUrl} label={config.websiteLabel} caption="Notre site" />
         </motion.div>
       </div>
     </Frame>
@@ -724,7 +724,7 @@ function Next({ config }: ScreenProps) {
         </div>
         <motion.div {...up(0.7)} className="flex flex-col items-center gap-8">
           <LogoBadge size="lg" />
-          <QrCard url={config.academyUrl} label={config.websiteLabel} caption="Nutriome Academy" />
+          <QrCard url={config.academyUrl} label={config.websiteLabel} caption="Notre site" />
         </motion.div>
       </div>
     </Frame>

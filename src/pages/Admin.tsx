@@ -233,7 +233,7 @@ export default function Admin() {
                 <p className="mb-1.5 text-[12px] font-bold uppercase tracking-[0.16em] text-white/45">{title}</p>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                   {config.screens
-                    .filter((s) => s.phase === phase)
+                    .filter((s) => s.phase === phase && s.id !== 'academy' && s.id !== 'newcomers')
                     .map((s) => {
                       const active = !presenting && !waiting && s.id === screen
                       const n = order.indexOf(s.id)

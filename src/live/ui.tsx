@@ -140,11 +140,13 @@ export function Eyebrow({ children, light = true }: { children: ReactNode; light
 
 export function QrCard({ url, label, caption }: { url: string; label: string; caption?: string }) {
   return (
-    <div className="flex items-center gap-7 rounded-[32px] bg-white px-7 py-6 text-[#0e1a2b] shadow-[0_30px_80px_-40px_rgba(0,0,0,.7)]">
-      <QRCodeSVG value={url} size={220} level="M" fgColor="#0f4a33" bgColor="#ffffff" marginSize={1} />
-      <div className="max-w-[340px]">
-        {caption && <p className="text-[22px] font-bold uppercase tracking-[0.16em] text-[#b06d12]">{caption}</p>}
-        <p className="mt-2 font-serif text-[40px] leading-tight">{label}</p>
+    <div className="flex w-max max-w-full items-center gap-7 rounded-[32px] bg-white px-8 py-6 text-[#0e1a2b] shadow-[0_30px_80px_-40px_rgba(0,0,0,.7)]">
+      <QRCodeSVG value={url} size={200} level="M" fgColor="#0f4a33" bgColor="#ffffff" marginSize={1} className="shrink-0" />
+      <div className="min-w-0">
+        {caption && (
+          <p className="text-[20px] font-bold uppercase leading-snug tracking-[0.12em] text-[#b06d12]">{caption}</p>
+        )}
+        <p className="mt-2 font-serif text-[36px] leading-none whitespace-nowrap">{label}</p>
       </div>
     </div>
   )

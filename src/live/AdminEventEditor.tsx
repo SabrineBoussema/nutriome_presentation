@@ -167,7 +167,7 @@ export function AdminEventEditor({ config, onChange }: { config: EventConfig; on
       </Section>
 
       <Section title="Liens et QR codes">
-        <Field label="Nutriome Academy (QR)">
+        <Field label="Site web (QR)">
           <input className={input} value={config.academyUrl} onChange={(e) => set('academyUrl', e.target.value)} />
         </Field>
         <Field label="Canal de contact (QR)">
@@ -182,7 +182,7 @@ export function AdminEventEditor({ config, onChange }: { config: EventConfig; on
       </Section>
 
       <Section title="Écrans d’attente (défilement automatique)">
-        {config.screens.map((s) => (
+        {config.screens.filter((s) => s.id !== 'academy' && s.id !== 'newcomers').map((s) => (
           <div key={s.id} className="flex items-center gap-2">
             <input
               type="checkbox"

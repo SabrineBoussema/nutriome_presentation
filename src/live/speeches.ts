@@ -206,7 +206,7 @@ Et surtout, **merci à vous tous**, professionnels de santé, pour votre présen
 **« Immunité et infections respiratoires saisonnières : quels apports de la phytothérapie et des micronutriments ? »**
 
 [pause]
-Retrouvez toutes nos rencontres sur Nutriome Academy, sur www.nutriome.tn.
+Retrouvez toutes nos rencontres sur www.nutriome.tn.
 
 [sourire] [caméra]
 Merci encore, et **excellente soirée à toutes et à tous.**`,
