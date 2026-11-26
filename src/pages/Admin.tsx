@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight, Circle, ExternalLink, MonitorPlay, MonitorX, Pause, Play, Settings, Undo2, X } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Circle, ExternalLink, Hand, Hourglass, Landmark, Mic, MonitorPlay, MonitorX, Pause, Play, Power, Rocket, Settings, Undo2, X } from 'lucide-react'
 import { MotionConfig } from 'motion/react'
 import { useCallback, useEffect, useState, type ReactNode } from 'react'
 import { Logo } from '../components/ui/Logo'
@@ -6,7 +6,7 @@ import { AdminEventEditor } from '../live/AdminEventEditor'
 import type { EventConfig, ScreenId } from '../live/eventConfig'
 import { ModeratorTeleprompter } from '../live/ModeratorTeleprompter'
 import { ScreenView } from '../live/screens'
-import { currentScreen, loopAt, loopPosition, loopScreens, useLiveSync, useNow } from '../live/sync'
+import { currentScreen, loopAt, loopPosition, loopScreens, runOrder, useLiveSync, useNow } from '../live/sync'
 import { Stage } from '../live/ui'
 
 const BG = '#071a12'
@@ -55,7 +55,7 @@ export default function Admin() {
   const pos = loopPosition(state, config, now)
   const connected = peerSeen !== null && now - peerSeen < 5000
   const start = new Date(config.startsAt).getTime()
-  const order = config.screens.map((s) => s.id)
+  const order = runOrder(config)
   const waiting = state.mode === 'waiting'
   const presenting = state.view === 'presentation'
   const label = (id: ScreenId) => config.screens.find((s) => s.id === id)?.label ?? id
@@ -79,7 +79,7 @@ export default function Admin() {
         return
       }
       const i = order.indexOf(state.screen)
-      show(order[Math.max(0, Math.min(order.length - 1, i + dir))])
+      show(order[i < 0 ? 0 : Math.max(0, Math.min(order.length - 1, i + dir))])
     },
     [waiting, loop, pos.index, config, state.loop.running, state.screen, order, update, show],
   )
@@ -165,10 +165,10 @@ export default function Admin() {
                   ? state.loop.running
                     ? `Boucle d’attente · suivant dans ${Math.ceil(pos.remaining / 1000)} s`
                     : 'Boucle d’attente en pause'
-                  : `Suivant : ${label(order[Math.min(order.length - 1, order.indexOf(screen) + 1)])}`}
+                  : `Suivant : ${label(order[Math.max(0, Math.min(order.length - 1, order.indexOf(screen) + 1))])}`}
               </span>
             </p>
-            <div style={{ position: 'relative', borderRadius: 16, overflow: 'hidden', border: `3px solid ${GOLD}`, maxWidth: 'calc((100vh - 330px) * 16 / 9)' }}>
+            <div style={{ position: 'relative', borderRadius: 16, overflow: 'hidden', border: `3px solid ${GOLD}`, maxWidth: 'calc((100vh - 420px) * 16 / 9)' }}>
               <Preview id={screen} config={config} now={now} />
               {state.blackout && <div style={{ position: 'absolute', inset: 0, background: 'rgb(0 0 0 / 0.85)' }} />}
             </div>
@@ -191,38 +191,82 @@ export default function Admin() {
             </Big>
           </div>
 
-          {/* déroulé */}
+          {/* actions rapides */}
           <div>
-            <p className="mb-2 text-[13px] font-bold uppercase tracking-[0.16em] text-white/50">Déroulé — cliquez pour afficher</p>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-              {config.screens.map((s, i) => {
-                const active = !presenting && s.id === screen
-                return (
-                  <button
-                    key={s.id}
-                    type="button"
-                    onClick={() => show(s.id)}
-                    className="rounded-xl px-3.5 py-2.5 text-[14.5px] font-semibold transition"
-                    style={{
-                      background: active ? GOLD : 'rgb(255 255 255 / 0.06)',
-                      color: active ? '#2a1a03' : '#fff',
-                      border: `1px solid ${active ? GOLD : 'rgb(255 255 255 / 0.12)'}`,
-                    }}
-                  >
-                    {i + 1}. {s.label}
-                  </button>
-                )
-              })}
-              <button
-                type="button"
-                onClick={() => update(presenting ? { view: 'live' } : { view: 'presentation', blackout: false })}
-                className="inline-flex items-center gap-2 rounded-xl px-3.5 py-2.5 text-[14.5px] font-bold"
-                style={{ background: presenting ? GOLD : '#1f7a52', color: presenting ? '#2a1a03' : '#fff' }}
-              >
-                {presenting ? <Undo2 className="size-4" /> : <MonitorPlay className="size-4" />}
-                {presenting ? 'Revenir aux écrans EPU' : 'Présentation produits (Malek)'}
-              </button>
+            <p className="mb-2 text-[13px] font-bold uppercase tracking-[0.16em] text-white/50">Actions rapides</p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(190px, 1fr))', gap: 8 }}>
+              {(
+                [
+                  ['Lancer l’attente', Hourglass, () => update({ mode: 'waiting', view: 'live', blackout: false, loop: loopAt(config, loop[0]?.id ?? 'welcome', true, Date.now()) }), waiting],
+                  ['Commencer l’EPU', Rocket, () => { update({ conferenceStartedAt: Date.now() }); show('welcome') }, !waiting && screen === 'welcome' && !presenting],
+                  ['Introduction institutionnelle', Landmark, () => show('about'), !waiting && ['about', 'vision', 'collaborate'].includes(screen) && !presenting],
+                  ['Donner la parole au Dr Amin', Mic, () => show('speaker'), !waiting && screen === 'speaker' && !presenting],
+                  ['Lancer la présentation de Malek', MonitorPlay, () => update({ mode: 'live', screen: 'malek', view: 'presentation', blackout: false }), presenting],
+                  ['Reprendre la conférence', Undo2, () => show('resume'), !waiting && screen === 'resume' && !presenting],
+                  ['Questions-réponses', Hand, () => show('qa'), !waiting && screen === 'qa' && !presenting],
+                  ['Clôturer', Power, () => show('thanks'), !waiting && (screen === 'thanks' || screen === 'next') && !presenting],
+                ] as const
+              ).map(([text, Icon, run, active]) => (
+                <button
+                  key={text}
+                  type="button"
+                  onClick={run}
+                  className="inline-flex items-center gap-2 rounded-xl px-3 py-3 text-left text-[14.5px] font-bold transition hover:brightness-110"
+                  style={{ background: active ? GOLD : 'rgb(255 255 255 / 0.07)', color: active ? '#2a1a03' : '#fff', border: `1px solid ${active ? GOLD : 'rgb(255 255 255 / 0.12)'}` }}
+                >
+                  <Icon className="size-4 shrink-0" /> {text}
+                </button>
+              ))}
             </div>
+          </div>
+
+          {/* déroulé par phase */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            {(
+              [
+                ['B', 'Introduction officielle'],
+                ['C', 'Modération scientifique'],
+                ['X', 'Écrans d’appoint'],
+              ] as const
+            ).map(([phase, title]) => (
+              <div key={phase}>
+                <p className="mb-1.5 text-[12px] font-bold uppercase tracking-[0.16em] text-white/45">{title}</p>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                  {config.screens
+                    .filter((s) => s.phase === phase)
+                    .map((s) => {
+                      const active = !presenting && !waiting && s.id === screen
+                      const n = order.indexOf(s.id)
+                      return (
+                        <button
+                          key={s.id}
+                          type="button"
+                          onClick={() => show(s.id)}
+                          className="rounded-lg px-3 py-2 text-[13.5px] font-semibold transition"
+                          style={{
+                            background: active ? GOLD : 'rgb(255 255 255 / 0.05)',
+                            color: active ? '#2a1a03' : '#fff',
+                            border: `1px solid ${active ? GOLD : 'rgb(255 255 255 / 0.1)'}`,
+                          }}
+                        >
+                          {n >= 0 ? `${n + 1}. ` : ''}
+                          {s.label}
+                        </button>
+                      )
+                    })}
+                  {phase === 'C' && presenting && (
+                    <button
+                      type="button"
+                      onClick={() => update({ view: 'live' })}
+                      className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-[13.5px] font-bold"
+                      style={{ background: GOLD, color: '#2a1a03' }}
+                    >
+                      <Undo2 className="size-4" /> Revenir aux écrans EPU
+                    </button>
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
 
           <p className="mt-auto text-[12.5px] text-white/40">
@@ -232,7 +276,7 @@ export default function Admin() {
 
         {/* ── notes / paramètres ── */}
         <aside style={{ borderLeft: '1px solid rgb(255 255 255 / 0.1)', display: 'flex', flexDirection: 'column', minHeight: 0, maxHeight: 'calc(100vh - 69px)', overflowY: 'auto' }}>
-          {settings ? <AdminEventEditor config={config} onChange={setConfig} /> : <ModeratorTeleprompter screen={screen} />}
+          {settings ? <AdminEventEditor config={config} onChange={setConfig} /> : <ModeratorTeleprompter screen={screen} screenLabel={presenting ? 'présentation produits' : label(screen)} />}
         </aside>
       </div>
     </div>

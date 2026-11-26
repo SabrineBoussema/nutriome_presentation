@@ -5,7 +5,8 @@
  * (WebSocket, Supabase Realtime…) sans changer les écrans.
  */
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { DEFAULT_EVENT, DEFAULT_NOTES, type EventConfig, type NoteDef, type ScreenDef, type ScreenId } from './eventConfig'
+import { DEFAULT_EVENT, type EventConfig, type ScreenDef, type ScreenId } from './eventConfig'
+import { DEFAULT_NOTES, type NoteDef } from './speeches'
 
 export interface LiveState {
   /** waiting = boucle automatique d'attente ; live = contrôle manuel */
@@ -41,7 +42,7 @@ export interface SyncTransport {
   subscribe(cb: (msg: Message) => void): () => void
 }
 
-const KEY = { state: 'nutriome-live:state', config: 'nutriome-live:config', notes: 'nutriome-live:notes' }
+const KEY = { state: 'nutriome-live:state:v2', config: 'nutriome-live:config:v2', notes: 'nutriome-live:notes:v2' }
 const CHANNEL = 'nutriome-live'
 
 function read<T>(key: string): T | null {
@@ -84,8 +85,16 @@ export function broadcastTransport(): SyncTransport {
 function loadConfig(): EventConfig {
   const stored = read<Partial<EventConfig>>(KEY.config)
   if (!stored) return DEFAULT_EVENT
-  const screens: ScreenDef[] = DEFAULT_EVENT.screens.map((d) => ({ ...d, ...stored.screens?.find((s) => s.id === d.id) }))
-  return { ...DEFAULT_EVENT, ...stored, screens, speaker: { ...DEFAULT_EVENT.speaker, ...stored.speaker } }
+  const migrate = (stored.version ?? 2) < 3
+  const screens: ScreenDef[] = DEFAULT_EVENT.screens.map((d) => {
+    const s = stored.screens?.find((x) => x.id === d.id)
+    const merged = s ? { ...d, loop: s.loop, duration: s.duration } : d
+    if (migrate && (d.id === 'academy' || d.id === 'newcomers')) return { ...merged, loop: d.loop, phase: d.phase }
+    return merged
+  })
+  const known = new Set(screens.map((s) => s.id))
+  const loopOrder = (migrate ? DEFAULT_EVENT.loopOrder : (stored.loopOrder ?? DEFAULT_EVENT.loopOrder)).filter((id) => known.has(id))
+  return { ...DEFAULT_EVENT, ...stored, version: 3, screens, loopOrder, speaker: { ...DEFAULT_EVENT.speaker, ...stored.speaker } }
 }
 
 export function loadNotes(): NoteDef[] {
@@ -99,7 +108,14 @@ export function saveNotes(notes: NoteDef[]) {
 
 /** Screen shown right now (waiting loop is derived from a shared clock, so every window agrees). */
 export function loopScreens(config: EventConfig) {
-  return config.screens.filter((s) => s.loop && s.duration > 0)
+  return config.loopOrder
+    .map((id) => config.screens.find((s) => s.id === id))
+    .filter((s): s is ScreenDef => Boolean(s && s.loop && s.duration > 0))
+}
+
+/** Manual running order (phases B and C). */
+export function runOrder(config: EventConfig): ScreenId[] {
+  return config.screens.filter((s) => s.phase === 'B' || s.phase === 'C').map((s) => s.id)
 }
 
 export function loopPosition(state: LiveState, config: EventConfig, now: number) {

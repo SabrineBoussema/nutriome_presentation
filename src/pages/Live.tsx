@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useFullscreen } from '../hooks/useFullscreen'
 import { ScreenView } from '../live/screens'
 import { currentScreen, LIVE_WINDOW_FLAG, useLiveSync, useNow } from '../live/sync'
+import { WaitingClock } from '../live/ui'
 import { Stage } from '../live/ui'
 
 /** LivePresentation — écran public projeté sur Zoom (1920×1080). Aucune commande visible. */
@@ -68,6 +69,7 @@ export default function Live() {
             <ScreenView id={screen} config={config} now={now} />
           </motion.div>
         </AnimatePresence>
+        {state.mode === 'waiting' && screen !== 'welcome' && <WaitingClock startsAt={config.startsAt} now={now} />}
       </Stage>
       <AnimatePresence>
         {state.blackout && (

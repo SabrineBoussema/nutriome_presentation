@@ -57,7 +57,7 @@ export function AdminEventEditor({ config, onChange }: { config: EventConfig; on
   const importJson = async (file: File) => {
     try {
       const parsed = JSON.parse(await file.text()) as Partial<EventConfig>
-      onChange({ ...DEFAULT_EVENT, ...parsed, version: 1 })
+      onChange({ ...DEFAULT_EVENT, ...parsed, version: 3 })
     } catch {
       window.alert('Fichier invalide.')
     }

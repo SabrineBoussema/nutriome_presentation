@@ -208,3 +208,43 @@ export function Countdown({ target, now }: { target: number; now: number }) {
     </div>
   )
 }
+
+/** Discreet clock + countdown shown during the waiting loop (phase A). Never starts the event by itself. */
+export function WaitingClock({ startsAt, now }: { startsAt: string; now: number }) {
+  const start = new Date(startsAt).getTime()
+  const diff = start - now
+  const time = new Intl.DateTimeFormat('fr-FR', { hour: '2-digit', minute: '2-digit', timeZone: 'Africa/Tunis' }).format(now).replace(':', 'h')
+  const mm = Math.floor(Math.max(0, diff) / 60_000)
+  const ss = Math.floor((Math.max(0, diff) % 60_000) / 1000)
+  const hh = Math.floor(mm / 60)
+  return (
+    <div
+      style={{
+        position: 'absolute',
+        left: 60,
+        bottom: 44,
+        zIndex: 20,
+        display: 'flex',
+        alignItems: 'center',
+        gap: 18,
+        padding: '12px 24px',
+        borderRadius: 999,
+        background: 'rgb(4 20 13 / 0.72)',
+        border: '1px solid rgb(255 255 255 / 0.14)',
+        color: '#fff',
+        fontSize: 26,
+        backdropFilter: 'blur(8px)',
+      }}
+    >
+      <span style={{ opacity: 0.75, fontVariantNumeric: 'tabular-nums' }}>{time}</span>
+      <span style={{ width: 1, height: 26, background: 'rgb(255 255 255 / 0.25)' }} />
+      {diff > 0 ? (
+        <span style={{ fontWeight: 600, fontVariantNumeric: 'tabular-nums' }}>
+          Début dans <span style={{ color: GOLD }}>{hh > 0 ? `${hh} h ${String(mm % 60).padStart(2, '0')}` : `${mm}:${String(ss).padStart(2, '0')}`}</span>
+        </span>
+      ) : (
+        <span style={{ fontWeight: 600, fontStyle: 'italic' }}>Nous allons commencer dans quelques instants…</span>
+      )}
+    </div>
+  )
+}

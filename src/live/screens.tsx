@@ -140,12 +140,13 @@ function Welcome({ config, now }: ScreenProps) {
           <motion.div {...up(1)} className="mt-10 flex flex-col items-center gap-5">
             {before && <Countdown target={start} now={now} />}
             <p className="text-[28px] italic text-white/85">
-          Nous allons commencer dans quelques instants
-          {[0, 1, 2].map((i) => (
-            <span key={i} style={{ animation: `live-dots 1.4s ease-in-out ${i * 0.25}s infinite` }}>
-              .
-            </span>
-          ))}
+              {before ? `Début de la conférence à ${formatEventDate(config.startsAt).split('— ')[1] ?? ''}` : 'Nous allons commencer dans quelques instants'}
+              {!before &&
+                [0, 1, 2].map((i) => (
+                  <span key={i} style={{ animation: `live-dots 1.4s ease-in-out ${i * 0.25}s infinite` }}>
+                    .
+                  </span>
+                ))}
             </p>
           </motion.div>
         </div>
@@ -642,13 +643,88 @@ function Thanks({ config }: ScreenProps) {
           initial={{ opacity: 0, x: 60 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.6, duration: 1, ease: EASE }}
-          className="flex flex-col justify-center self-center rounded-[40px] bg-white p-12 text-[#0e1a2b] shadow-[0_50px_100px_-50px_rgba(0,0,0,.9)]"
+          className="flex flex-col items-center justify-center gap-10"
         >
-          <p className="text-[24px] font-bold uppercase tracking-[0.2em] text-[#b06d12]">Prochain rendez-vous scientifique</p>
-          <p className="mt-6 flex items-center gap-4 font-serif text-[64px] leading-none text-[#0f4a33]">
-            <CalendarDays className="size-14" style={{ color: GOLD }} /> {config.next.date}
-          </p>
-          <p className="mt-8 font-serif text-[42px] leading-[1.2]">« {config.next.theme} »</p>
+          <Portrait src={config.speaker.portrait || DEFAULT_PORTRAIT} size={300} />
+          <QrCard url={config.academyUrl} label={config.websiteLabel} caption="Nutriome Academy" />
+        </motion.div>
+      </div>
+    </Frame>
+  )
+}
+
+
+function Theme({ config }: ScreenProps) {
+  return (
+    <Frame tone="light">
+      <div className="grid h-full grid-cols-[1fr_520px] items-center gap-20 px-[130px]">
+        <div>
+          <motion.div {...up(0)}>
+            <Eyebrow light={false}>Thématique de la soirée</Eyebrow>
+          </motion.div>
+          <motion.p {...up(0.2)} className="mt-8 font-serif text-[92px] leading-[1.04] tracking-[-0.015em] text-[#0f4a33] text-balance">
+            {config.theme}
+          </motion.p>
+          <motion.p {...up(0.45)} className="mt-10 flex items-center gap-4 text-[32px] font-semibold text-[#33424f]">
+            <CalendarDays className="size-9" style={{ color: GOLD }} />
+            {formatEventDate(config.startsAt)}
+          </motion.p>
+        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 1, ease: EASE }}
+          className="flex flex-col items-center rounded-[44px] bg-[#0f4a33] px-10 pb-12 pt-14 text-center text-white shadow-[0_50px_100px_-50px_rgba(15,74,51,.9)]"
+        >
+          <Portrait src={config.speaker.portrait || DEFAULT_PORTRAIT} size={300} />
+          <p className="mt-10 font-serif text-[50px] leading-none">{config.speaker.name}</p>
+          <p className="mt-3 text-[26px] text-[#f2c26f]">{config.speaker.title}</p>
+        </motion.div>
+      </div>
+    </Frame>
+  )
+}
+
+function Resume({ config }: ScreenProps) {
+  return (
+    <Frame>
+      <div className="flex h-full flex-col items-center justify-center px-[160px] text-center">
+        <motion.div initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1, ease: EASE }}>
+          <Portrait src={config.speaker.portrait || DEFAULT_PORTRAIT} size={260} />
+        </motion.div>
+        <motion.div {...up(0.3)} className="mt-14">
+          <Eyebrow>Reprise de la conférence scientifique</Eyebrow>
+        </motion.div>
+        <motion.p {...up(0.45)} className="mt-6 font-serif text-[104px] leading-none">
+          {config.speaker.name}
+        </motion.p>
+        <motion.p {...up(0.6)} className="mt-8 max-w-[1400px] font-serif text-[42px] italic leading-snug text-white/85">
+          {config.theme}
+        </motion.p>
+      </div>
+    </Frame>
+  )
+}
+
+function Next({ config }: ScreenProps) {
+  return (
+    <Frame tone="light">
+      <div className="grid h-full grid-cols-[1fr_520px] items-center gap-20 px-[130px]">
+        <div>
+          <motion.div {...up(0)}>
+            <Eyebrow light={false}>Prochain rendez-vous scientifique</Eyebrow>
+          </motion.div>
+          <motion.p {...up(0.2)} className="mt-8 flex items-center gap-6 font-serif text-[120px] leading-none text-[#0f4a33]">
+            <CalendarDays className="size-24" style={{ color: GOLD }} />
+            {config.next.date}
+          </motion.p>
+          <motion.p {...up(0.45)} className="mt-10 max-w-[1100px] font-serif text-[52px] leading-[1.15] text-[#0e1a2b] text-balance">
+            « {config.next.theme} »
+          </motion.p>
+        </div>
+        <motion.div {...up(0.7)} className="flex flex-col items-center gap-8">
+          <LogoBadge size="lg" />
+          <QrCard url={config.academyUrl} label={config.websiteLabel} caption="Nutriome Academy" />
         </motion.div>
       </div>
     </Frame>
@@ -657,6 +733,9 @@ function Thanks({ config }: ScreenProps) {
 
 export const SCREEN_COMPONENTS: Record<ScreenId, (p: ScreenProps) => ReactNode> = {
   welcome: Welcome,
+  theme: Theme,
+  resume: Resume,
+  next: Next,
   about: About,
   vision: Vision,
   range: Range,
