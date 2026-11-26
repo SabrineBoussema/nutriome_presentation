@@ -21,7 +21,7 @@ import { BioDigestScene } from '../mechanisms/BioDigestMechanism'
 import { useSlide } from '../presentation/SlideContext'
 import { Packshot } from '../products/Packshot'
 import { SlideShell } from '../ui/SlideShell'
-import { Drawer, FlagJapan, FlagTunisia, PolymerChain } from './BioDigestStorySlides'
+import { Drawer, FlagTunisia, PolymerChain } from './BioDigestStorySlides'
 
 const GREEN = '#1d5a39'
 const ZN = '#5b7a99'
@@ -268,7 +268,7 @@ const MOLECULE_CARDS = [
   },
   {
     title: 'Intérêt pour la muqueuse',
-    text: 'Action locale sur la muqueuse gastrique étudiée, surtout avec le polaprezinc.',
+    text: 'Action locale sur la muqueuse gastrique étudiée.',
   },
   {
     title: 'Non antisécrétoire',
@@ -332,33 +332,23 @@ export function BdHeritageSlide({ product }: { product: Product }) {
             className="relative flex min-h-0 flex-col overflow-hidden rounded-[30px] px-7 py-6 text-white shadow-[0_30px_60px_-36px_rgb(14_26_43/0.7)]"
             style={{ background: `linear-gradient(140deg, ${GREEN} 0%, #154630 60%, #0f3a27 100%)` }}
           >
-            {/* route Japon → Tunisie */}
-            <div className="flex items-center gap-3">
-              <div className="flex flex-col items-center gap-1">
-                <FlagJapan className={canvas ? 'w-[64px]' : 'w-[48px]'} />
-                <span className="text-[14.5px] font-semibold text-white/80">Molécule japonaise</span>
-              </div>
-              <svg viewBox="0 0 300 40" className="h-10 flex-1" aria-hidden>
-                <path d="M6 28 C100 0 200 0 294 28" fill="none" stroke="white" strokeOpacity={0.55} strokeWidth={2} strokeDasharray="7 6" />
-                <PathParticles d="M6 28 C100 0 200 0 294 28" count={3} dur={3} r={5} fill="#f3c86b" />
-              </svg>
-              <div className="flex flex-col items-center gap-1">
-                <FlagTunisia className={canvas ? 'w-[64px]' : 'w-[48px]'} />
-                <span className="text-[14.5px] font-semibold text-white/80">Nutriome Labs</span>
-              </div>
-            </div>
-
-            <div className={`flex min-h-0 flex-1 items-center ${canvas ? 'mt-10 gap-16' : 'mt-8 flex-col gap-4'}`}>
+            <div className={`flex min-h-0 flex-1 items-center ${canvas ? 'gap-10' : 'flex-col gap-4'}`}>
               <div className="relative shrink-0">
-                <Packshot product={product} className={canvas ? 'w-[250px]' : 'w-[170px]'} eager glow={false} />
+                <Packshot
+                  product={product}
+                  className={canvas ? 'w-[440px]' : 'w-[240px]'}
+                  fill
+                  eager
+                  glow={false}
+                />
                 {exclusive && (
                   <motion.div
-                    className="absolute -top-16 -right-12 z-10"
+                    className="absolute -top-10 -right-8 z-10"
                     initial={reduced ? false : { scale: 0, rotate: -30, opacity: 0 }}
                     animate={{ scale: 1, rotate: 0, opacity: 1 }}
                     transition={{ delay: 0.5, type: 'spring', stiffness: 220, damping: 14 }}
                   >
-                    <ExclusiveSeal size={canvas ? 130 : 96} reduced={reduced} />
+                    <ExclusiveSeal size={canvas ? 148 : 104} reduced={reduced} />
                   </motion.div>
                 )}
               </div>

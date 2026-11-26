@@ -1,4 +1,3 @@
-import { Atom, Droplets, Leaf, Scale } from 'lucide-react'
 import { animate, AnimatePresence, motion, useMotionValue, useReducedMotion, useTransform } from 'motion/react'
 import { useEffect, useState, type ComponentType, type ReactNode } from 'react'
 import {
@@ -7,18 +6,15 @@ import {
   COMFORT_ROWS,
   ENZYME_REFS,
   ENZYME_STEPS,
-  INTRO,
   ORIENTATIONS,
   SALT_CARDS,
   type SaltCard,
 } from '../../data/bio3magStory'
 import { stagesFor } from '../../data/mechanisms'
-import { claimText } from '../../data/commercialClaims'
 import type { Product } from '../../data/types'
 import { Eyebrow, RefLine } from '../commercial/shared'
 import { Bio3MagVisual } from '../mechanisms/Bio3MagMechanism'
 import { MgIon, PathParticles } from '../mechanisms/kit'
-import { useDeck } from '../presentation/DeckContext'
 import { useSlide } from '../presentation/SlideContext'
 import { Packshot } from '../products/Packshot'
 import { BisglycinateMolecule, CitrateMolecule, MalateMolecule } from '../scientific/molecules/MagnesiumForms'
@@ -55,85 +51,61 @@ function Refs({ ids, label = 'Références' }: { ids: string[]; label?: string }
   )
 }
 
-/* ============================================================ A — introduction */
-
-const PILLAR_ICONS: Record<string, ComponentType<{ className?: string }>> = {
-  bioavailability: Droplets,
-  comfort: Leaf,
-  enzymes: Atom,
-  balance: Scale,
-}
-const PILLAR_COLORS: Record<string, string> = { bioavailability: CITRATE, comfort: BISGLY, enzymes: MALATE, balance: '#6a3d8f' }
+/* ============================================================ A — chapter break */
 
 export function Bio3MagIntroSlide({ product }: { product: Product }) {
   const { canvas, reduced } = useFlags()
-  const { slides, goToSlideId } = useDeck()
-  const target = (kind: string) => {
-    const id = `${product.slug}-${kind}`
-    return slides.some((s) => s.id === id) ? id : null
-  }
   return (
-    <SlideShell product={product} headerPackshot={false}>
-      <div className={`min-h-0 flex-1 gap-10 ${canvas ? 'grid grid-cols-[minmax(0,1fr)_400px] items-center' : 'flex flex-col'}`}>
-        <div className="flex flex-col">
-          <Eyebrow color={product.accent}>Bio3Mag · Formulation</Eyebrow>
-          <Heading size={58}>
-            Bio3Mag — <em className="text-ocean">L’intelligence</em> d’une triple formulation
-          </Heading>
-          <p className={`mt-4 max-w-[760px] leading-snug text-slate ${canvas ? 'text-[26px]' : 'text-[1.25rem]'}`}>{claimText('bio3mag-subtitle')}</p>
-          <div className={`mt-7 grid gap-4 ${canvas ? 'grid-cols-2' : 'grid-cols-1'}`}>
-            {INTRO.pillars.map((p, i) => {
-              const Icon = PILLAR_ICONS[p.id]
-              const color = PILLAR_COLORS[p.id]
-              const link = target(p.slide)
-              return (
-                <motion.button
-                  type="button"
-                  disabled={!link}
-                  onClick={() => link && goToSlideId(link)}
-                  key={p.id}
-                  initial={reduced ? false : { opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.35 + i * 0.18, duration: 0.6, ease: EASE }}
-                  className="relative overflow-hidden rounded-3xl border border-navy/10 bg-white px-5 py-4 text-left shadow-[0_20px_40px_-32px_rgb(14_26_43/0.5)] enabled:hover:border-navy/25"
-                >
-                  <motion.span
-                    className="absolute top-0 left-0 h-1 rounded-r-full"
-                    style={{ background: color }}
-                    initial={reduced ? false : { width: 0 }}
-                    animate={{ width: '38%' }}
-                    transition={{ delay: 0.7 + i * 0.18, duration: 0.7, ease: EASE }}
-                  />
-                  <div className="flex items-center gap-3">
-                    <span className="flex size-10 shrink-0 items-center justify-center rounded-full" style={{ background: `${color}18`, color }}>
-                      <Icon className="size-5" />
-                    </span>
-                    <p className={`font-semibold leading-tight text-navy ${canvas ? 'text-[23px]' : 'text-base'}`}>{p.title}</p>
-                  </div>
-                  <p className={`mt-2 flex items-center justify-between gap-2 leading-snug text-slate ${canvas ? 'text-[18px]' : 'text-sm'}`}>
-                    {p.text}
-                    {link && <span className="shrink-0 text-[15.5px] font-semibold" style={{ color }}>Voir →</span>}
-                  </p>
-                </motion.button>
-              )
-            })}
-          </div>
-        </div>
-        <div className="relative flex flex-col items-center">
-          <Packshot product={product} className={canvas ? 'w-[360px]' : 'w-[220px]'} eager />
-          <motion.div
-            className="mt-6 flex flex-wrap justify-center gap-2"
+    <SlideShell product={product} headerPackshot={false} tone="tint">
+      <div className={`min-h-0 flex-1 items-center ${canvas ? 'grid grid-cols-[1.05fr_1fr] gap-12' : 'flex flex-col gap-8'}`}>
+        <div>
+          <Eyebrow color={product.accent}>À présent · Bio3Mag</Eyebrow>
+          <motion.h1
+            className={`mt-3 font-serif leading-[0.95] tracking-[-0.03em] text-navy ${canvas ? 'text-[120px]' : 'text-5xl'}`}
+            initial={reduced ? false : { opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: EASE }}
+          >
+            Bio3Mag
+          </motion.h1>
+          <motion.p
+            className={`mt-5 font-serif italic leading-snug ${canvas ? 'text-[36px]' : 'text-xl'}`}
+            style={{ color: product.accent }}
+            initial={reduced ? false : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.6, ease: EASE }}
+          >
+            {product.tagline.fr}
+          </motion.p>
+          <motion.p
+            className={`mt-5 max-w-[640px] leading-snug text-slate ${canvas ? 'text-[24px]' : 'text-[1.15rem]'}`}
             initial={reduced ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.2, duration: 0.6 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+          >
+            {product.positioning.fr}
+          </motion.p>
+          <motion.div
+            className="mt-8 flex flex-wrap gap-2.5"
+            initial={reduced ? false : { opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.45, duration: 0.5 }}
           >
             {SALT_CARDS.map((s) => (
-              <span key={s.id} className="rounded-full px-3 py-1 text-[17px] font-semibold text-white" style={{ background: s.color }}>
+              <span key={s.id} className="rounded-full px-4 py-1.5 text-[18px] font-semibold text-white" style={{ background: s.color }}>
                 {s.name}
               </span>
             ))}
           </motion.div>
         </div>
+        <motion.div
+          className="flex justify-center"
+          initial={reduced ? false : { opacity: 0, scale: 0.92 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.2, duration: 0.7, ease: EASE }}
+        >
+          <Packshot product={product} className={canvas ? 'w-[520px]' : 'w-[260px]'} fill eager />
+        </motion.div>
       </div>
     </SlideShell>
   )

@@ -9,13 +9,15 @@ interface PackshotProps {
   float?: boolean
   glow?: boolean
   eager?: boolean
+  /** Fill the wrapper width instead of the artwork’s intrinsic size. */
+  fill?: boolean
 }
 
 /**
  * Packaging artwork displayed whole (never cropped): the frame takes the artwork's
  * own aspect ratio and the image is object-contain.
  */
-export function Packshot({ product, className = '', float = true, glow = true, eager = false }: PackshotProps) {
+export function Packshot({ product, className = '', float = true, glow = true, eager = false, fill = false }: PackshotProps) {
   const { isPrint } = useSlide()
   const animate = float && !isPrint
   return (
@@ -32,11 +34,11 @@ export function Packshot({ product, className = '', float = true, glow = true, e
         animate={animate ? { y: [0, -10, 0] } : undefined}
         transition={animate ? { duration: 6, repeat: Infinity, ease: 'easeInOut' } : undefined}
       >
-        <div className="relative">
+        <div className={`relative ${fill ? 'w-full' : ''}`}>
           <img
             src={product.image}
             alt={`${product.name} — packaging`}
-            className="relative z-[1] mx-auto block h-auto max-h-[280px] w-auto max-w-full rounded-[6px] object-contain shadow-[0_40px_80px_-30px_rgb(14_26_43/0.45),0_12px_24px_-12px_rgb(14_26_43/0.25)] ring-1 ring-black/5 @4xl:max-h-[480px]"
+            className={`relative z-[1] mx-auto block h-auto max-w-full rounded-[6px] object-contain shadow-[0_40px_80px_-30px_rgb(14_26_43/0.45),0_12px_24px_-12px_rgb(14_26_43/0.25)] ring-1 ring-black/5 ${fill ? 'w-full max-h-none' : 'w-auto max-h-[280px] @4xl:max-h-[480px]'}`}
             loading={eager ? 'eager' : 'lazy'}
             decoding="async"
             draggable={false}

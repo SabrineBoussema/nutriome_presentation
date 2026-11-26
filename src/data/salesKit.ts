@@ -141,7 +141,7 @@ export const salesKits: SalesKit[] = [
         q: 'Quelles données cliniques ?',
         a: 'Des données sur le polaprezinc, pas sur BioDigest : perméabilité intestinale sous indométacine chez 10 volontaires (Mahmood 2007), lésions liées à l’aspirine chez 20 patients (Watari 2013), essai multicentrique H. pylori sur 303 patients (Tan 2017) et méta-analyse de 3 essais, 396 participants, aux preuves encore limitées (Mahmoud 2022).',
       },
-      { q: 'Quelle posologie ?', a: '1 à 2 gélules par jour, au cours d’un repas.' },
+      { q: 'Quelle posologie ?', a: '2 gélules par jour, au cours d’un repas.' },
       {
         q: 'Interactions ?',
         a: 'Espacer de 2 heures la prise de quinolones, de tétracyclines ou de fer. Tenir compte de l’apport total en zinc (limite supérieure de sécurité de l’EFSA : 25 mg/jour chez l’adulte).',
@@ -177,11 +177,11 @@ export const salesKits: SalesKit[] = [
       'Docteur, la muqueuse gastrique est régulièrement fragilisée : acidité, AINS, H. pylori, stress oxydatif. BioDigest a été formulé autour du zinc-L-carnosine, un complexe de zinc et de L-carnosine.',
       'Ce complexe a été étudié pour son action locale sur la muqueuse lésée. Les études décrivent une action antioxydante, une stabilisation des membranes et, in vitro, une stimulation de la migration et de la prolifération des cellules épithéliales. Chez des volontaires sains, il a limité la hausse de perméabilité intestinale induite par l’indométacine.',
       'Sur le plan international, le polaprezinc est utilisé au Japon comme médicament protecteur de la muqueuse, et sa sécurité a été évaluée par l’EFSA en 2022. Une méta-analyse suggère un bénéfice en adjuvant à la trithérapie anti-H. pylori, avec des preuves encore limitées.',
-      'BioDigest n’a pas d’effet antisécrétoire et ne remplace ni un IPP ni un traitement prescrit. Posologie : 1 à 2 gélules par jour au cours d’un repas, en tenant compte de l’apport total en zinc.',
+      'BioDigest n’a pas d’effet antisécrétoire et ne remplace ni un IPP ni un traitement prescrit. Posologie : 2 gélules par jour au cours d’un repas, en tenant compte de l’apport total en zinc.',
     ],
     summary: [
       { label: 'Actif', value: 'Zinc-L-carnosine 66 mg par gélule' },
-      { label: 'Posologie', value: '1 à 2 gélules par jour, au cours d’un repas' },
+      { label: 'Posologie', value: '2 gélules par jour, au cours d’un repas' },
       { label: 'Conditionnement', value: 'Boîte de 30 gélules' },
       { label: 'Contre-indication', value: 'Hypersensibilité au zinc ou à la L-carnosine' },
       { label: 'Vigilance', value: 'Apport total en zinc ; saignement, amaigrissement, dysphagie : consulter' },

@@ -179,7 +179,11 @@ function productSlides(p: Product, mode: PresentationMode = 'scientifique'): Sli
   if (p.id === 'bio3mag') {
     // Storyline A → F (data/bio3magStory.ts). The interactive anatomical mechanism stays in scientific mode.
     const s = (kind: SlideKind, fr: string, notes: string) => base(kind, { fr, en: fr }, 1, { fr: notes, en: notes })
-    const intro = s('b3m-intro', 'Bio3Mag', 'Ouvrir sur la logique de formulation : trois formes choisies pour quatre piliers.')
+    const intro = s(
+      'b3m-intro',
+      'Bio3Mag',
+      'Diapositive de séparation : passer à Bio3Mag. Montrer la boîte, les trois formes, puis enchaîner sur le détail.',
+    )
     const salts = s(
       'b3m-salts',
       'Trois formes de magnésium',
@@ -203,16 +207,15 @@ function productSlides(p: Product, mode: PresentationMode = 'scientifique'): Sli
       'Arguments, composition, indications, posologie et contre-indications sur une seule diapositive. Précautions par le bouton.',
     )
     // Posology, contraindications and precautions now sit on the commercial synthesis (no separate dosage slide).
-    // Condensed: 3 slides. Intro, complementarity, enzymes and comfort slides stay in the codebase (unused);
-    // their key points are folded into the salts slide and the product synthesis (composition, indications, dosage).
-    void intro
+    // Condensed: intro (chapter break) + salts + synthesis + pitch.
+    // Complementarity, enzymes and comfort slides stay in the codebase (unused).
     void complement
     void enzymes
     void comfort
     const byMode: Record<PresentationMode, SlideDef[]> = {
-      scientifique: [salts, synthesis, pitch],
-      commercial: [salts, synthesis, pitch],
-      express: [salts, pitch],
+      scientifique: [intro, salts, synthesis, pitch],
+      commercial: [intro, salts, synthesis, pitch],
+      express: [intro, salts, pitch],
     }
     return [...byMode[mode], ...refs]
   }

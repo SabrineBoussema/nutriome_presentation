@@ -102,7 +102,7 @@ export const SALT_CARDS: SaltCard[] = [
     formula: 'Mg(C₂H₄NO₂)₂ · ≈ 14 % de Mg',
     points: [
       { scope: 'salt', text: 'Chélate : le magnésium est lié à deux molécules de glycine.' },
-      { scope: 'salt', text: 'Intérêt pour la tolérance digestive : généralement décrit comme bien toléré ; données comparatives limitées.' },
+      { scope: 'salt', text: 'Intérêt pour la tolérance digestive : généralement décrit comme bien toléré.' },
       { scope: 'mg', text: 'Le magnésium contribue au fonctionnement normal du système nerveux.' },
     ],
     refs: ['schuette-1994', 'eu-432-2012'],

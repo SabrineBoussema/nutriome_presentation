@@ -780,7 +780,7 @@ export const products: Product[] = [
         en: 'Safety of zinc L-carnosine assessed by EFSA (novel food, 2022).',
       },
     ],
-    usage: { text: { fr: '1 à 2 gélules par jour, au cours d’un repas.', en: '1 to 2 capsules per day, with a meal.' } },
+    usage: { text: { fr: '2 gélules par jour, au cours d’un repas.', en: '2 capsules per day, with a meal.' } },
     format: { text: { fr: 'Gélules', en: 'Capsules' } },
     packaging: { text: { fr: 'Boîte de 30 gélules', en: 'Box of 30 capsules' } },
     contraindications: [
