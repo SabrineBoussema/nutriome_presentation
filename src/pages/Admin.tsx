@@ -12,14 +12,6 @@ import { Stage } from '../live/ui'
 const BG = '#071a12'
 const GOLD = '#e7a23b'
 
-function fmt(ms: number) {
-  const s = Math.max(0, Math.floor(ms / 1000))
-  const h = Math.floor(s / 3600)
-  const m = Math.floor((s % 3600) / 60)
-  const sec = s % 60
-  return `${h ? `${h}:` : ''}${String(m).padStart(h ? 2 : 1, '0')}:${String(sec).padStart(2, '0')}`
-}
-
 /** Motion-free scaled preview of a screen. */
 function Preview({ id, config, now }: { id: ScreenId; config: EventConfig; now: number }) {
   return (
@@ -54,7 +46,6 @@ export default function Admin() {
   const loop = loopScreens(config)
   const pos = loopPosition(state, config, now)
   const connected = peerSeen !== null && now - peerSeen < 5000
-  const start = new Date(config.startsAt).getTime()
   const order = runOrder(config)
   const waiting = state.mode === 'waiting'
   const presenting = state.view === 'presentation'
@@ -135,9 +126,6 @@ export default function Admin() {
         >
           <Circle className="size-2.5" fill="currentColor" />
           {connected ? 'Écran /live connecté' : 'Écran /live non ouvert'}
-        </span>
-        <span className="text-[14px] tabular-nums text-white/70">
-          {now < start ? `Début dans ${fmt(start - now)}` : state.conferenceStartedAt ? `Écoulé ${fmt(now - state.conferenceStartedAt)}` : 'Heure de début passée'}
         </span>
         <div style={{ marginLeft: 'auto', display: 'flex', gap: 8 }}>
           <Big onClick={openLive} style={{ background: GOLD, color: '#2a1a03', minHeight: 44 }}>

@@ -185,32 +185,6 @@ export function Stage({ children, className = '', style }: { children: ReactNode
   )
 }
 
-/** CountdownTimer — days/hours/min/sec until `target`. */
-export function Countdown({ target, now }: { target: number; now: number }) {
-  const diff = Math.max(0, target - now)
-  const h = Math.floor(diff / 3_600_000)
-  const m = Math.floor((diff % 3_600_000) / 60_000)
-  const s = Math.floor((diff % 60_000) / 1000)
-  const parts = [
-    ...(h > 0 ? [{ v: h, l: h > 1 ? 'heures' : 'heure' }] : []),
-    { v: m, l: 'minutes' },
-    { v: s, l: 'secondes' },
-  ]
-  return (
-    <div className="flex items-end gap-5">
-      {parts.map((p, i) => (
-        <div key={p.l} className="flex items-end gap-5">
-          {i > 0 && <span className="pb-9 font-serif text-[64px] text-white/40">:</span>}
-          <div className="flex w-[150px] flex-col items-center rounded-[26px] border border-white/15 bg-white/10 py-4 backdrop-blur">
-            <span className="font-serif text-[88px] leading-none tabular-nums text-white">{String(p.v).padStart(2, '0')}</span>
-            <span className="mt-2 text-[20px] font-semibold uppercase tracking-[0.18em] text-white/70">{p.l}</span>
-          </div>
-        </div>
-      ))}
-    </div>
-  )
-}
-
 /** Discreet clock + countdown shown during the waiting loop (phase A). Never starts the event by itself. */
 export function WaitingClock({ startsAt, now }: { startsAt: string; now: number }) {
   const start = new Date(startsAt).getTime()

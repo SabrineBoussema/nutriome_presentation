@@ -23,7 +23,7 @@ import { motion } from 'motion/react'
 import type { ReactNode } from 'react'
 import { products } from '../data/products'
 import { DEFAULT_PORTRAIT, type EventConfig, type ScreenId } from './eventConfig'
-import { Backdrop, Countdown, Eyebrow, GOLD, LogoBadge, QrCard } from './ui'
+import { Backdrop, Eyebrow, GOLD, LogoBadge, QrCard } from './ui'
 
 const EASE = [0.22, 1, 0.36, 1] as const
 
@@ -92,9 +92,7 @@ function Pill({ icon: Icon, children, delay }: { icon: typeof Sparkles; children
 
 /* ---------------------------------------------------------------- screens */
 
-function Welcome({ config, now }: ScreenProps) {
-  const start = new Date(config.startsAt).getTime()
-  const before = now < start
+function Welcome({ config }: ScreenProps) {
   return (
     <Frame>
       <div className="grid h-full grid-cols-[1fr_620px] gap-16 px-[120px] py-[90px]">
@@ -137,18 +135,9 @@ function Welcome({ config, now }: ScreenProps) {
           <motion.p {...up(0.8)} className="mt-3 text-[28px] text-[#f2c26f]">
             {config.speaker.title}
           </motion.p>
-          <motion.div {...up(1)} className="mt-10 flex flex-col items-center gap-5">
-            {before && <Countdown target={start} now={now} />}
-            <p className="text-[28px] italic text-white/85">
-              {before ? `Début de la conférence à ${formatEventDate(config.startsAt).split('— ')[1] ?? ''}` : 'Nous allons commencer dans quelques instants'}
-              {!before &&
-                [0, 1, 2].map((i) => (
-                  <span key={i} style={{ animation: `live-dots 1.4s ease-in-out ${i * 0.25}s infinite` }}>
-                    .
-                  </span>
-                ))}
-            </p>
-          </motion.div>
+          <motion.p {...up(1)} className="mt-10 text-[28px] italic text-white/85">
+            Début de la conférence à {formatEventDate(config.startsAt).split('— ')[1] ?? ''}
+          </motion.p>
         </div>
       </div>
     </Frame>
