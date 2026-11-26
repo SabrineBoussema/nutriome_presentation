@@ -1,4 +1,7 @@
 @import 'tailwindcss';
+/* Régie /admin et écran /live : forcer l'analyse des nouveaux dossiers */
+@source '../live';
+@source '../pages';
 
 @theme {
   /* Scientific pairing for projection: Newsreader (titres, fonderie Production Type) + Source Sans 3 (texte) */

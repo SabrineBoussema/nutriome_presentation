@@ -7,6 +7,8 @@ const Direction = lazy(() => import('./pages/Direction'))
 const ProductDetail = lazy(() => import('./pages/ProductDetail'))
 const PrintDeck = lazy(() => import('./pages/PrintDeck'))
 const SalesKit = lazy(() => import('./pages/SalesKit'))
+const Live = lazy(() => import('./pages/Live'))
+const Admin = lazy(() => import('./pages/Admin'))
 
 function NotFound() {
   const { t } = useI18n()
@@ -32,6 +34,8 @@ export default function App() {
             <Route path="/products/:slug" element={<ProductDetail />} />
             <Route path="/print" element={<PrintDeck />} />
             <Route path="/argumentaire" element={<SalesKit />} />
+            <Route path="/live" element={<Live />} />
+            <Route path="/admin" element={<Admin />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
