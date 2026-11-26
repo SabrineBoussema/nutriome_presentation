@@ -149,7 +149,8 @@ export function MechanismEngine({
     return () => window.removeEventListener('keydown', onKey)
   })
 
-  const visibleClaims = (mode === 'express' ? stage.claims.slice(0, 1) : stage.claims)
+  // Express: one key message. Expert: the evidence cards. Never both (they would repeat each other).
+  const visibleClaims = (mode === 'express' ? [] : stage.claims)
     .map((id) => evidence[id])
     .filter((c) => c && c.status !== 'unsupported')
 
@@ -169,9 +170,6 @@ export function MechanismEngine({
               >
                 <span className="h-px w-8" style={{ background: accent }} aria-hidden />
                 {eyebrow}
-                <span className="text-slate">
-                  · Étape {index + 1}/{stages.length}
-                </span>
               </p>
               <AnimatePresence mode="wait" initial={false}>
                 <motion.h2
@@ -233,7 +231,9 @@ export function MechanismEngine({
                   transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                   className="flex min-h-0 flex-col gap-4"
                 >
-                  <p className={`font-medium leading-snug text-navy ${canvas ? 'text-[21px]' : 'text-[1.1rem]'}`}>{stage.lead}</p>
+                  {mode === 'express' && (
+                    <p className={`font-medium leading-snug text-navy ${canvas ? 'text-[26px]' : 'text-[1.2rem]'}`}>{stage.lead}</p>
+                  )}
                   <ul className="flex flex-col gap-3">
                     {visibleClaims.map((c, i) => {
                       const level = LEVEL_LABEL[c.level]
@@ -242,7 +242,7 @@ export function MechanismEngine({
                           key={c.id}
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.45, delay: reduced ? 0 : 0.8 + i * 0.9 }}
+                          transition={{ duration: 0.45, delay: reduced ? 0 : 0.4 + i * 0.8 }}
                           className="rounded-2xl border border-navy/10 bg-white px-4 py-2.5"
                         >
                           <p className={`leading-snug text-ink ${canvas ? 'text-[16px]' : 'text-base'}`}>{c.fr}</p>
@@ -281,6 +281,7 @@ export function MechanismEngine({
                       type="button"
                       onClick={() => go(i)}
                       aria-current={active ? 'step' : undefined}
+                      aria-label={`Étape ${i + 1} sur ${stages.length} : ${s.label}`}
                       className={`inline-flex min-h-11 items-center gap-2 rounded-full border px-3.5 text-[14.5px] font-semibold transition-colors ${
                         active ? 'border-transparent text-white' : done ? 'border-navy/15 bg-white text-navy' : 'border-navy/10 bg-white/60 text-slate hover:text-navy'
                       }`}
@@ -317,10 +318,6 @@ export function MechanismEngine({
                 <ChevronRight className="size-5" aria-hidden />
               </CtrlButton>
             </div>
-          </div>
-          {/* progress within the mechanism */}
-          <div className="mt-3 h-1 overflow-hidden rounded-full bg-navy/10" aria-hidden>
-            <motion.div className="h-full rounded-full" style={{ background: accent }} animate={{ width: `${((index + 1) / stages.length) * 100}%` }} />
           </div>
 
           <AnimatePresence>

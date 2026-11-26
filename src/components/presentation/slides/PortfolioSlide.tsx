@@ -17,7 +17,7 @@ export function PortfolioSlide() {
   const firstSlideId = (slug: string) => slides.find((s) => s.productSlug === slug)?.id
 
   return (
-    <SlideShell tone="paper" label={t.portfolio.eyebrow}>
+    <SlideShell tone="paper">
       <div className="flex flex-col gap-2 @4xl:flex-row @4xl:items-end @4xl:justify-between">
         <div>
           <Reveal>

@@ -454,29 +454,23 @@ function MicrobiotaScene() {
       ))}
       <Appear delay={0.6}>
         <g transform="translate(14,388)">
-          <rect width={274} height={76} rx={14} fill="#e3efe6" />
+          <rect width={274} height={68} rx={14} fill="#e3efe6" />
           <text x={14} y={24} fontSize={11.5} fontWeight={800} fill={GREEN} letterSpacing="1.5">
             PHYSIOLOGIE
           </text>
-          <text x={14} y={46} fontSize={13.5} fontWeight={600} fill={INK}>
-            Le zinc participe à l’intégrité
-          </text>
-          <text x={14} y={64} fontSize={13.5} fontWeight={600} fill={INK}>
-            de la barrière épithéliale
+          <text x={14} y={52} fontSize={15} fontWeight={600} fill={INK}>
+            Barrière épithéliale
           </text>
         </g>
       </Appear>
       <Appear delay={1.3}>
         <g transform="translate(302,388)">
-          <rect width={274} height={76} rx={14} fill="white" stroke="#9a7bb6" strokeWidth={1.5} strokeDasharray="6 5" />
+          <rect width={274} height={68} rx={14} fill="white" stroke="#9a7bb6" strokeWidth={1.5} strokeDasharray="6 5" />
           <text x={14} y={24} fontSize={11.5} fontWeight={800} fill="#6a3d8f" letterSpacing="1.5">
             RECHERCHE ÉMERGENTE
           </text>
-          <text x={14} y={46} fontSize={13.5} fontWeight={600} fill={INK}>
-            Zinc et microbiote : données
-          </text>
-          <text x={14} y={64} fontSize={13.5} fontWeight={600} fill={INK}>
-            surtout précliniques
+          <text x={14} y={52} fontSize={15} fontWeight={600} fill={INK}>
+            Zinc et microbiote
           </text>
         </g>
       </Appear>
@@ -491,17 +485,6 @@ const SCENES: Record<string, () => React.ReactElement> = {
   repair: RepairScene,
   physiology: PhysiologyScene,
   microbiota: MicrobiotaScene,
-}
-
-function ZncBar({ on }: { on: boolean }) {
-  return (
-    <g transform={`translate(${PANEL_W / 2 - 150}, ${PANEL_H - 50})`}>
-      <rect width={300} height={34} rx={17} fill={on ? GREEN : 'white'} stroke={GREEN} strokeWidth={on ? 0 : 1.5} opacity={on ? 1 : 0.75} />
-      <text x={150} y={22} textAnchor="middle" fontSize={14.5} fontWeight={700} fill={on ? 'white' : GREEN}>
-        Zinc-L-carnosine · 66 mg par gélule
-      </text>
-    </g>
-  )
 }
 
 export function BioDigestVisual({ stage, stages, goToStageId, replayKey, interactive = true }: VisualContext & { interactive?: boolean }) {
@@ -538,7 +521,6 @@ export function BioDigestVisual({ stage, stages, goToStageId, replayKey, interac
         <AnimatePresence mode="wait">
           <g key={`${stage.id}-${replayKey}`}>{SceneComp && <SceneComp />}</g>
         </AnimatePresence>
-        {stage.id !== 'microbiota' && <ZncBar on={stage.highlight === 'znc'} />}
       </g>
     </svg>
   )

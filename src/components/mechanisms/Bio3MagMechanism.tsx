@@ -1,7 +1,6 @@
 import { AnimatePresence } from 'motion/react'
 import type { MechanismStage } from '../../data/mechanisms'
 import type { Product } from '../../data/types'
-import { BisglycinateMolecule, CitrateMolecule, MalateMolecule } from '../scientific/molecules/MagnesiumForms'
 import { Appear, Callout, FONT_STYLE, Hotspot, INK, MG, MgIon, PathParticles, Scene, SLATE } from './kit'
 import { MechanismEngine, type VisualContext } from './MechanismEngine'
 
@@ -178,7 +177,8 @@ function EnergyScene() {
             return <circle key={k} cx={Math.cos(a) * 26} cy={Math.sin(a) * 26} r={k === 4 ? 7 : 4} fill={k === 4 ? MALATE : '#e8b98c'} />
           })}
         </g>
-        <Callout x={60} y={372} text="Cycle de Krebs" color={MALATE} size={14} sub="dont le malate est un intermédiaire" />
+        <Callout x={60} y={372} text="Cycle de Krebs" color={MALATE} size={14} />
+        <Callout x={196} y={262} text="malate" color={MALATE} size={13} weight={700} />
       </Appear>
       {/* ATP synthase */}
       <g transform="translate(372,148)">
@@ -337,79 +337,70 @@ function NervousScene() {
         <Callout x={40} y={316} text="Neurone" color={BISGLY} size={14.5} />
         <Callout x={250} y={128} text="Influx nerveux" color="#c06b14" size={14} anchor="middle" />
         <Callout x={445} y={300} text="Synapse" color={SLATE} size={13.5} anchor="middle" />
-        <Callout x={560} y={372} text="Récepteur NMDA" to={[535, 252]} anchor="end" color={INK} size={14.5} sub="bloqué par Mg²⁺ au repos" />
+        <Callout x={560} y={372} text="Récepteur NMDA" to={[535, 252]} anchor="end" color={INK} size={14.5} />
       </Appear>
     </Scene>
   )
 }
 
-function FormulationScene() {
-  const cards = [
-    { name: 'Malate de magnésium', dose: '150 mg', ligand: 'Malate : intermédiaire du cycle de Krebs', color: MALATE, Mol: MalateMolecule },
-    { name: 'Citrate de magnésium', dose: '200 mg', ligand: 'Citrate : forme soluble', color: CITRATE, Mol: CitrateMolecule },
-    { name: 'Bisglycinate de magnésium', dose: '150 mg', ligand: 'Glycine : acide aminé (chélate)', color: BISGLY, Mol: BisglycinateMolecule },
+/** Synthesis: three salts → one ion → documented roles. Doses and molecules live on the Composition slide. */
+function SynthesisScene() {
+  const salts = [
+    { x: 120, label: 'Malate', c: MALATE },
+    { x: 295, label: 'Citrate', c: CITRATE },
+    { x: 470, label: 'Bisglycinate', c: BISGLY },
   ]
-  const w = 182
-  const gap = 10
+  const ion = { x: 295, y: 168 }
+  const roles = [
+    ['Métabolisme', 'énergétique'],
+    ['Réduction', 'de la fatigue'],
+    ['Fonction', 'musculaire'],
+    ['Système', 'nerveux'],
+    ['Fonctions', 'psychologiques'],
+    ['Équilibre', 'électrolytique'],
+  ]
+  const tw = 178
+  const th = 84
+  const tx = (k: number) => 12 + (k % 3) * (tw + 10)
+  const ty = (k: number) => 262 + Math.floor(k / 3) * (th + 12)
   return (
     <Scene originX={PANEL_W / 2} originY={PANEL_H / 2}>
-      {cards.map((c, i) => {
-        const x = 12 + i * (w + gap)
-        return (
-          <Appear key={c.name} delay={0.15 + i * 0.25}>
-            <rect x={x} y={14} width={w} height={300} rx={18} fill="white" stroke="#e2e8ee" />
-            <rect x={x + 16} y={30} width={30} height={4} rx={2} fill={c.color} />
-            <foreignObject x={x + 6} y={42} width={w - 12} height={128}>
-              <div style={{ width: '100%', height: '100%' }}>
-                <c.Mol className="h-full w-full" />
-              </div>
-            </foreignObject>
-            <text x={x + 16} y={200} fontSize={30} fontFamily="Fraunces, Georgia, serif" fill={INK}>
-              {c.dose.split(' ')[0]}
-              <tspan fontSize={15} fontFamily="'Plus Jakarta Sans', sans-serif" fill={SLATE}>
-                {' '}
-                mg
-              </tspan>
+      {salts.map((s) => (
+        <g key={s.label}>
+          <rect x={s.x - 66} y={30} width={132} height={32} rx={16} fill="white" stroke={s.c} strokeWidth={1.5} />
+          <text x={s.x} y={51} textAnchor="middle" fontSize={14} fontWeight={700} fill={s.c}>
+            {s.label}
+          </text>
+          <PathParticles d={`M${s.x} 64 C${s.x} 110 ${ion.x} 110 ${ion.x} ${ion.y - 30}`} count={2} dur={2.6} r={4} fill={s.c} />
+        </g>
+      ))}
+      <MgIon x={ion.x} y={ion.y} r={30} />
+      <Appear delay={0.5}>
+        {roles.map((_, k) => (
+          <path
+            key={k}
+            d={`M${ion.x} ${ion.y + 30} C${ion.x} ${ion.y + 60} ${tx(k) + tw / 2} ${ty(k) - 40} ${tx(k) + tw / 2} ${ty(k)}`}
+            fill="none"
+            stroke="#b9c8d6"
+            strokeWidth={1.2}
+            strokeDasharray="4 4"
+          />
+        ))}
+        {roles.map(([a, b], k) => (
+          <g key={a}>
+            <rect x={tx(k)} y={ty(k)} width={tw} height={th} rx={16} fill="white" stroke="#d5e2ee" />
+            <rect x={tx(k) + 16} y={ty(k) + 16} width={26} height={4} rx={2} fill={MG} />
+            <text x={tx(k) + 16} y={ty(k) + 44} fontSize={15} fontWeight={700} fill={INK}>
+              {a}
             </text>
-            {c.name.split(' de ').map((part, k) => (
-              <text key={k} x={x + 16} y={226 + k * 19} fontSize={14.5} fontWeight={700} fill={c.color}>
-                {k === 0 ? `${part} de` : part}
-              </text>
-            ))}
-            <foreignObject x={x + 12} y={258} width={w - 24} height={50}>
-              <p style={{ fontSize: 12.5, lineHeight: 1.3, color: SLATE, margin: 0 }}>{c.ligand}</p>
-            </foreignObject>
-          </Appear>
-        )
-      })}
-      <Appear delay={1}>
-        <rect x={12} y={330} width={566} height={64} rx={18} fill={MG} />
-        <MgIon x={52} y={362} r={20} fill="#0f4f7c" />
-        <text x={86} y={358} fontSize={20} fontFamily="Fraunces, Georgia, serif" fill="white">
-          75 mg de magnésium élément par gélule
+            <text x={tx(k) + 16} y={ty(k) + 64} fontSize={15} fontWeight={700} fill={INK}>
+              {b}
+            </text>
+          </g>
+        ))}
+        <text x={PANEL_W / 2} y={PANEL_H - 22} textAnchor="middle" fontSize={12.5} fill={SLATE}>
+          Allégations de santé autorisées pour le magnésium (Règl. UE 432/2012)
         </text>
-        <text x={86} y={381} fontSize={13.5} fill="white" opacity={0.8}>
-          20 % des VNR · le même ion Mg²⁺ quelle que soit la forme
-        </text>
-      </Appear>
-      <Appear delay={1.4}>
-        <text x={14} y={426} fontSize={12.5} fontWeight={700} fill={SLATE} letterSpacing="1.5">
-          RÔLES DOCUMENTÉS DU MAGNÉSIUM (ALLÉGATIONS AUTORISÉES)
-        </text>
-        {['Métabolisme énergétique', 'Réduction de la fatigue', 'Fonction musculaire', 'Système nerveux', 'Équilibre électrolytique'].map((t, i) => {
-          const widths = [168, 160, 140, 124, 168]
-          const x = 12 + widths.slice(0, i % 3).reduce((a, b) => a + b + 8, 0)
-          const row = i < 3 ? 0 : 1
-          const xx = row === 0 ? x : 12 + widths.slice(3, i).reduce((a, b) => a + b + 8, 0)
-          return (
-            <g key={t}>
-              <rect x={xx} y={438 + row * 36} width={widths[i]} height={28} rx={14} fill="#e8f2ea" />
-              <text x={xx + widths[i] / 2} y={457 + row * 36} textAnchor="middle" fontSize={13} fontWeight={600} fill="#1d5a39">
-                {t}
-              </text>
-            </g>
-          )
-        })}
       </Appear>
     </Scene>
   )
@@ -420,7 +411,7 @@ const SCENES: Record<string, () => React.ReactElement> = {
   energy: EnergyScene,
   muscle: MuscleScene,
   nervous: NervousScene,
-  formulation: FormulationScene,
+  formulation: SynthesisScene,
 }
 
 /* -------------------------------------------------------------------- visual */
@@ -470,7 +461,8 @@ export function Bio3MagVisual({ stage, stages, goToStageId, replayKey, interacti
         <AnimatePresence mode="wait">
           <g key={`${stage.id}-${replayKey}`}>{SceneComp && <SceneComp />}</g>
         </AnimatePresence>
-        {stage.id !== 'formulation' && <FormulaBar highlight={stage.highlight} />}
+        {/* the salt highlighted at this stage (absorption and synthesis already show the three salts) */}
+        {stage.highlight && stage.highlight !== 'all' && <FormulaBar highlight={stage.highlight} />}
       </g>
     </svg>
   )

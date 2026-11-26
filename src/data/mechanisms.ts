@@ -12,9 +12,9 @@ export interface MechanismStage {
   /** Short label for the stage stepper */
   label: string
   title: string
-  /** One-sentence takeaway, shown in both modes */
+  /** Key message for short visits (express mode) */
   lead: string
-  /** Progressive annotations (claim ids). Express mode shows only the first one. */
+  /** Evidence cards (claim ids), shown in expert mode and in the references panel. Express mode shows the lead instead. */
   claims: string[]
   /** Kept in express mode (short medical visits) */
   express: boolean
@@ -78,13 +78,13 @@ export const mechanismStages: Record<MechanismProductId, MechanismStage[]> = {
     },
     {
       id: 'formulation',
-      label: 'Formulation',
-      title: 'Trois sels, un même ion actif',
-      lead: 'Bio3Mag associe trois sels organiques de magnésium dans une même gélule, soit 75 mg de magnésium élément (20 % des VNR).',
+      label: 'Synthèse',
+      title: 'Un même ion, plusieurs fonctions',
+      lead: 'Les trois sels de Bio3Mag apportent le même ion Mg²⁺, qui contribue à l’ensemble de ces fonctions.',
       claims: ['mg-organic-forms', 'bisglycinate-tolerance'],
       express: true,
       highlight: 'all',
-      caveat: 'Quelle que soit la forme, c’est l’ion Mg²⁺ libéré qui agit : aucun sel n’agit exclusivement sur un organe.',
+      caveat: 'Aucun sel n’agit exclusivement sur un organe.',
       duration: 12,
     },
   ],
@@ -104,7 +104,7 @@ export const mechanismStages: Record<MechanismProductId, MechanismStage[]> = {
       label: 'Zinc-L-carnosine',
       title: 'Le complexe zinc-L-carnosine',
       lead: 'Le zinc-L-carnosine est un complexe zinc / L-carnosine dont l’action locale sur la muqueuse lésée a été étudiée.',
-      claims: ['znc-complex', 'znc-local'],
+      claims: ['znc-local', 'znc-complex'],
       express: true,
       highlight: 'znc',
       duration: 10,
@@ -134,10 +134,9 @@ export const mechanismStages: Record<MechanismProductId, MechanismStage[]> = {
       id: 'physiology',
       label: 'Respect physiologique',
       title: 'Respect de la physiologie gastrique',
-      lead: 'Le zinc-L-carnosine protège la muqueuse sans bloquer la pompe à protons : la sécrétion acide est conservée.',
+      lead: 'Le zinc-L-carnosine protège la muqueuse sans bloquer la pompe à protons. Il ne remplace ni les IPP ni un traitement prescrit.',
       claims: ['znc-not-antisecretory', 'znc-hpylori'],
       express: true,
-      caveat: 'Ne remplace ni les IPP ni un traitement prescrit.',
       duration: 10,
     },
     {

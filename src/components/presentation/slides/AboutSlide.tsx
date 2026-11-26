@@ -11,7 +11,7 @@ const ICONS = { flask: FlaskConical, shield: ShieldCheck, stethoscope: Stethosco
 export function AboutSlide() {
   const { l, t } = useI18n()
   return (
-    <SlideShell tone="ivory" label={t.about.eyebrow}>
+    <SlideShell tone="ivory">
       <div className="grid flex-1 gap-8 @4xl:grid-cols-[1.1fr_1fr] @4xl:gap-16">
         <div className="flex flex-col">
           <Reveal>

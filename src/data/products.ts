@@ -49,8 +49,8 @@ export const products: Product[] = [
     category: { fr: 'Minéraux', en: 'Minerals' },
     tagline: { fr: 'Énergie, performance & récupération', en: 'Energy, performance & recovery' },
     positioning: {
-      fr: 'Une association experte de trois formes hautement biodisponibles — malate, citrate et bisglycinate — pour l’énergie, les muscles et la récupération. 75 mg de magnésium élément par gélule.',
-      en: 'An expert combination of three highly bioavailable forms — malate, citrate and bisglycinate — for energy, muscles and recovery. 75 mg of elemental magnesium per capsule.',
+      fr: 'Une association experte de trois formes hautement biodisponibles — malate, citrate et bisglycinate — pour l’énergie, les muscles et la récupération.',
+      en: 'An expert combination of three highly bioavailable forms — malate, citrate and bisglycinate — for energy, muscles and recovery.',
     },
     description: {
       fr: 'Malate + citrate pour l’énergie et les muscles ; bisglycinate pour la détente nerveuse, le sommeil et un effet tampon digestif.',
@@ -1359,7 +1359,7 @@ export const products: Product[] = [
 const RANGE_ORDER = ['bioberberine', 'bioq10', 'biodigest', 'bio3mag', 'biod3k2', 'biogrippal']
 
 /** Theme of this meeting — detailed slides only. */
-const THEME_ORDER = ['bio3mag', 'biodigest']
+const THEME_ORDER = ['biodigest', 'bio3mag']
 
 function sortBy(order: string[]) {
   return (a: { id: string }, b: { id: string }) => {

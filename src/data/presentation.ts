@@ -13,6 +13,8 @@ export const presentationConfig = {
   showLanguageSwitch: false,
   /** Dedicated scientific-references slides at the end of each product section */
   showReferences: false,
+  /** Products with an interactive mechanism already cover their indications stage by stage */
+  showIndicationsWithMechanism: false,
 }
 
 /** Visible copy that only exists to flag missing validation — hidden with the badges. */
@@ -149,7 +151,8 @@ function productSlides(p: Product, mode: MechanismMode = 'expert'): SlideDef[] {
         })
       : base('product-hero', { fr: p.name, en: p.name }, 1, script?.hero)
 
-  return [hero, composition, schema, indications, posology, ...refs]
+  const withIndications = !hasMechanism(p.id) || presentationConfig.showIndicationsWithMechanism
+  return [hero, composition, schema, ...(withIndications ? [indications] : []), posology, ...refs]
 }
 
 export function buildDeck(onlySlug?: string, mode: MechanismMode = 'expert'): SlideDef[] {
@@ -177,8 +180,8 @@ export function buildDeck(onlySlug?: string, mode: MechanismMode = 'expert'): Sl
       section: S.range,
       title: { fr: 'Notre gamme', en: 'Our range' },
       notes: {
-        fr: 'Montrer la gamme complète. Ce soir, on développe seulement les deux formules du thème : Bio3Mag puis BioDigest.',
-        en: 'Show the full range. Tonight we only develop the two theme formulas: Bio3Mag then BioDigest.',
+        fr: 'Montrer la gamme complète. Ce soir, on développe seulement les deux formules du thème : BioDigest puis Bio3Mag.',
+        en: 'Show the full range. Tonight we only develop the two theme formulas: BioDigest then Bio3Mag.',
       },
     },
     ...themeCatalog.flatMap((p) => productSlides(p, mode)),
